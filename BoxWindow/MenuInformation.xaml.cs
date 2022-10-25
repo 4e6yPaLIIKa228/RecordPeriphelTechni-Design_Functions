@@ -312,5 +312,22 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         {
             Environment.Exit(0);
         }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

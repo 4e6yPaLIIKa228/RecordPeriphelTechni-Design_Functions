@@ -38,7 +38,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     connection.Open();
                     string query1 = $@"SELECT * FROM TypeTechs"; // 
                     string query2 = $@"SELECT * FROM Organiz"; // 
-                                                               // string query3 = $@"SELECT * FROM Kabunets"; // 
+                                                               // 
                     string query4 = $@"SELECT * FROM Status"; // 
                     string query5 = $@"SELECT * FROM Works"; // 
                     string query6 = $@"SELECT * FROM MakersProcc"; // 
@@ -295,11 +295,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text}', Vmemory2='{TextVmemory2.Text}',TypeMemory2='{TextTypeMemory2.Text}',Maker2='{TextMaker2.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                       // query1 = $@"SELECT ID FROM SlotRAM2 WHERE Model = '{TextRAMModel2.Text}' and Vmemory = '{TextVmemory2.Text}' and TypeMemory = '{TextTypeMemory2.Text}' and  Maker = '{TextMaker2.Text}'";
-                       // cmd1 = new SQLiteCommand(query1, connection);
-                       //// int IDSlot2loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                       // IDSlot2 = Convert.ToInt32(cmd1.ExecuteScalar());
-                       // //IDSlot2 = Convert.ToString(IDSlot2loc);
                     }
                     else if (TextRAMModel2.Text != "" && (TextVmemory2.Text == "" || TextTypeMemory2.Text == "" || TextMaker2.Text == ""))
                     {
@@ -311,11 +306,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET  Model2='Нет', Vmemory2='Нет',TypeMemory2='Нет',Maker2='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                       // query1 = $@"SELECT ID FROM SlotRAM2 WHERE Model = 'Нет' and Vmemory = 'Нет' and TypeMemory = 'Нет' and  Maker = 'Нет'";
-                       // cmd1 = new SQLiteCommand(query1, connection);
-                       //// int IDSlot2loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                       // //IDSlot2 = Convert.ToString(IDSlot2loc);
-                       // IDSlot2 = Convert.ToInt32(cmd1.ExecuteScalar());
                     }
                     else
                     {
@@ -327,11 +317,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET Model3 ='{TextRAMModel3.Text}', Vmemory3='{TextVmemory3.Text}',TypeMemory3='{TextTypeMemory3.Text}',Maker3='{TextMaker3.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                       // query1 = $@"SELECT ID FROM SlotRAM3 WHERE Model = '{TextRAMModel3.Text}' and Vmemory = '{TextVmemory3.Text}' and TypeMemory = '{TextTypeMemory3.Text}' and  Maker = '{TextMaker3.Text}'";
-                       // cmd1 = new SQLiteCommand(query1, connection);
-                       //// int IDSlot3loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                       //// IDSlot3 = Convert.ToString(IDSlot3loc);
-                       // IDSlot3 = Convert.ToInt32(cmd1.ExecuteScalar());
                     }
                     else if (TextRAMModel3.Text != "" && (TextVmemory3.Text == "" || TextTypeMemory3.Text == "" || TextMaker3.Text == ""))
                     {
@@ -343,11 +328,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET  Model3='Нет', Vmemory3='Нет',TypeMemory3='Нет',Maker3='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                        //query1 = $@"SELECT ID FROM SlotRAM3 WHERE Model = 'Нет' and Vmemory = 'Нет' and TypeMemory = 'Нет' and  Maker = 'Нет'";
-                        //cmd1 = new SQLiteCommand(query1, connection);
-                        //// int IDSlot3loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                        //// IDSlot3 = Convert.ToString(IDSlot3loc);
-                        //IDSlot3 = Convert.ToInt32(cmd1.ExecuteScalar());
                     }
                     else
                     {
@@ -359,11 +339,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET Model4='{TextRAMModel4.Text}', Vmemory4='{TextVmemory4.Text}',TypeMemory4='{TextTypeMemory4.Text}',Maker4='{TextMaker4.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                        //query1 = $@"SELECT ID FROM SlotRAM4 WHERE Model = '{TextRAMModel4.Text}' and Vmemory = '{TextVmemory4.Text}' and TypeMemory = '{TextTypeMemory4.Text}' and  Maker = '{TextMaker4.Text}'";
-                        //cmd1 = new SQLiteCommand(query1, connection);
-                        //// int IDSlot4loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                        //// IDSlot4 = Convert.ToString(IDSlot4loc);
-                        //IDSlot4 = Convert.ToInt32(cmd1.ExecuteScalar());
                     }
                     else if (TextRAMModel4.Text != "" && (TextVmemory4.Text == "" || TextTypeMemory4.Text == "" || TextMaker4.Text == ""))
                     {
@@ -375,11 +350,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         string query1 = $@"UPDATE RAMs SET  Model4='Нет', Vmemory4='Нет',TypeMemory4='Нет',Maker4='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                        //query1 = $@"SELECT ID FROM SlotRAM4 WHERE Model = 'Нет' and Vmemory = 'Нет' and TypeMemory = 'Нет' and  Maker = 'Нет' ";
-                        //cmd1 = new SQLiteCommand(query1, connection);
-                        //// int IDSlot4loc = Convert.ToInt32(cmd1.ExecuteScalar());
-                        ////IDSlot4 = Convert.ToString(IDSlot4loc);
-                        //IDSlot4 = Convert.ToInt32(cmd1.ExecuteScalar());
                     }
                     else
                     {

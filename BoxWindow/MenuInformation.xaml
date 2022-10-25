@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-    Title="MainWindow222" Height="680" Width="1450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
+    Title="MainWindow222" Height="680" Width="1450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -22,27 +22,29 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="190" />
             <ColumnDefinition/>
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
             <DockPanel
               LastChildFill="True">
-                <Button
-                Margin="8,10,8,-6"
-                Content="{materialDesign:PackIcon Kind=Search}"
-                DockPanel.Dock="Right"
-                Style="{StaticResource MaterialDesignToolForegroundButton}" Cursor="Hand" />
+                <Button x:Name="BtnSearch"  Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
+                <Button Margin="3,5,8,-6" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />                
                 <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,12,0,0" VerticalAlignment="Top" />
             </DockPanel>
+            <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
+                <Button x:Name="BtnAdd"  Height="30" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="BtnAdd_Click" Cursor="Hand"/>
+                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
+                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
+            </DockPanel>
         </StackPanel>
-        <Grid Grid.Row="1"  Grid.Column="1">
+        <Grid Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0">
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
                 <TabItem Header="Компьютерная техника">
                     <Grid>
-
-                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" >
+                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Visibility="Hidden" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
                                 <DataGridTextColumn Header="Тип" Visibility="Hidden" FontSize="20" Width="270" Binding="{Binding NameType}"/>
@@ -195,19 +197,64 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="2" >
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
-                <Button x:Name="BtnAdd"  Height="30" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="BtnAdd_Click" Cursor="Hand"/>
-                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
-                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
-            </StackPanel>
-        </Grid>
+        </Grid>       
         <Grid Grid.Row="1" Grid.Column="0" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                <TextBlock Text="312321312"/>
-                <ComboBox Width="50" Height="30" />
+                <TreeView MinWidth="220">
+                    <TreeViewItem Header="Информация" >
+                        <TreeViewItem Header="Организация"/>
+                        <TreeViewItem Header="Кабинет" />
+                        <TreeViewItem Header="Номер" />
+                        <TreeViewItem Header="Дата начала" />
+                        <TreeViewItem Header="Дата окончания" />
+                        <TreeViewItem Header="Статус" />
+                        <TreeViewItem Header="Работаспособность" />
+                        <TreeViewItem Header="Коментарий" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Системный блок">
+                        <TreeViewItem Header="Процессор">
+                            <TreeViewItem Header="Модель" />
+                            <TreeViewItem Header="Тактовая частота" />
+                            <TreeViewItem Header="Производитель" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Материнская плата">
+                            <TreeViewItem Header="Модель" />
+                            <TreeViewItem Header="Производитель" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Видеокарта">
+                            <TreeViewItem Header="Объем памяти" />
+                            <TreeViewItem Header="Производитель" />
+                        </TreeViewItem>
+                        <TreeViewItem Header="Оперативная память">
+                            <TreeViewItem Header=" Слот памяти 1">
+                                <TreeViewItem Header="Модель" />
+                                <TreeViewItem Header="Объем памяти" />
+                                <TreeViewItem Header="Тип памяти" />
+                                <TreeViewItem Header="Производитель" />
+                            </TreeViewItem>
+                            <TreeViewItem Header=" Слот памяти 2">
+                                <TreeViewItem Header="Модель" />
+                                <TreeViewItem Header="Объем памяти" />
+                                <TreeViewItem Header="Тип памяти" />
+                                <TreeViewItem Header="Производитель" />
+                            </TreeViewItem>
+                            <TreeViewItem Header=" Слот памяти 3">
+                                <TreeViewItem Header="Модель" />
+                                <TreeViewItem Header="Объем памяти" />
+                                <TreeViewItem Header="Тип памяти" />
+                                <TreeViewItem Header="Производитель" />
+                            </TreeViewItem>
+                            <TreeViewItem Header=" Слот памяти 4">
+                                <TreeViewItem Header="Модель" />
+                                <TreeViewItem Header="Объем памяти" />
+                                <TreeViewItem Header="Тип памяти" />
+                                <TreeViewItem Header="Производитель" />
+                            </TreeViewItem>
+                        </TreeViewItem>
+
+                    </TreeViewItem>
+
+                </TreeView>
             </StackPanel>
         </Grid>
     </Grid>
