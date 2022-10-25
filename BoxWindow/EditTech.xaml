@@ -1,0 +1,144 @@
+﻿<Window x:Class="RecordPeriphelTechniс.Windows.EditTech"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RecordPeriphelTechniс.Windows"
+        mc:Ignorable="d"
+        Title="EditTech" Height="920" Width="1020">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="201*"/>
+            <RowDefinition Height="55"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15" />
+            <ColumnDefinition/>
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+
+        
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0">
+            <TabControl>
+                <TabItem Header ="Информация">
+                    
+                    <StackPanel Margin="10" Orientation="Vertical">
+                        
+                        <TextBlock   FontSize="25"   Text=" Основная информация " FontWeight="Bold" />
+                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                            <TextBlock   FontSize="25" Text=" Тип " Margin="30,0,0,0" />
+                            <TextBlock   Margin="320,0,0,0" FontSize="25" Text=" Организация " />                            
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                            <ComboBox Width="320" FontSize="25" Name="CombTypeTech" Margin="10,0,0,0" />
+                            <ComboBox Width="250" FontSize="25" Name="CombIDOrgamniz" Margin="80,0,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                            <TextBlock   FontSize="25" Text=" Номер "  Margin="30,0,0,0" />
+                            <TextBlock    Margin="285,0,0,0" FontSize="25" Text=" Кабинет " />
+                            <TextBlock   Margin="290,0,0,0" FontSize="25" Text=" Имя " />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">                           
+                            <TextBox Width="150" FontSize="25" Name="TextIDKabuneta" Margin="10,0,0,0"/>
+                            <TextBox Width="150" FontSize="25" Name="TextName"  Margin="250,0,0,0"/>
+                            <TextBlock   Margin="170,0,0,0" FontSize="25" Text="000- " VerticalAlignment="Center" />
+                            <TextBox Width="150" FontSize="25" Name="TextNumber"  Margin="0,0,0,0"/>                           
+                        </StackPanel>
+                        <TextBlock   FontSize="25"   Text=" Дата начало/окончания работы " FontWeight="Bold" Margin="0,20,0,0" />
+                        <StackPanel Orientation="Horizontal"  Margin="0,15,0,0">
+                            <TextBlock   FontSize="25" Text=" Дата начало "   Margin="30,0,0,0"  />
+                            <TextBlock   FontSize="25" Text=" Дата окончания  "   Margin="220,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  Margin="0,15,0,0" >
+                            <DatePicker Width="250" FontSize="25" Name="TextDataStart" Margin="10,0,0,0" />
+                            <DatePicker Width="250" FontSize="25" Name="TextDataEnd" Margin="150,0,0,0"/>
+                        </StackPanel>
+                        <TextBlock   FontSize="25"   Text=" Активность " FontWeight="Bold"  Margin="0,20,0,0" />
+                        <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
+                            <TextBlock   FontSize="25" Text=" Статус "  Margin="30,0,0,0" />
+                            <TextBlock   FontSize="25" Text=" Работа  "  Margin="290,0,0,0" />                           
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Width="150" FontSize="25" Name="CombIDStatus" Margin="10,0,0,0" />
+                            <ComboBox Width="150" FontSize="25" Name="CombIDWorks"  Margin="250,0,0,0"/>
+                           
+                        </StackPanel>
+                        <TextBlock   FontSize="25" Text=" Коментарий  " Margin="30,15,0,0" />
+                        <TextBox Height="145"  FontSize="25" Name="TextComments"  Margin="0,15,0,0"/>
+                    </StackPanel>
+                   
+                </TabItem>
+                <TabItem Header ="Системный блок">
+                    <StackPanel Margin="10" Orientation="Vertical">
+                        <TextBlock   FontSize="25"   Text=" Процессор " FontWeight="Bold" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock   FontSize="25" Text=" Название " />
+                            <TextBlock   FontSize="25" Text=" Тактовая частота " />
+                            <TextBlock   FontSize="25" Text=" Производитель " />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBox Width="150" FontSize="25" Name="TextProccModel" />
+                            <TextBox Width="150" FontSize="25" Name="TextSpeed"/>
+                            <ComboBox Width="150" FontSize="25" Name="CombProccMaker" />
+                        </StackPanel >
+                        <TextBlock   FontSize="25"   Text=" Материнская плата " FontWeight="Bold" />
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock   FontSize="25" Text=" Название " />
+                            <TextBlock   FontSize="25" Text=" Производитель " />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBox Width="150" FontSize="25" Name="TextMatePlatModel" />
+                            <ComboBox Width="150" FontSize="25" Name="CombMatePlatMaker" />
+                        </StackPanel>
+                        <TextBlock   FontSize="25"   Text=" Оперативная память " FontWeight="Bold" />
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBlock Text="1:" FontSize="25"/>
+                            <TextBox Width="150" FontSize="25" Name="TextRAMModel1" />
+                            <TextBox Width="150" FontSize="25" Name="TextVmemory1" />
+                            <TextBox Width="150" FontSize="25" Name="TextTypeMemory1" />
+                            <TextBox Width="150" FontSize="25" Name="TextMaker1" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBlock Text="2:" FontSize="25"/>
+                            <TextBox Width="150" FontSize="25" Name="TextRAMModel2" />
+                            <TextBox Width="150" FontSize="25" Name="TextVmemory2" />
+                            <TextBox Width="150" FontSize="25" Name="TextTypeMemory2" />
+                            <TextBox Width="150" FontSize="25" Name="TextMaker2" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBlock Text="3:" FontSize="25"/>
+                            <TextBox Width="150" FontSize="25" Name="TextRAMModel3" />
+                            <TextBox Width="150" FontSize="25" Name="TextVmemory3" />
+                            <TextBox Width="150" FontSize="25" Name="TextTypeMemory3" />
+                            <TextBox Width="150" FontSize="25" Name="TextMaker3" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                            <TextBlock Text="4:" FontSize="25"/>
+                            <TextBox Width="150" FontSize="25" Name="TextRAMModel4" />
+                            <TextBox Width="150" FontSize="25" Name="TextVmemory4" />
+                            <TextBox Width="150" FontSize="25" Name="TextTypeMemory4" />
+                            <TextBox Width="150" FontSize="25" Name="TextMaker4" />
+                        </StackPanel>
+                        <TextBlock   FontSize="25"   Text=" Видеокарта " FontWeight="Bold" />
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+
+                            <TextBox Width="150" FontSize="25" Name="TextVideoModel" />
+                            <TextBox Width="150" FontSize="25" Name="TextVideoMemory" />
+                            <ComboBox Width="150" FontSize="25" Name="CombVidieoMaker" />
+
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="BtnEdit"  Height="40" Content= "Изменить"  Margin="0,0,25,0" Click="BtnEdit_Click"/>
+                <Button  Height="40" Content="Удалить" Margin="0,0,25,0"/>
+                <Button Width="80" Height="40" Margin="0,0,25,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

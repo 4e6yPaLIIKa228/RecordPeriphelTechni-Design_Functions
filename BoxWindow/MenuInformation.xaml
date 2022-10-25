@@ -1,0 +1,214 @@
+﻿<Window x:Class="RecordPeriphelTechniс.Windows.MenuInformation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:RecordPeriphelTechniс.Windows"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+    Title="MainWindow222" Height="680" Width="1450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"/>
+            <RowDefinition/>
+            <RowDefinition Height="43"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition/>
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
+            <DockPanel
+              LastChildFill="True">
+                <Button
+                Margin="8,10,8,-6"
+                Content="{materialDesign:PackIcon Kind=Search}"
+                DockPanel.Dock="Right"
+                Style="{StaticResource MaterialDesignToolForegroundButton}" Cursor="Hand" />
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,12,0,0" VerticalAlignment="Top" />
+            </DockPanel>
+        </StackPanel>
+        <Grid Grid.Row="1"  Grid.Column="1">
+            <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
+                <TabItem Header="Компьютерная техника">
+                    <Grid>
+
+                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Visibility="Hidden" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
+                                <DataGridTextColumn Header="Тип" Visibility="Hidden" FontSize="20" Width="270" Binding="{Binding NameType}"/>
+                                <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
+                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Comments}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock   FontSize="25" Text=" Процессор: " FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=NameProcces}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= SpeedProcces}" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= MakerProcc}" />
+                                        </StackPanel>
+                                        <TextBlock   FontSize="25"   Text=" Материнская плата: " FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=ModelMatePlat}" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=MakerMaterPlat}" />
+                                        </StackPanel>
+                                        <TextBlock   FontSize="25"   Text=" Видеокарта: " FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=ModeVideos}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=VVideoMemory}" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=MakerVideoCard}" />
+                                        </StackPanel>
+                                        <TextBlock   FontSize="25"   Text=" Оперативная память: " FontWeight="Bold" />
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" I " />
+                                            <TextBlock   FontSize="25" Text="   Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Model1}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= V1 }" />
+                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory1}" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker1}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" II " />
+                                            <TextBlock   FontSize="25" Name="Name2" Text="  Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Model2}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= V2 }" />
+                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory2}" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker2}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" III " />
+                                            <TextBlock   FontSize="25" Name="NameRam3" Text=" Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Model3}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= V3 }" />
+                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory3 }" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker3}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" IV " />
+                                            <TextBlock   FontSize="25" Text=" Название: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Model4}" />
+                                            <TextBlock   FontSize="25" Text=" Скорость: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= V4 }" />
+                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory4 }" />
+                                            <TextBlock   FontSize="25" Text=" Производитель: " />
+                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker4}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
+
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Перефирийные устройства">
+                    <Grid>
+                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
+                                <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
+                                <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
+                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Path = Comments}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Доп. оборудование">
+                    <Grid>
+
+                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforDopOboryd" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforDopOboryd_MouseDoubleClick" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
+                                <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
+                                <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
+                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Path = Comments}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontSize="20" Text="-" ></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnSazeMax_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="2" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
+                <Button x:Name="BtnAdd"  Height="30" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="BtnAdd_Click" Cursor="Hand"/>
+                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
+                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" >
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="312321312"/>
+                <ComboBox Width="50" Height="30" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
