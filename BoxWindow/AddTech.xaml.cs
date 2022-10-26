@@ -137,6 +137,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 
             }
         }         
+        
         public void AddOsnova()
         {
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
@@ -231,6 +232,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+        
         public void AddPcCompet()
         {
             if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) ||
@@ -282,6 +284,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+       
         public void AddRams()
         {
             try 
@@ -363,6 +366,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+        
         public void AddComponets()
         {
             try
@@ -383,6 +387,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+       
         public void UpdateMenuPer()
         {
             try

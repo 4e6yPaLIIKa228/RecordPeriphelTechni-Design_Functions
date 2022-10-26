@@ -31,7 +31,7 @@
               LastChildFill="True">
                 <Button x:Name="BtnSearch"  Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
                 <Button Margin="3,5,8,-6" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />                
-                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,12,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,12,0,0" VerticalAlignment="Top" PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
             </DockPanel>
             <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom">
                 <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
@@ -201,29 +201,29 @@
         <Grid Grid.Row="1" Grid.Column="0" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <TreeView MinWidth="220">
-                    <TreeViewItem Header="Информация" >
-                        <TreeViewItem Header="Организация"/>
-                        <TreeViewItem Header="Кабинет" />
-                        <TreeViewItem Header="Номер" />
-                        <TreeViewItem Header="Дата начала" />
-                        <TreeViewItem Header="Дата окончания" />
-                        <TreeViewItem Header="Статус" />
-                        <TreeViewItem Header="Работаспособность" />
-                        <TreeViewItem Header="Коментарий" />
+                    <TreeViewItem Header="Информация" Name="TreeInfoGlav" Expanded="TreeInfoGlav_Expanded" >
+                        <TreeViewItem Header="Организация" Name="Organiz"/>
+                        <TreeViewItem Header="Кабинет" Name="Kabunet" />
+                        <TreeViewItem Header="Номер" Name="Number" />
+                        <TreeViewItem Header="Дата начала" Name="DataStart" />
+                        <TreeViewItem Header="Дата окончания" Name="DataEnd" />
+                        <TreeViewItem Header="Статус" Name="Status" />
+                        <TreeViewItem Header="Работаспособность" Name="Work" />
+                        <TreeViewItem Header="Коментарий" Name="Comment" />
                     </TreeViewItem>
-                    <TreeViewItem Header="Системный блок">
+                    <TreeViewItem Header="Системный блок" Name="TreeSisBlock" Expanded="TreeSisBlock_Expanded">
                         <TreeViewItem Header="Процессор">
-                            <TreeViewItem Header="Модель" />
-                            <TreeViewItem Header="Тактовая частота" />
-                            <TreeViewItem Header="Производитель" />
+                            <TreeViewItem Header="Модель" Name="ModelProcces" />
+                            <TreeViewItem Header="Тактовая частота" Name="SpeedProcces" />
+                            <TreeViewItem Header="Производитель" Name="MakerProcces" />
                         </TreeViewItem>
                         <TreeViewItem Header="Материнская плата">
-                            <TreeViewItem Header="Модель" />
-                            <TreeViewItem Header="Производитель" />
+                            <TreeViewItem Header="Модель" Name="ModelMaterPlat" />
+                            <TreeViewItem Header="Производитель" Name="MakerMaterPlat" />
                         </TreeViewItem>
                         <TreeViewItem Header="Видеокарта">
-                            <TreeViewItem Header="Объем памяти" />
-                            <TreeViewItem Header="Производитель" />
+                            <TreeViewItem Header="Объем памяти" Name="VVideoCard" />
+                            <TreeViewItem Header="Производитель" Name="MakerVideoCard" />
                         </TreeViewItem>
                         <TreeViewItem Header="Оперативная память">
                             <TreeViewItem Header=" Слот памяти 1">
