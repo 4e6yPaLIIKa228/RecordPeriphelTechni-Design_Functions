@@ -111,12 +111,12 @@ WHERE  MenuPerTech.IDTypeTech = '1'
                     while (dr.Read())
                     {
                         //Componets, ProccesID, MaterPlatID, VideCardID, IDRAM, Slot1ID1, Slot1ID2, Slot1ID3, Slot1ID4;
-                        Saver.IDMenuPerPC = dr["IDMenuPer"].ToString();
-                        Saver.IDComponets = dr["IDComponets"].ToString();
-                        Saver.ProccesID = dr["ProccesID"].ToString();
-                        Saver.MaterPlatID = dr["MaterPlatID"].ToString();
-                        Saver.VideCardID = dr["VideoCardID"].ToString();
-                        Saver.IDRAM = dr["IDRAM"].ToString();
+                        //Saver.IDMenuPerPC = dr["IDMenuPer"].ToString();
+                        //Saver.IDComponets = dr["IDComponets"].ToString();
+                        //Saver.ProccesID = dr["ProccesID"].ToString();
+                        //Saver.MaterPlatID = dr["MaterPlatID"].ToString();
+                        //Saver.VideCardID = dr["VideoCardID"].ToString();
+                        //Saver.IDRAM = dr["IDRAM"].ToString();
                         //Saver.SlotID1 = dr["SlotID1"].ToString();
                         //Saver.SlotID2 = dr["SlotID2"].ToString();
                         //Saver.SlotID3 = dr["SlotID3"].ToString();
@@ -162,7 +162,7 @@ WHERE  MenuPerTech.IDTypeTech = '2'
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Saver.IDMenuPerTech = dr["IDMenuPer"].ToString();
+                        //Saver.IDMenuPerTech = dr["IDMenuPer"].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -200,7 +200,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Saver.IDMenuOboryd = dr["IDMenuPer"].ToString();
+                        //Saver.IDMenuOboryd = dr["IDMenuPer"].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -469,7 +469,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     if (Status.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
-                        string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '%{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like like '%{TxtSearch.Text.ToUpper()}%') and  MenuPerTech.IDTypeTech = '1'";
+                        string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '%{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like '%{TxtSearch.Text.ToUpper()}%' or  Status.NameStatus like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -488,7 +488,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     if (Comment.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
-                        string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like like '%{TxtSearch.Text.ToUpper()}%') and  MenuPerTech.IDTypeTech = '1'";
+                        string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like '%{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Comments like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -503,6 +503,10 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     else if (Comment.IsSelected == true && IndexTabCont == 2)
                     {
 
+                    }
+                    if (ModelProcces.IsSelected == true && IndexTabCont == 0)
+                    {
+                        InforPcTex.ItemsSource = null;
                     }
 
 

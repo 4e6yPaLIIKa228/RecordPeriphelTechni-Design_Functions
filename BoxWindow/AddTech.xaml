@@ -13,18 +13,18 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="AddTech" Height="620" Width="870" WindowStartupLocation="CenterScreen">
+        Title="AddTech" Height="630" Width="870" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="201*"/>
+            <RowDefinition Height="46"/>
+            <RowDefinition/>
             <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="189" />
         </Grid.ColumnDefinitions>
         <Grid HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0" >
             <TabControl>
@@ -124,7 +124,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" Name="TextVideoModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Объем"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" Name="TextVideoModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Объем видеопамяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -229,7 +229,7 @@
 
             </TabControl>
         </Grid>
-      
+
         <Grid Grid.Row="2" Grid.Column="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="BtnEdit" Width="80" Height="40" Content= "Изменить"  Margin="0,0,25,0"/>
@@ -237,5 +237,26 @@
                 <Button x:Name="BtnSave" Content="Сохранить" Width="80" Height="40" Margin="0,0,25,0" Click="BtnSave_Click"/>
             </StackPanel>
         </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontSize="20" Text="-" ></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnSazeMax_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Window>

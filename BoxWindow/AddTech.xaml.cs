@@ -430,5 +430,36 @@ namespace RecordPeriphelTechniс.BoxWindow
             Expander3.IsExpanded = false;
         }
 
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void BtnSazeMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
+        }
+
     }
 }

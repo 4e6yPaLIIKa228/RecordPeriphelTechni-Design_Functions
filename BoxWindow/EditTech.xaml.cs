@@ -30,6 +30,8 @@ namespace RecordPeriphelTechniс.Windows
             InitializeComponent();
             CombBoxDowmload();
             TypeEdit = Type;
+            Saver.IDMenuPerTech = drv["IDMenuPer"].ToString();
+            Saver.IDMenuOboryd = drv["IDMenuPer"].ToString();
             CombTypeTech.Text = drv["NameType"].ToString();
             CombIDOrgamniz.Text = drv["NameOrg"].ToString();
             TextIDKabuneta.Text = drv["Kabunet"].ToString();
@@ -45,8 +47,13 @@ namespace RecordPeriphelTechniс.Windows
 
             if (Type == 1)
             {
-
-
+                Saver.IDMenuPerPC = drv["IDMenuPer"].ToString();
+                Saver.IDComponets = drv["IDComponets"].ToString();
+                Saver.ProccesID = drv["ProccesID"].ToString();
+                Saver.MaterPlatID = drv["MaterPlatID"].ToString();
+                Saver.VideCardID = drv["VideoCardID"].ToString();
+                Saver.IDRAM = drv["IDRAM"].ToString();
+                Saver.IDMenuPerTech = drv["IDMenuPer"].ToString();
                 TextProccModel.Text = drv["NameProcces"].ToString();
                 TextSpeed.Text = drv["SpeedProcces"].ToString();
                 CombProccMaker.Text = drv["MakerProcc"].ToString();
@@ -441,6 +448,32 @@ namespace RecordPeriphelTechniс.Windows
 
             }
         }
+
+        private void Expander1_Expanded(object sender, RoutedEventArgs e)
+        {
+            Expander2.IsExpanded = false;
+            Expander3.IsExpanded = false;
+            Expander4.IsExpanded = false;
+        }
+        private void Expander2_Expanded(object sender, RoutedEventArgs e)
+        {
+            Expander1.IsExpanded = false;
+            Expander3.IsExpanded = false;
+            Expander4.IsExpanded = false;
+        }
+        private void Expander3_Expanded(object sender, RoutedEventArgs e)
+        {
+            Expander1.IsExpanded = false;
+            Expander2.IsExpanded = false;
+            Expander4.IsExpanded = false;
+        }
+        private void Expander4_Expanded(object sender, RoutedEventArgs e)
+        {
+            Expander1.IsExpanded = false;
+            Expander2.IsExpanded = false;
+            Expander3.IsExpanded = false;
+        }
+
     }
 }
       
