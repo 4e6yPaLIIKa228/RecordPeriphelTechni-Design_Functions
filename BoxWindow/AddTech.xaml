@@ -11,9 +11,10 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
+        Background="#EBF5FF"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="AddTech" Height="630" Width="870" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="46"/>

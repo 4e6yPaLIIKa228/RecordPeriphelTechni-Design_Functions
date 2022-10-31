@@ -447,7 +447,8 @@ namespace RecordPeriphelTechniс.BoxWindow
         }
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            this.Close();
         }
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

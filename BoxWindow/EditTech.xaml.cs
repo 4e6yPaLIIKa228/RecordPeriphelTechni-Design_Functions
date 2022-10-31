@@ -80,7 +80,7 @@ namespace RecordPeriphelTechniс.Windows
                 TextTypeMemory4.Text = drv["TypeMemory4"].ToString();
                 TextMaker4.Text = drv["Maker4"].ToString();
 
-                TextVideoModel.Text = drv["ModeVideos"].ToString();
+                TextVideoModel.Text = drv["ModelVideos"].ToString();
                 TextVideoMemory.Text = drv["VVideoMemory"].ToString();
                 CombVidieoMaker.Text = drv["MakerVideoCard"].ToString();
                 //idi = drv["Components"].ToString();

@@ -80,7 +80,7 @@
                                         <TextBlock   FontSize="25"   Text=" Видеокарта: " FontWeight="Bold" />
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock   FontSize="25" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=ModeVideos}" />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=ModelVideos}" />
                                             <TextBlock   FontSize="25" Text=" Скорость: " />
                                             <TextBlock   FontSize="25" Text="{Binding Path=VVideoMemory}" />
                                             <TextBlock   FontSize="25" Text=" Производитель: " />
@@ -222,33 +222,34 @@
                             <TreeViewItem Header="Производитель" Name="MakerMaterPlat" />
                         </TreeViewItem>
                         <TreeViewItem Header="Видеокарта">
+                            <TreeViewItem Header="Модель" Name="ModelVideoCard" />
                             <TreeViewItem Header="Объем памяти" Name="VVideoCard" />
                             <TreeViewItem Header="Производитель" Name="MakerVideoCard" />
                         </TreeViewItem>
                         <TreeViewItem Header="Оперативная память">
                             <TreeViewItem Header=" Слот памяти 1">
-                                <TreeViewItem Header="Модель" />
-                                <TreeViewItem Header="Объем памяти" />
-                                <TreeViewItem Header="Тип памяти" />
-                                <TreeViewItem Header="Производитель" />
+                                <TreeViewItem Header="Модель" Name="TextRAMModel1" />
+                                <TreeViewItem Header="Объем памяти" Name="TextVmemory1" />
+                                <TreeViewItem Header="Тип памяти" Name="TextTypeMemory1" />
+                                <TreeViewItem Header="Производитель" Name="TextMaker1"  />
                             </TreeViewItem>
                             <TreeViewItem Header=" Слот памяти 2">
-                                <TreeViewItem Header="Модель" />
-                                <TreeViewItem Header="Объем памяти" />
-                                <TreeViewItem Header="Тип памяти" />
-                                <TreeViewItem Header="Производитель" />
+                                <TreeViewItem Header="Модель"  Name="TextRAMModel2" />
+                                <TreeViewItem Header="Объем памяти" Name="TextVmemory2" />
+                                <TreeViewItem Header="Тип памяти" Name="TextTypeMemory2" />
+                                <TreeViewItem Header="Производитель" Name="TextMaker2"  />
                             </TreeViewItem>
                             <TreeViewItem Header=" Слот памяти 3">
-                                <TreeViewItem Header="Модель" />
-                                <TreeViewItem Header="Объем памяти" />
-                                <TreeViewItem Header="Тип памяти" />
-                                <TreeViewItem Header="Производитель" />
+                                <TreeViewItem Header="Модель"  Name="TextRAMModel3" />
+                                <TreeViewItem Header="Объем памяти" Name="TextVmemory3"  />
+                                <TreeViewItem Header="Тип памяти" Name="TextTypeMemory3" />
+                                <TreeViewItem Header="Производитель" Name="TextMaker3"  />
                             </TreeViewItem>
                             <TreeViewItem Header=" Слот памяти 4">
-                                <TreeViewItem Header="Модель" />
-                                <TreeViewItem Header="Объем памяти" />
-                                <TreeViewItem Header="Тип памяти" />
-                                <TreeViewItem Header="Производитель" />
+                                <TreeViewItem Header="Модель"  Name="TextRAMModel4" />
+                                <TreeViewItem Header="Объем памяти" Name="TextVmemory4" />
+                                <TreeViewItem Header="Тип памяти" Name="TextTypeMemory4" />
+                                <TreeViewItem Header="Производитель" Name="TextMaker4" />
                             </TreeViewItem>
                         </TreeViewItem>
 
