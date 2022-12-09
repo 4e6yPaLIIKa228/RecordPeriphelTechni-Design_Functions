@@ -23,7 +23,8 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class AddTech : Window
     {
-        int IDMenuPerTech = 0, IDTypeTech=0, Proverka=0, Proverka2=0,IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0, IDSlot1=0;
+        int IDMenuPerTech = 0, IDTypeTech = 0, IDTypeTechCombBox = 0, ProverkaOsnova = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0, IDSlot1=0;
+        string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
         public AddTech()
         {
             InitializeComponent();
@@ -121,24 +122,92 @@ namespace RecordPeriphelTechniс.BoxWindow
         }
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            AddOsnova();
-            if (IDTypeTech == 1 && Proverka == 0)
+
+            if (IDTypeTechCombBox == 0)
             {
-                
-                AddPcCompet();
-                if (Proverka2 != 0)
-                {
-                    AddOsnova();
-                    AddRams();
-                    AddComponets();
-                    UpdateMenuPer();
-                    MessageBox.Show("Данные добавлены");
-                }
-                
+                AddOsnovaPC();
+                //if (ProverkaOsnova == 0)
+                //{
+                //    AddPcCompet();
+                //    if (Proverka2 == 1)
+                //    {
+                //        AddRams();
+                //        if (Proverka3 == 0)
+                //        {
+                //AddComponets();
+                //UpdateMenuPer();
+                //MessageBox.Show("Данные добавлены");
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    try
+                //    {
+                //        using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                //        {
+                //            connection.Open();
+                //        }
+                //    }
+                //    catch (SQLiteException ex)
+                //    {
+                //        MessageBox.Show("Error: " + ex.Message);
+                //    }
+                //}
             }
-        }         
-        
-        public void AddOsnova()
+            else
+            {
+                AddOsnovaPerTech();
+            }
+           
+        }
+        public void AddOsnovaPerTech()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    connection.Open();
+                    if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) ||
+                        String.IsNullOrEmpty(CombIDWorks.Text))
+                    {
+                        MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                        bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                        bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                        bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
+                        string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (ProverkaNumber != 1)
+                        {
+                            
+                            query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','','{TextName.Text}','{TextDataStart.Text}','{TextDataEnd.Text}','{id2}','{id3}','{TextComments.Text}')";
+                            cmd = new SQLiteCommand(query, connection);
+                            cmd.ExecuteNonQuery();
+                            query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                            MessageBox.Show("Данные добавлены");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Измените номер техники");
+                        }
+                    }
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
+        }
+        public void AddOsnovaPC()
         {
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
             {
@@ -150,89 +219,49 @@ namespace RecordPeriphelTechniс.BoxWindow
                 }
                 else
                 {
-                    bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out  IDTypeTech);
-                    bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int  id);
-                    bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int  id2);
-                    bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int  id3);
+                    bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                    bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                    bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                    bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
                     string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                    Proverka = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    if (Proverka != 1 && IDTypeTech != 1)
+                    ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (ProverkaNumber != 1)
                     {
-                        if (Proverka != 1)
+                        CheckRams();
+                        if (ProverkaRams == 0)
                         {
-
-                            query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                        values (@IDTypeTech,@IDOrganiz,@Kabunet,@Number,@IDComponets,@Name,@StartWork,@EndWork,@IDStatus,@IDWorks,@Comments)";
-                            cmd = new SQLiteCommand(query, connection);
-                            try
+                            AddPcCompet();
+                            if (ProverkaPcCompont == 1)
                             {
-                                cmd.Parameters.AddWithValue("@IDTypeTech", IDTypeTech);
-                                cmd.Parameters.AddWithValue("@IDOrganiz", id);
-                                cmd.Parameters.AddWithValue("@Kabunet", TextIDKabuneta.Text);
-                                cmd.Parameters.AddWithValue("@Number", TextNumber.Text);
-                                cmd.Parameters.AddWithValue("@IDComponets", null);
-                                cmd.Parameters.AddWithValue("@Name", TextName.Text);
-                                cmd.Parameters.AddWithValue("@StartWork", TextDataStart.Text);
-                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                                cmd.Parameters.AddWithValue("@IDStatus", id2);
-                                cmd.Parameters.AddWithValue("@IDWorks", id3);
-                                cmd.Parameters.AddWithValue("@Comments", TextComments.Text);
+                                query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}','{TextDataEnd.Text}','{id2}','{id3}','{TextComments.Text}')";
+                                cmd = new SQLiteCommand(query, connection);
                                 cmd.ExecuteNonQuery();
+                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                                ProverkaOsnova = 0;
+                                AddRams();
+                                AddComponets();
+                                UpdateMenuPer();
                             }
-                            catch (SQLiteException ex)
-                            {
-                                MessageBox.Show("Error: " + ex.Message);
-                            }
-                            query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
-                            cmd = new SQLiteCommand(query, connection);
-                            IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                            MessageBox.Show("Данные добавлены");
                         }
-                        else
-                        {
-                            MessageBox.Show("Измените номер техники");
-                        }
-
                     }
                     else
                     {
-                       // MessageBox.Show("Измените номер техники");
-                    }
-                    if (Proverka2 != 0)
-                    {
-                        query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                        values (@IDTypeTech,@IDOrganiz,@Kabunet,@Number,@IDComponets,@Name,@StartWork,@EndWork,@IDStatus,@IDWorks,@Comments)";
-                        cmd = new SQLiteCommand(query, connection);
-                        try
-                        {
-                            cmd.Parameters.AddWithValue("@IDTypeTech", IDTypeTech);
-                            cmd.Parameters.AddWithValue("@IDOrganiz", id);
-                            cmd.Parameters.AddWithValue("@Kabunet", TextIDKabuneta.Text);
-                            cmd.Parameters.AddWithValue("@Number", TextNumber.Text);
-                            cmd.Parameters.AddWithValue("@IDComponets", 1);
-                            cmd.Parameters.AddWithValue("@Name", TextName.Text);
-                            cmd.Parameters.AddWithValue("@StartWork", TextDataStart.Text);
-                            cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                            cmd.Parameters.AddWithValue("@IDStatus", id2);
-                            cmd.Parameters.AddWithValue("@IDWorks", id3);
-                            cmd.Parameters.AddWithValue("@Comments", TextComments.Text);
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch (SQLiteException ex)
-                        {
-                            MessageBox.Show("Error: " + ex.Message);
-                        }
-                        query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz ='{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks = '{id3}' and Comments = '{TextComments.Text}' ";
-                        cmd = new SQLiteCommand(query, connection);
-                        IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                        MessageBox.Show("Измените номер техники");
+                        ProverkaOsnova = 1;
                     }
                 }
             }
         }
 
-        
+        private void CombTypeTech_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IDTypeTechCombBox = CombTypeTech.SelectedIndex;
+        }
+
         public void AddPcCompet()
         {
             if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) ||
@@ -240,125 +269,298 @@ namespace RecordPeriphelTechniс.BoxWindow
                        String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || String.IsNullOrEmpty(CombVidieoMaker.Text))
             {
                 MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                Proverka2 = 0;
+                ProverkaPcCompont = 0;
             }
             else
             {
-                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                try
                 {
-                    connection.Open();
-                    bool resultTitl = int.TryParse(CombProccMaker.SelectedValue.ToString(), out int id4);
-                    bool resultBrand = int.TryParse(CombMatePlatMaker.SelectedValue.ToString(), out int id5);
-                    bool resultModel = int.TryParse(CombVidieoMaker.SelectedValue.ToString(), out int id6);
+                    using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                    {
+                        connection.Open();
+                        bool resultTitl = int.TryParse(CombProccMaker.SelectedValue.ToString(), out int id4);
+                        bool resultBrand = int.TryParse(CombMatePlatMaker.SelectedValue.ToString(), out int id5);
+                        bool resultModel = int.TryParse(CombVidieoMaker.SelectedValue.ToString(), out int id6);
 
-                    string query = $@"INSERT INTO Procces ('Model', 'Speed','IDMaker') VALUES ('{TextProccModel.Text}','{TextSpeed.Text}','{id4}');";
-                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                    cmd.ExecuteNonQuery();
-                    query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' ";
-                    cmd = new SQLiteCommand(query, connection);
-                    IDProcces = Convert.ToInt32(cmd.ExecuteScalar());
+                        string query = $@"INSERT INTO Procces ('Model', 'Speed','IDMaker') VALUES ('{TextProccModel.Text}','{TextSpeed.Text}','{id4}');";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDProcces = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDProccesCheck = 0;
+                        if (CheckIDProcces != 1)
+                        {
+                            while (CheckIDProcces >= 1)
+                            {
+                                query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDProccesCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDProcces = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDProcces = IDProccesCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDProcces = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
 
+                        query = $@"INSERT INTO MaterPlatas ('Model','IDMaker') VALUES ('{TextMatePlatModel.Text}','{id5}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  MaterPlatas WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDMaterPlatCheck = 0;
+                        if (CheckIDMaterPlat != 0)
+                        {
+                            while (CheckIDMaterPlat >= 1)
+                            {
+                                query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDMaterPlatCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDMaterPlat = IDMaterPlatCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
 
-                    query = $@"INSERT INTO MaterPlatas ('Model','IDMaker') VALUES ('{TextMatePlatModel.Text}','{id5}');";
-                    cmd = new SQLiteCommand(query, connection);
-                    cmd.ExecuteNonQuery();
-                    query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' ";
-                    cmd = new SQLiteCommand(query, connection);
-                    IDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
+                        query = $@"INSERT INTO VideoCards ('Model','VVideoMemory','IDMaker') VALUES ('{TextVideoModel.Text}','{TextVideoMemory.Text}','{id6}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDVideCards = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDVideoCardsCheck = 0;
+                        if (CheckIDVideCards != 0)
+                        {
+                            while (CheckIDVideCards >= 1)
+                            {
+                                query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDVideoCardsCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDVideCards = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDVideoCard = IDVideoCardsCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDVideoCard = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
 
-                    query = $@"INSERT INTO VideoCards ('Model','VVideoMemory','IDMaker') VALUES ('{TextVideoModel.Text}','{TextVideoMemory.Text}','{id6}');";
-                    cmd = new SQLiteCommand(query, connection);
-                    cmd.ExecuteNonQuery();
-                    query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' ";
-                    cmd = new SQLiteCommand(query, connection);
-                    IDVideoCard = Convert.ToInt32(cmd.ExecuteScalar());
-
-                    query = $@"INSERT INTO RAMs  ('Model1','Vmemory1','TypeMemory1','Maker1') VALUES ('{TextRAMModel1.Text}','{TextVmemory1.Text}','{TextTypeMemory1.Text}','{TextMaker1.Text}');";
-                    cmd = new SQLiteCommand(query, connection);
-                    cmd.ExecuteNonQuery();
-                    query = $@"SELECT ID FROM RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}'";
-                    cmd = new SQLiteCommand(query, connection);
-                    IDRams = Convert.ToInt32(cmd.ExecuteScalar());                    
-                    Proverka2 = 1;
+                        query = $@"INSERT INTO RAMs  ('Model1','Vmemory1','TypeMemory1','Maker1') VALUES ('{TextRAMModel1.Text}','{TextVmemory1.Text}','{TextTypeMemory1.Text}','{TextMaker1.Text}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDRams = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDRamsCheck = 0;
+                        if (CheckIDRams >= 1)
+                        {
+                            while (CheckIDRams != 0)
+                            {
+                                query = $@"SELECT ID FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}' and ID > '{IDRamsCheck}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDRamsCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}' and ID > '{IDRamsCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDRams = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDRams = IDRamsCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}'";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDRams = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+                        ProverkaPcCompont = 1;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
 
-       
+        public void CheckRams()
+        {
+            ProverkaRams = 0;
+            TextRamInfo2 = "Заполните во втором слоте : ";
+            TextRamInfo3 = "Заполните в третьем слоте: " ;
+            TextRamInfo4 = "Заполните в четвертом слоте: ";
+            if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
+            {
+                // MessageBox.Show("заполнено все2");               
+                TextRamInfo2 = "";
+            }
+            else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
+            {
+                MessageBox.Show("Все пусто");
+                string query1 = $@"UPDATE RAMs SET  Model2='Нет', Vmemory2='Нет',TypeMemory2='Нет',Maker2='Нет' WHERE ID='{IDRams}'";               
+                TextRamInfo2 = "";
+            }
+            else
+            {
+                if (TextRAMModel2.Text == "")
+                {
+                    TextRamInfo2 = TextRamInfo2 + "Модель, ";
+                }
+                if (TextVmemory2.Text == "")
+                {
+                    TextRamInfo2 = TextRamInfo2 + "Объем памяти, ";
+                }
+                if (TextTypeMemory2.Text == "")
+                {
+                    TextRamInfo2 = TextRamInfo2 + "Тип памяти, ";
+                }
+                if (TextMaker2.Text == "")
+                {
+                    TextRamInfo2 = TextRamInfo2 + "Производитель ";
+                }
+                ProverkaRams = 1;
+            }
+            if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
+            {
+               // MessageBox.Show("заполнено все3");               
+                TextRamInfo3 = "";
+            }
+            //else if (TextRAMModel3.Text != "" && (TextVmemory3.Text == "" || TextTypeMemory3.Text == "" || TextMaker3.Text == ""))
+            //{
+            //    //  MessageBox.Show("Дозаполните");
+            //}
+            else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
+            {
+                //  MessageBox.Show("Все пусто");
+                string query1 = $@"UPDATE RAMs SET  Model3='Нет', Vmemory3='Нет',TypeMemory3='Нет',Maker3='Нет' WHERE ID='{IDRams}'";               
+                TextRamInfo3 = "";
+            }
+            else
+            {
+                if (TextRAMModel3.Text == "")
+                {
+                    TextRamInfo3 = TextRamInfo3 + "Модель, ";
+                }
+                if (TextVmemory3.Text == "")
+                {
+                    TextRamInfo3 = TextRamInfo3 + "Объем памяти, ";
+                }
+                if (TextTypeMemory3.Text == "")
+                {
+                    TextRamInfo3 = TextRamInfo3 + "Тип памяти, ";
+                }
+                if (TextMaker3.Text == "")
+                {
+                    TextRamInfo3 = TextRamInfo3 + "Производитель ";
+                }
+                ProverkaRams = 1;
+            }
+            if (TextRAMModel4.Text != "" && TextVmemory4.Text != "" && TextTypeMemory4.Text != "" && TextMaker4.Text != "")
+            {
+               // MessageBox.Show("заполнено все4");               
+                TextRamInfo4 = "";
+            }            
+            else if (TextRAMModel4.Text == "" && (TextVmemory4.Text == "" && TextTypeMemory4.Text == "" && TextMaker4.Text == ""))
+            {
+                //  MessageBox.Show("Все пусто");               
+                TextRamInfo4 = "";
+            }
+            else
+            {
+                if (TextRAMModel4.Text == "")
+                {
+                    TextRamInfo4 = TextRamInfo4 + "Модель, ";
+                }
+                if (TextVmemory4.Text == "")
+                {
+                    TextRamInfo4 = TextRamInfo4 + "Объем памяти, ";
+                }
+                if (TextTypeMemory4.Text == "")
+                {
+                    TextRamInfo4 = TextRamInfo4 + "Тип памяти, ";
+                }
+                if (TextMaker4.Text == "")
+                {
+                    TextRamInfo4 = TextRamInfo4 + "Производитель ";
+                }
+                ProverkaRams = 1;
+            }
+            if (ProverkaRams == 1)
+            {
+                MessageBox.Show(TextRamInfo2 + '\n' + TextRamInfo3 + '\n' + TextRamInfo4);
+            }
+            
+        }    
+
         public void AddRams()
         {
             try 
             {
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
-                {
+                {                    
                     connection.Open();                    
                     if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
                     {
-                        MessageBox.Show("заполнено все2");
+                       // MessageBox.Show("заполнено все2");
                         string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text}', Vmemory2='{TextVmemory2.Text}',TypeMemory2='{TextTypeMemory2.Text}',Maker2='{TextMaker2.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }
-                    else if (TextRAMModel2.Text != "" && (TextVmemory2.Text == "" || TextTypeMemory2.Text == "" || TextMaker2.Text == ""))
-                    {
-                        //  MessageBox.Show("Дозаполните");
-                    }
+                    }                    
                     else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
                     {
-                        MessageBox.Show("Все пусто");
+                       // MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model2='Нет', Vmemory2='Нет',TypeMemory2='Нет',Maker2='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Дозаполните");
-                    }
+
+                    }                   
                     if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
                     {
-                        MessageBox.Show("заполнено все3");
+                        //MessageBox.Show("заполнено все3");
                         string query1 = $@"UPDATE RAMs SET Model3 ='{TextRAMModel3.Text}', Vmemory3='{TextVmemory3.Text}',TypeMemory3='{TextTypeMemory3.Text}',Maker3='{TextMaker3.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }
-                    else if (TextRAMModel3.Text != "" && (TextVmemory3.Text == "" || TextTypeMemory3.Text == "" || TextMaker3.Text == ""))
-                    {
-                        //  MessageBox.Show("Дозаполните");
-                    }
+
+                    }                    
                     else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model3='Нет', Vmemory3='Нет',TypeMemory3='Нет',Maker3='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Дозаполните");
-                    }
+                 
+                    }                   
                     if (TextRAMModel4.Text != "" && TextVmemory4.Text != "" && TextTypeMemory4.Text != "" && TextMaker4.Text != "")
                     {
-                        MessageBox.Show("заполнено все4");
+                        //MessageBox.Show("заполнено все4");
                         string query1 = $@"UPDATE RAMs SET Model4='{TextRAMModel4.Text}', Vmemory4='{TextVmemory4.Text}',TypeMemory4='{TextTypeMemory4.Text}',Maker4='{TextMaker4.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }
-                    else if (TextRAMModel4.Text != "" && (TextVmemory4.Text == "" || TextTypeMemory4.Text == "" || TextMaker4.Text == ""))
-                    {
-                        //  MessageBox.Show("Дозаполните");
+                      
                     }
                     else if (TextRAMModel4.Text == "" && (TextVmemory4.Text == "" && TextTypeMemory4.Text == "" && TextMaker4.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model4='Нет', Vmemory4='Нет',TypeMemory4='Нет',Maker4='Нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
-                        cmd1.ExecuteNonQuery();
-                    }
-                    else
-                    {
-                        // MessageBox.Show("Дозаполните");
-                    }
-                   
+                        cmd1.ExecuteNonQuery();                       
+                    }                   
                 }
             }catch (Exception ex)
             {
@@ -398,6 +600,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     string query = $@"UPDATE MenuPerTech SET IDComponets ='{IDComponets}' WHERE ID ='{IDMenuPerTech}' ";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
+                    MessageBox.Show("Данные добавлены");
                 }
             }
             catch (Exception ex)

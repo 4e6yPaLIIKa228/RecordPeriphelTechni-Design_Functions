@@ -11,7 +11,7 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
+
         FontFamily="{DynamicResource MaterialDesignFont}"
     Title="MainWindow222" Height="680" Width="1450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
@@ -26,6 +26,25 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="0,0.1,0,0">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="3" Orientation="Vertical" Margin="0,0.1,0,0" VerticalAlignment="Bottom">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+        <Grid Grid.Column="3"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
             <DockPanel
               LastChildFill="True">
@@ -44,7 +63,7 @@
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
                 <TabItem Header="Компьютерная техника">
                     <Grid>
-                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" >
+                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Visibility="Hidden" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
                                 <DataGridTextColumn Header="Тип" Visibility="Hidden" FontSize="20" Width="270" Binding="{Binding NameType}"/>
@@ -142,7 +161,6 @@
                     <Grid>
                         <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
                                 <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
@@ -162,7 +180,6 @@
 
                         <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforDopOboryd" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforDopOboryd_MouseDoubleClick" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
                                 <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
