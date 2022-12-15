@@ -437,14 +437,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                 ProverkaRams = 1;
             }
             if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
-            {
-               // MessageBox.Show("заполнено все3");               
+            {                           
                 TextRamInfo3 = "";
             }
-            //else if (TextRAMModel3.Text != "" && (TextVmemory3.Text == "" || TextTypeMemory3.Text == "" || TextMaker3.Text == ""))
-            //{
-            //    //  MessageBox.Show("Дозаполните");
-            //}
+            
             else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
             {
                 //  MessageBox.Show("Все пусто");
