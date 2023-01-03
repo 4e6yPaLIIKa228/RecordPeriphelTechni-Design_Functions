@@ -91,7 +91,7 @@
                         </TabItem>
                     </TabControl>
                 </TabItem>
-                <TabItem Header="Системный блок" >
+                <TabItem Header="Системный блок" Name="CicBlock" >
                     <TabControl TabStripPlacement="Left">
                         <TabItem Header="Процессор"  >
                             <StackPanel Orientation="Vertical" Width="auto" HorizontalAlignment="Left"  >

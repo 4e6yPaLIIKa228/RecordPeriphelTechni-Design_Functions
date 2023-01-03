@@ -125,35 +125,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
             if (IDTypeTechCombBox == 0)
             {
-                AddOsnovaPC();
-                //if (ProverkaOsnova == 0)
-                //{
-                //    AddPcCompet();
-                //    if (Proverka2 == 1)
-                //    {
-                //        AddRams();
-                //        if (Proverka3 == 0)
-                //        {
-                //AddComponets();
-                //UpdateMenuPer();
-                //MessageBox.Show("Данные добавлены");
-                //        }
-                //    }
-                //}
-                //else
-                //{
-                //    try
-                //    {
-                //        using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
-                //        {
-                //            connection.Open();
-                //        }
-                //    }
-                //    catch (SQLiteException ex)
-                //    {
-                //        MessageBox.Show("Error: " + ex.Message);
-                //    }
-                //}
+                AddOsnovaPC();               
             }
             else
             {

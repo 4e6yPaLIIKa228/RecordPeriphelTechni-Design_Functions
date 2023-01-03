@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,8 +68,8 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
             {
                 try
                 {
-                connection.Open();
-                    string query  = $@"SELECT MenuPerTech.ID as IDMenuPer, MenuPerTech.Name as NameYstr, TypeTechs.NameType,MenuPerTech.Kabunet ,Organiz.NameOrg, MenuPerTech.Number,
+                    connection.Open();
+                    string query = $@"SELECT MenuPerTech.ID as IDMenuPer, MenuPerTech.Name as NameYstr, TypeTechs.NameType,MenuPerTech.Kabunet ,Organiz.NameOrg, MenuPerTech.Number,
 MenuPerTech.IDComponets as IDComponets, MenuPerTech.StartWork, MenuPerTech.EndWork,
 MenuPerTech.Comments, Status.NameStatus, Works.NameWorks,
 Procces.ID as ProccesID, Procces.Model as NameProcces ,Procces.Speed as SpeedProcces, MakersProcc.Name as MakerProcc,
@@ -100,14 +101,14 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID
 
 WHERE  MenuPerTech.IDTypeTech = '1'
                           ";
-                    SQLiteCommand cmd = new SQLiteCommand(query, connection);                    
+                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     DataTable DT = new DataTable("MenuPerTech");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                     SDA.Fill(DT);
                     InforPcTex.ItemsSource = DT.DefaultView;
                     cmd.ExecuteNonQuery();
                     SQLiteDataReader dr = null;
-                    dr = cmd.ExecuteReader();                   
+                    dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
                         //Componets, ProccesID, MaterPlatID, VideCardID, IDRAM, Slot1ID1, Slot1ID2, Slot1ID3, Slot1ID4;
@@ -123,12 +124,12 @@ WHERE  MenuPerTech.IDTypeTech = '1'
                         //Saver.SlotID4 = dr["SlotID4"].ToString();
 
                     }
-                   
+
 
                 }
                 catch (Exception ex)
                 {
-                 MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -287,18 +288,20 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             if (IndexTabCont == 0)
             {
                 Eddit_InforPcTex();
-            }else if(IndexTabCont == 1)
+            }
+            else if (IndexTabCont == 1)
             {
-               
+
                 Eddit_InforPerTech();
-            }else if (IndexTabCont == 2)
+            }
+            else if (IndexTabCont == 2)
             {
                 Eddit_InforDopOboryd();
-            }            
+            }
         }
         private void TabConrlMenuPer_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-          IndexTabCont =  TabConrlMenuPer.SelectedIndex;
+            IndexTabCont = TabConrlMenuPer.SelectedIndex;
             if (IndexTabCont == 1 || IndexTabCont == 2)
             {
                 TreeSisBlock.Visibility = Visibility.Hidden;
@@ -390,7 +393,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 {
                     if (Organiz.IsSelected == true && IndexTabCont == 0)
                     {
-                        InforPcTex.ItemsSource = null;                       
+                        InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}   WHERE (Organiz.NameOrg like '%{TxtSearch.Text.ToLower()}%' or Organiz.NameOrg like '%{TxtSearch.Text.ToUpper()}%')  and  MenuPerTech.IDTypeTech = '1'";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
@@ -401,11 +404,11 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     }
                     else if (Organiz.IsSelected == true && IndexTabCont == 1)
                     {
-                       // InforPcTex.ItemsSource = null;
+                        // InforPcTex.ItemsSource = null;
                     }
                     else if (Organiz.IsSelected == true && IndexTabCont == 2)
                     {
-                       // InforPcTex.ItemsSource = null;
+                        // InforPcTex.ItemsSource = null;
                     }
 
                     if (Kabunet.IsSelected == true && IndexTabCont == 0)
@@ -416,7 +419,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                         SDA.Fill(DT);
-                        InforPcTex.ItemsSource = DT.DefaultView; 
+                        InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
                     else if (Kabunet.IsSelected == true && IndexTabCont == 1)
@@ -426,8 +429,8 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     else if (Kabunet.IsSelected == true && IndexTabCont == 2)
                     {
 
-                    }  
-                    
+                    }
+
                     if (Number.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
@@ -536,7 +539,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         SDA.Fill(DT);
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
-                    }                    
+                    }
                     if (ModelMaterPlat.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
@@ -559,7 +562,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if(ModelVideoCard.IsSelected == true && IndexTabCont == 0)
+                    if (ModelVideoCard.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (ModelVideos like '%{TxtSearch.Text.ToLower()}%' or ModelVideos like '%{TxtSearch.Text.ToUpper()}%' or ModelVideos like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -588,7 +591,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
-                        SDA.Fill(DT); 
+                        SDA.Fill(DT);
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
@@ -787,12 +790,55 @@ WHERE  MenuPerTech.IDTypeTech = '3'
 
         private void TxtSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-           // SelectTree(sender,e);
+            // SelectTree(sender,e);
         }
 
         private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             SelectTree(sender, e);
+        }
+
+        private void BtnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcel();
+        }
+        private void ExportToExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            
+            for (int j = 0; j < InforPcTex.Columns.Count; j++)
+            {
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 20;
+                    myRange.Value2 = InforPcTex.Columns[j].Header;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }            
+            }
+
+
+            for (int i = 0; i < InforPcTex.Columns.Count; i++)
+            {
+                for (int j = 0; j < InforPcTex.Items.Count; j++)
+                {
+                    TextBlock b = InforPcTex.Columns[i].GetCellContent(InforPcTex.Items[j]) as TextBlock;
+
+                    if (b == null)
+                        continue;
+
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+
+                }
+            }
         }
     }
 }

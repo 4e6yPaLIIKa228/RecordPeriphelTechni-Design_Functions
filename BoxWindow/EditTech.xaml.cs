@@ -23,7 +23,7 @@ namespace RecordPeriphelTechniс.Windows
     public partial class EditTech : Window
     {
         int TypeEdit, ProverkaOsnova = 0, ProverkaPC = 0, ProverkaRams = 0;
-        string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
+        string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "", CheckNumber="";
 
         public EditTech(DataRowView drv, int Type)
         {
@@ -38,6 +38,7 @@ namespace RecordPeriphelTechniс.Windows
             TextIDKabuneta.Text = drv["Kabunet"].ToString();
             TextName.Text = drv["NameYstr"].ToString();
             TextNumber.Text = drv["Number"].ToString();
+            CheckNumber = drv["Number"].ToString(); 
             TextDataStart.Text = drv["StartWork"].ToString();
             TextDataEnd.Text = drv["EndWork"].ToString();
             CombIDStatus.Text = drv["NameStatus"].ToString();
@@ -204,17 +205,7 @@ namespace RecordPeriphelTechniс.Windows
         }
 
         public void IsEnabledData()
-        {
-
-            //CombTypeTech.IsEnabled = false;
-            //CombIDOrgamniz.IsEnabled = false;
-            //TextIDKabuneta.IsEnabled = false;
-            //TextNumber.IsEnabled = false;
-            //TextDataStart.IsEnabled = false;
-            //TextDataEnd.IsEnabled = false;
-            //CombIDStatus.IsEnabled = false;
-            //CombIDWorks.IsEnabled = false;
-            //TextComments.IsEnabled = false;
+        {          
 
             TextProccModel.IsEnabled = false;
             TextSpeed.IsEnabled = false;
@@ -245,6 +236,8 @@ namespace RecordPeriphelTechniс.Windows
             TextVideoModel.IsEnabled = false; ;
             TextVideoMemory.IsEnabled = false;
             CombVidieoMaker.IsEnabled = false;
+
+            CicBlock.Visibility = Visibility.Hidden;
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -301,18 +294,36 @@ namespace RecordPeriphelTechniс.Windows
                     bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out id3);
                     if (TypeEdit == 1)
                     {
-                        CheckRams();
-                        if (ProverkaRams == 0)
+                        int ProverkaNumber = 0;
+                        if (CheckNumber != TextNumber.Text)
                         {
-                            EdiitPC();
-                            if (ProverkaPC == 0)
+                            string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+                        else
+                        {
+                            ProverkaNumber = 0;
+                        }
+                        if (ProverkaNumber == 0)
+                        {
+                            CheckRams();
+                            if (ProverkaRams == 0)
                             {
-                                string query = $@"UPDATE MenuPerTech SET IDOrganiz='{id}', Kabunet='{TextIDKabuneta.Text}',Number='{TextNumber.Text}',Name='{TextName.Text}', StartWork='{TextDataStart.Text}', 
+                                EdiitPC();
+                                if (ProverkaPC == 0)
+                                {
+                                    string query = $@"UPDATE MenuPerTech SET IDOrganiz='{id}', Kabunet='{TextIDKabuneta.Text}',Number='{TextNumber.Text}',Name='{TextName.Text}', StartWork='{TextDataStart.Text}', 
                                             EndWork='{TextDataEnd.Text}' ,IDStatus='{id2}',IDWorks='{id3}',Comments='{TextComments.Text}' WHERE ID='{Saver.IDMenuPerPC}';";
-                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show("Информация обновленна");
+                                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Информация обновленна", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                }
                             }
+                        }
+                        else
+                        {
+                            MessageBox.Show($@"Этот номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -320,32 +331,51 @@ namespace RecordPeriphelTechniс.Windows
                         string query = $@"UPDATE MenuPerTech SET IDOrganiz=@IDOrganiz, Kabunet=@Kabunet,Number=@Number,Name=@Name, Number=@Number, StartWork=@StartWork, 
                                             EndWork=@EndWork ,IDStatus=@IDStatus,IDWorks=@IDWorks,Comments=@Comments WHERE ID=@ID;";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                        try
+                        int  ProverkaNumber = 0;
+                        if (CheckNumber != TextNumber.Text)
                         {
-                            if (TypeEdit == 2)
-                            {
-                                cmd.Parameters.AddWithValue("@ID", Saver.IDMenuPerTech);
-                            }
-                            else if (TypeEdit == 3)
-                            {
-                                cmd.Parameters.AddWithValue("@ID", Saver.IDMenuOboryd);
-                            }
-                            cmd.Parameters.AddWithValue("@IDOrganiz", id);
-                            cmd.Parameters.AddWithValue("@Kabunet", TextIDKabuneta.Text);
-                            cmd.Parameters.AddWithValue("@Number", TextNumber.Text);
-                            cmd.Parameters.AddWithValue("@Name", TextName.Text);
-                            cmd.Parameters.AddWithValue("@StartWork", TextDataStart.Text);
-                            cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                            cmd.Parameters.AddWithValue("@IDStatus", id2);
-                            cmd.Parameters.AddWithValue("@IDWorks", id3);
-                            cmd.Parameters.AddWithValue("@Comments", TextComments.Text);
-                            cmd.ExecuteNonQuery();
+                            query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
+                            cmd = new SQLiteCommand(query, connection);
+                            ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            MessageBox.Show(ex.Message);
+                            ProverkaNumber = 0;
                         }
-                        MessageBox.Show("Информация обновленна");
+                        if (ProverkaNumber == 0)
+                        {
+                            try
+                            {
+                                if (TypeEdit == 2)
+                                {
+                                    cmd.Parameters.AddWithValue("@ID", Saver.IDMenuPerTech);
+                                }
+                                else if (TypeEdit == 3)
+                                {
+                                    cmd.Parameters.AddWithValue("@ID", Saver.IDMenuOboryd);
+                                }
+                                cmd.Parameters.AddWithValue("@IDOrganiz", id);
+                                cmd.Parameters.AddWithValue("@Kabunet", TextIDKabuneta.Text);
+                                cmd.Parameters.AddWithValue("@Number", TextNumber.Text);
+                                cmd.Parameters.AddWithValue("@Name", TextName.Text);
+                                cmd.Parameters.AddWithValue("@StartWork", TextDataStart.Text);
+                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                cmd.Parameters.AddWithValue("@IDStatus", id2);
+                                cmd.Parameters.AddWithValue("@IDWorks", id3);
+                                cmd.Parameters.AddWithValue("@Comments", TextComments.Text);
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+                            MessageBox.Show("Информация обновленна", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                        }
+                        else
+                        {
+                            MessageBox.Show($@"Этот номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                        
                     }
                 }
                
