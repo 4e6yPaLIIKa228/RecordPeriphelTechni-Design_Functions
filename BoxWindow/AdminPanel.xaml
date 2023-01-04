@@ -29,7 +29,7 @@
 
         <Grid  Grid.Column="0" Grid.Row="0">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                <Label Content="Панель Администратора" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                <TextBlock Text="Панель Администратора" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
             </StackPanel>
         </Grid>
 
@@ -50,20 +50,20 @@
                 <Button Name="BtnEddit" Height="30" Content="Изменить данные" VerticalAlignment="Top" Margin="10" />
                 <Button Name="AddComponent" Height="30" Content="Добавить компонент" VerticalAlignment="Top" Margin="10"/>
                 <Button Name="AddUsers" Height="30" Content="Добавить пользователя" VerticalAlignment="Top" Margin="10" Click="AddUsers_Click" />
-                <Button Name="InHome" Height="30" Content="На главную" VerticalAlignment="Top" Margin="10"/>
+                <Button Name="InHome" Height="30" Content="На главную" VerticalAlignment="Top" Margin="10" Click="InHome_Click"/>
             </StackPanel>
         </Grid>
 
         <Grid  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,5,0" >
             <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="ListUsers" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID"  FontSize="20" Width="50" Binding="{Binding IDMenuPer}"  />
-                    <DataGridTextColumn Header="Логин"  FontSize="20" Width="100" Binding="{Binding NameType}"/>                   
-                    <DataGridTextColumn Header="Фамилия" FontSize="20"  Binding="{Binding NameYstr}"/>
-                    <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
-                    <DataGridTextColumn Header="Отчество" FontSize="20"  Binding="{Binding NameYstr}"/>
-                    <DataGridTextColumn Header="Дата регистрации" FontSize="20"  Binding="{Binding StartWork}"/>
-                    <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding StartWork}"/>
+                    <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
+                    <DataGridTextColumn Header="Логин"  FontSize="20" Width="150"  Binding="{Binding Login}"/>
+                    <DataGridTextColumn Header="Фамилия" FontSize="20"  Binding="{Binding Surname}"/>
+                    <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Отчество" FontSize="20"  Binding="{Binding MiddleName}"/>
+                    <DataGridTextColumn Header="Дата регистрации" FontSize="20"  Binding="{Binding DataRegist}"/>
+                    <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding StatusUser}"/>
                 </DataGrid.Columns> 
             </DataGrid>
         </Grid>

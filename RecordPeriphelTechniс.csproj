@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="PrintDG.cs" />
     <Compile Include="Saver.cs" />
+    <Compile Include="SimpleComand.cs" />
     <Page Include="BoxWindow\AddTech.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

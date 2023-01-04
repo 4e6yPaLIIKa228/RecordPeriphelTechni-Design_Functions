@@ -38,14 +38,12 @@ namespace RecordPeriphelTechniс.BoxWindow
                 {
                     connection.Open();
                     string query1 = $@"SELECT * FROM TypeTechs"; // 
-                    string query2 = $@"SELECT * FROM Organiz"; // 
-                                                               // 
+                    string query2 = $@"SELECT * FROM Organiz"; //                                                                 
                     string query4 = $@"SELECT * FROM Status"; // 
                     string query5 = $@"SELECT * FROM Works"; // 
                     string query6 = $@"SELECT * FROM MakersProcc"; // 
                     string query7 = $@"SELECT * FROM MakersMaterPlat"; // 
                     string query8 = $@"SELECT * FROM MakersVideoCard"; // 
-
 
                     //----------------------------------------------
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
