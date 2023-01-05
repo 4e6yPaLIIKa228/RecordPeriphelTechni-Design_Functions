@@ -23,7 +23,7 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class AddTech : Window
     {
-        int IDMenuPerTech = 0, IDTypeTech = 0, IDTypeTechCombBox = 0, ProverkaOsnova = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0, IDSlot1=0;
+        int IDMenuPerTech = 0, IDTypeTech = 0, IDTypeTechCombBox = 0, /*ProverkaOsnova = 0,*/ ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0/*, IDSlot1=0*/;
         string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
         public AddTech()
         {
@@ -211,7 +211,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                                ProverkaOsnova = 0;
+                                //ProverkaOsnova = 0;
                                 AddRams();
                                 AddComponets();
                                 UpdateMenuPer();
@@ -221,7 +221,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     else
                     {
                         MessageBox.Show("Измените номер техники");
-                        ProverkaOsnova = 1;
+                        //ProverkaOsnova = 1;
                     }
                 }
             }

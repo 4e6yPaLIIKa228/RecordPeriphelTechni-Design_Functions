@@ -22,7 +22,7 @@ namespace RecordPeriphelTechniс.Windows
     /// </summary>
     public partial class EditTech : Window
     {
-        int TypeEdit, ProverkaOsnova = 0, ProverkaPC = 0, ProverkaRams = 0;
+        int TypeEdit, ProverkaPC = 0, /*ProverkaOsnova=0,*/ ProverkaRams = 0;
         string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "", CheckNumber="";
 
         public EditTech(DataRowView drv, int Type)
@@ -242,35 +242,7 @@ namespace RecordPeriphelTechniс.Windows
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
         {
-            //if (TypeEdit == 1)
-            //{
-            //    CheckRams();
-            //    if (ProverkaRams == 0)
-            //    {
-            //        EdiitPC();
-            //        if (ProverkaPC == 0)
-            //        {
-            //            EdiitOcnovaInfo();
-            //        }
-            //        if (ProverkaOsnova == 0)
-            //        {
-
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    EdiitOcnovaInfo();
-            //}                     
-            //if (TypeEdit == 1 && ProverkaOsnova != 1)
-            //{
-            //    EdiitPC();
-            //}
-            //if (ProverkaOsnova == 1)
-            //{
-            //    MessageBox.Show("Информация обновленна");
-            //}
-            EdiitOcnovaInfo();
+          EdiitOcnovaInfo();
         }
 
 
@@ -278,13 +250,13 @@ namespace RecordPeriphelTechniс.Windows
         {
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
             {
-                ProverkaOsnova = 0;
+                //ProverkaOsnova = 0;
                 connection.Open();
                 if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextDataStart.Text)  || String.IsNullOrEmpty(TextName.Text) ||
                     String.IsNullOrEmpty(CombIDWorks.Text))
                 {
                     MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    ProverkaOsnova = 1;
+                    //ProverkaOsnova = 1;
                 }
                 else
                 {
@@ -675,7 +647,7 @@ namespace RecordPeriphelTechniс.Windows
                         {
                             // MessageBox.Show("Дозаполните");
                         }
-                        ProverkaOsnova = 1;
+                        //ProverkaOsnova = 1;
                     }
 
                 }

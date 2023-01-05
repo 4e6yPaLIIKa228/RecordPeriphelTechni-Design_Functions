@@ -47,8 +47,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             try
             {
                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
-                {
-               
+                {               
                     connection.Open();
                     string query = $@"SELECT  Users.ID,Users.Login, Users.Passoword,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
                                 JOIN StatusUsers on Users.IDStasus = StatusUsers.ID";
@@ -57,9 +56,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                     SDA.Fill(DT);
                     ListUsers.ItemsSource = DT.DefaultView;
-                    cmd.ExecuteNonQuery();                             
-
-
+                    cmd.ExecuteNonQuery();
+                    connection.Close();
                 }
                 
             }

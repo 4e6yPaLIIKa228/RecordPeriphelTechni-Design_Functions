@@ -57,7 +57,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
             AddUsers();
-        }
+        } //Кнопка добавления пользователя
 
         public void CheckerText()
         {
@@ -65,8 +65,8 @@ namespace RecordPeriphelTechniс.BoxWindow
             SimpleComand.CheckPassBox(PassBox);
             SimpleComand.CheckTextBox(TextFamili);
             SimpleComand.CheckTextBox(TextName);
-            SimpleComand.CheckComboBox(CombStatus); 
-        }
+            SimpleComand.CheckComboBox(CombStatus);
+        } //Проверка пустых строк(подсветка)
 
         private void TextBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -132,7 +132,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             {
                 MessageBox.Show("Ошибка" + ex);
             }
-        }
+        } //Функция добавления пользователя
 
         public void CheckerLogin()
         {
@@ -152,11 +152,45 @@ namespace RecordPeriphelTechniс.BoxWindow
             {
                 MessageBox.Show("Ошибка" + ex);
             }
-        }
+        } //Проверка на повторый логин
 
         private void InHome_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        } //Кнопка назад
+
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void BtnSazeMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
