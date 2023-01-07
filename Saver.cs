@@ -8,6 +8,7 @@ namespace RecordPeriphelTechniс
 {
     internal class Saver
     {
-       public static string IDMenuPerPC,IDMenuPerTech, IDMenuOboryd, IDComponets, ProccesID, MaterPlatID, VideCardID, IDRAM/*, SlotID1, SlotID2, SlotID3, SlotID4*/;
+       public static string LoginUser, IDUser, IDMenuPerPC,IDMenuPerTech, IDMenuOboryd, IDComponets, ProccesID, MaterPlatID, VideCardID, IDRAM;
+      
     }
 }

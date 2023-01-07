@@ -93,8 +93,8 @@
                 <TextBox x:Name="TextOthectbo" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="68,0,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
-                <TextBlock   FontSize="20" Text="Статус" VerticalAlignment="Center"   Margin="0,0,0,0"/>
-                <ComboBox x:Name="CombStatus" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="93,0,0,0" materialDesign:HintAssist.Hint="Статус"   Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectionChanged="CombStatus_SelectionChanged" />
+                <TextBlock   FontSize="20" Text="Доступ" VerticalAlignment="Center"   Margin="0,0,0,0"/>
+                <ComboBox x:Name="CombAllowance" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="93,0,0,0" materialDesign:HintAssist.Hint="Доступ"   Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectionChanged="CombAllowance_SelectionChanged" />
             </StackPanel>
         </StackPanel>
 
@@ -106,9 +106,9 @@
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="AddUser" Height="30" Width="150" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="AddUser_Click"/>
-                <Button Name="InHome" Height="30" Width="150" Content="На главную" VerticalAlignment="Top" Margin="10" Click="InHome_Click"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button Name="InHome" Height="30" Width="150" Content="Назад" VerticalAlignment="Top" Margin="10" Click="InHome_Click"/>
+                <Button Name="AddUser" Height="30" Width="150" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="AddUser_Click"/>                
             </StackPanel>
         </Grid>
 

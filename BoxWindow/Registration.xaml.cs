@@ -23,7 +23,7 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class Registration : Window
     {
-        int CheckeLogin = 0;
+        int CheckeLogin = 0, IDProverka = 0;
         public Registration()
         {
             InitializeComponent();
@@ -37,14 +37,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                 try
                 {
                     connection.Open();
-                    string query = $@"SELECT * FROM StatusUsers";
+                    string query = $@"SELECT * FROM AllowanceUsers";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
-                    DataTable dt = new DataTable("StatusUsers");
+                    DataTable dt = new DataTable("AllowanceUsers");
                     SDA.Fill(dt);
-                    CombStatus.ItemsSource = dt.DefaultView;
-                    CombStatus.DisplayMemberPath = "StatusUser";
-                    CombStatus.SelectedValuePath = "ID";
+                    CombAllowance.ItemsSource = dt.DefaultView;
+                    CombAllowance.DisplayMemberPath = "Allowance";
+                    CombAllowance.SelectedValuePath = "ID";
 
                 }
                 catch (Exception ex)
@@ -56,6 +56,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
+            //AddProverka();
             AddUsers();
         } //Кнопка добавления пользователя
 
@@ -65,7 +66,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             SimpleComand.CheckPassBox(PassBox);
             SimpleComand.CheckTextBox(TextFamili);
             SimpleComand.CheckTextBox(TextName);
-            SimpleComand.CheckComboBox(CombStatus);
+            SimpleComand.CheckComboBox(CombAllowance);
         } //Проверка пустых строк(подсветка)
 
         private void TextBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,9 +89,9 @@ namespace RecordPeriphelTechniс.BoxWindow
             SimpleComand.CheckTextBox(TextName);
         }
 
-        private void CombStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CombAllowance_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SimpleComand.CheckComboBox(CombStatus);
+            SimpleComand.CheckComboBox(CombAllowance);
         }
 
         public void AddUsers()
@@ -100,7 +101,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
 
-                    if (String.IsNullOrEmpty(TextBoxLogin.Text) || String.IsNullOrEmpty(PassBox.Password) || String.IsNullOrEmpty(TextFamili.Text) || String.IsNullOrEmpty(TextName.Text) || String.IsNullOrEmpty(CombStatus.Text))
+                    if (String.IsNullOrEmpty(TextBoxLogin.Text) || String.IsNullOrEmpty(PassBox.Password) || String.IsNullOrEmpty(TextFamili.Text) || String.IsNullOrEmpty(TextName.Text) || String.IsNullOrEmpty(CombAllowance.Text))
                     {
                         CheckerText();
                         MessageBox.Show("Заполните обязательные поля ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -114,9 +115,16 @@ namespace RecordPeriphelTechniс.BoxWindow
                             var Login = TextBoxLogin.Text.ToLower();
                             var Pass = SimpleComand.GetHash(PassBox.Password);
                             var DateNow = DateTime.Now.ToString("dd/MM/yyyy");
-                            bool resultType = int.TryParse(CombStatus.SelectedValue.ToString(), out int  IDCombStatus);
-                            string query = $@"INSERT INTO Users ('Login','Passoword','Surname',Name,MiddleName,IDStasus,DataRegist) VALUES ('{Login}','{Pass}','{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{IDCombStatus}','{DateNow}')";
+                            bool resultType = int.TryParse(CombAllowance.SelectedValue.ToString(), out int IDCombAllowance);
+                            string query = $@"INSERT INTO Users ('Login','Password','Surname',Name,MiddleName,IDStasus,IDAllowance,DataRegist) VALUES ('{Login}','{Pass}','{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{1}','{IDCombAllowance}','{DateNow}')";
                             SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            cmd.ExecuteScalar();
+                            query = $@"SELECT ID FROM Users WHERE Login='{Login}';";
+                            cmd = new SQLiteCommand(query, connection);
+                            int IDProverka = Convert.ToInt32(cmd.ExecuteScalar());
+                            AddProverka();
+                            query = $@"UPDATE Users SET IDProverka = '{IDProverka}' WHERE Login= '{Login}'";
+                            cmd = new SQLiteCommand(query, connection);
                             cmd.ExecuteScalar();
                             connection.Close();
                             MessageBox.Show("Пользователь добавлен ", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);                            
@@ -124,6 +132,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                         else
                         {
                             MessageBox.Show("Такой логин занят ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                          
+                            connection.Close();
                         }
                     }
                 }
@@ -133,6 +143,29 @@ namespace RecordPeriphelTechniс.BoxWindow
                 MessageBox.Show("Ошибка" + ex);
             }
         } //Функция добавления пользователя
+
+        public void AddProverka()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    connection.Open();
+                    string query = $@"INSERT INTO Proverka ('TimeBegin','TimeEnd','Kolltry') VALUES ('00:00','00:00','{0}')";
+                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                    cmd.ExecuteNonQuery();
+                    query = $@"SELECT ID FROM Proverka ORDER BY ID DESC;";
+                    cmd = new SQLiteCommand(query, connection);
+                    IDProverka  = Convert.ToInt32(cmd.ExecuteScalar());
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка" + ex);
+            }
+        }
+
 
         public void CheckerLogin()
         {

@@ -49,8 +49,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {               
                     connection.Open();
-                    string query = $@"SELECT  Users.ID,Users.Login, Users.Passoword,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
-                                JOIN StatusUsers on Users.IDStasus = StatusUsers.ID";
+                    string query = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
+                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     DataTable DT = new DataTable("MenuPerTech");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);

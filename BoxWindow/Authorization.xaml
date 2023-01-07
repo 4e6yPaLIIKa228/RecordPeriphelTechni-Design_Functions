@@ -4,9 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecordPeriphelTechniс.BoxWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Authorization" Height="450" Width="800">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Authorization" Height="500" Width="450">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="78"/>
+            <RowDefinition/>
+            <RowDefinition Height="61"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition/>
+            <ColumnDefinition Width="115" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Login_In" Visibility="Hidden" Grid.RowSpan="2" >
+            <TextBlock HorizontalAlignment="Left" Height="21.334" Margin="4,0,0,0" TextWrapping="Wrap" Text="ITBankBigFarm" VerticalAlignment="Top" Width="132.667" FontWeight="Bold" FontSize="16" Foreground="#FF2222C5"/>
+            <TextBlock HorizontalAlignment="Left" Height="21.334" Margin="0,68.333,0,0" TextWrapping="Wrap" Text="Войдите в свою учетную запись" VerticalAlignment="Top" Width="354.25" FontWeight="Bold" FontSize="16" Foreground="#FF02020C" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" Height="40" Margin="19.333,103.334,0,0" TextWrapping="Wrap" Text="Войдите в свою учетную запись, чтобы продолжить свою работу" VerticalAlignment="Top" Width="320.917" Foreground="#FF02020C" TextAlignment="Center"/>
+
+
+            <TextBlock HorizontalAlignment="Left" Height="19.999" Margin="183.333,312.001,0,0" TextWrapping="Wrap" Text="Забыл пароль?" VerticalAlignment="Top" Width="170"  Background="{x:Null}" TextAlignment="Right" Foreground="#FF151580" />
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <TextBlock HorizontalAlignment="Left" Margin="4,0,0,0" TextWrapping="Wrap" Text="ITBankBigFarm" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#FF2222C5"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="1"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical">               
+                <StackPanel>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Войдите в свою учетную запись" VerticalAlignment="Top"  FontWeight="Bold" FontSize="16" Foreground="#FF02020C" TextAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" Text="Войдите в свою учетную запись, чтобы продолжить свою работу" VerticalAlignment="Top" Width="320.917" Foreground="#FF02020C" TextAlignment="Center" Margin="0,10,0,0"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"  VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#FF02020C" Margin="0,10,0,0"/>
+                    <TextBox Width="350" HorizontalAlignment="Left" FontSize="20" Name="TextBoxLogin"  Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Логин" TextChanged="TextBoxLogin_TextChanged" Margin="0,10,0,0" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"  FontWeight="Bold" FontSize="16" Foreground="#FF02020C"  Margin="0,10,0,0"/>
+                    <PasswordBox Width="350"  FontSize="20" Name="PassBox" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Пароль" PasswordChanged="PassBox_PasswordChanged"  Margin="0,10,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="51,10,51,11" Height="40" Width="340">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="BtnAvtoriz" Content="Аворизоваться" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="340"   BorderBrush="White"  FontWeight="Bold" Click="BtnAvtoriz_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
