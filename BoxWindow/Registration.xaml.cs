@@ -114,10 +114,12 @@ namespace RecordPeriphelTechniс.BoxWindow
                             connection.Open();
                             var Login = TextBoxLogin.Text.ToLower();
                             var Pass = SimpleComand.GetHash(PassBox.Password);
+                            //var Pass = SimpleComand.GetHash(txtpassreg.Password);
                             var DateNow = DateTime.Now.ToString("dd/MM/yyyy");
                             bool resultType = int.TryParse(CombAllowance.SelectedValue.ToString(), out int IDCombAllowance);
-                            string query = $@"INSERT INTO Users ('Login','Password','Surname',Name,MiddleName,IDStasus,IDAllowance,DataRegist) VALUES ('{Login}','{Pass}','{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{1}','{IDCombAllowance}','{DateNow}')";
+                            string query = $@"INSERT INTO Users ('Login','Password','Surname',Name,MiddleName,IDStatus,IDAllowance,DataRegist) VALUES ('{Login}',@Password,'{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{1}','{IDCombAllowance}','{DateNow}')";
                             SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            cmd.Parameters.AddWithValue("@Password", Pass);
                             cmd.ExecuteScalar();
                             query = $@"SELECT ID FROM Users WHERE Login='{Login}';";
                             cmd = new SQLiteCommand(query, connection);
@@ -151,7 +153,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    string query = $@"INSERT INTO Proverka ('TimeBegin','TimeEnd','Kolltry') VALUES ('00:00','00:00','{0}')";
+                    string query = $@"INSERT INTO Proverka ('TimeBegin','TimeEnd','AttemptNumber') VALUES ('00:00','00:00','{0}')";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
                     query = $@"SELECT ID FROM Proverka ORDER BY ID DESC;";

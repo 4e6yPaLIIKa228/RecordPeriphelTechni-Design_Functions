@@ -53,8 +53,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                         connection.Open();
                         var Pass = SimpleComand.GetHash(PassBox.Password);
                         string LoginLower = TextBoxLogin.Text.ToLower();
-                        string query = $@"SELECT  COUNT(1) FROM Users WHERE Login='{LoginLower}' AND Password = '{Pass}' and IDStatus != 3";
+                        string query = $@"SELECT  COUNT(1) FROM Users WHERE Login='{LoginLower}' AND Password = @Password and IDStatus != 3";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        cmd.Parameters.AddWithValue("@Password", Pass);
                         int UsersFound = Convert.ToInt32(cmd.ExecuteScalar());
                         if (UsersFound == 1)
                         {
@@ -90,6 +91,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                             connection.Close();
                             //MessageBox.Show("Добро пожаловать! " + $@"{TextBoxLogin.Text}");
                         }
+                        else
+                        {
+                            NotInvalidPass();
+                        }
                     }
                 }
             }
@@ -99,8 +104,100 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         } //Функция авторизации пользователя 
 
+        public void NotInvalidPass()
+        {
 
-        private void TextBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    connection.Open();
+                    var Pass = SimpleComand.GetHash(PassBox.Password);
+                    string LoginLower = TextBoxLogin.Text.ToLower();
+                    string  query = $@"SELECT  COUNT(1) FROM Users WHERE Login = '{LoginLower}' and Password != @Password";
+                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@Password", Pass);
+                    int proverkaInvalidPass = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (proverkaInvalidPass == 1)
+                    {
+                        query = $@"SELECT IDAllowance FROM Users WHERE Login= '{LoginLower}'";
+                        Saver.LoginUser = LoginLower;
+                        SQLiteDataReader dr = null;
+                        SQLiteCommand cmd1 = new SQLiteCommand(query, connection);
+                        int IDProverka = 0;
+                        dr = cmd1.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            //Saver.IDUser = dr["ID"].ToString();
+                            IDProverka = Convert.ToInt32(dr["IDAllowance"].ToString());
+                            //  Saver.IDAcc = countID;
+                        }
+                        query = $@"SELECT AttemptNumber,TimeEnd,TimeBegin FROM Proverka WHERE ID = '{IDProverka}';";
+                        cmd = new SQLiteCommand(query, connection);
+                        string dateOpen = DateTime.Now.ToString("t");
+                        TimeSpan s2 = TimeSpan.Parse(dateOpen);
+                        dr = null;
+                        string AttemptNumber = "";
+                        string dateban = "00:00";
+                        string dateBegin = "00:00";
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            AttemptNumber = dr["AttemptNumber"].ToString();
+                            dateban = dr["TimeEnd"].ToString();
+                            dateBegin = dr["TimeBegin"].ToString();
+
+                        }
+                        TimeSpan sban = TimeSpan.Parse(dateban);
+                        TimeSpan bban = TimeSpan.Parse(dateBegin);
+                        if (Convert.ToInt32(AttemptNumber) < 3)
+                        {
+
+                            int kolint = Convert.ToInt32(AttemptNumber);
+                            kolint++;
+                            string timeban = "0:01";
+                            TimeSpan s1 = TimeSpan.Parse("0:01");
+                            TimeSpan s3 = s1 + s2;
+                            string times3 = s3.ToString("hh':'mm");
+                            query = $@"UPDATE Proverka SET AttemptNumber='{kolint}',TimeBegin='{dateOpen}',TimeEnd ='{times3}' WHERE ID ='{IDProverka}';";
+                            cmd = new SQLiteCommand(query, connection);
+                            cmd.ExecuteReader();
+
+                        }
+                        else if (Convert.ToInt32(AttemptNumber) == 3)
+                        {
+                            if (Convert.ToInt32(AttemptNumber) == 3 && (TimeSpan.Parse(dateOpen) < TimeSpan.Parse(dateban)))
+                            {
+                                MessageBox.Show("попробуйте позже");//попробуйте позже
+                                query = $@"UPDATE Users SET IDStatus='{3}' WHERE Login='{LoginLower}';";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.ExecuteReader();
+                            }
+                            else if (Convert.ToInt32(AttemptNumber) == 3 && (TimeSpan.Parse(dateOpen) > TimeSpan.Parse(dateban)))
+                            {
+                                query = $@"UPDATE Proverka SET AttemptNumber = '{AttemptNumber}' WHERE ID ='{IDProverka}';";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.ExecuteReader();
+                                query = $@"UPDATE Users SET IDStatus='{1}' WHERE Login='{LoginLower}';";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.ExecuteReader();
+                            }
+                            else
+                            {
+                               // MessageBox.Show("Ban");
+                               
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка" + ex);
+            }
+        }
+
+            private void TextBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
         {
             SimpleComand.CheckTextBox(TextBoxLogin);
         }
