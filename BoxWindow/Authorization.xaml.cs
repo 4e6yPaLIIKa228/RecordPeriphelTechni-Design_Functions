@@ -276,6 +276,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         else
                         {
                             MessageBox.Show("Ваша учетная запись временно заблокированна,попробуйте позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                         }
 
 
