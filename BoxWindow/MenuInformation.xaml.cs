@@ -60,7 +60,7 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
             if (s == 1) 
             {
                 Visitor();
-            }            
+            }             
             LoadDB_InforPcTex();
             LoadDB_InforPerTech();
             LoadDB_InforDopOboryd();
