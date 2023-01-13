@@ -89,8 +89,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 }
                                 else
                                 {
+                                    int s = 0;
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    MenuInformation menuinfor = new MenuInformation();
+                                    MenuInformation menuinfor = new MenuInformation(s);
                                     this.Close();
                                     menuinfor.ShowDialog();
                                     connection.Close();
@@ -267,8 +268,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                             }
                             else
                             {
+                                int s = 0;
                                 MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                MenuInformation menuinfor = new MenuInformation();
+                                MenuInformation menuinfor = new MenuInformation(s);
                                 this.Close();
                                 menuinfor.ShowDialog();
                             }
@@ -303,6 +305,15 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void BtnAvtoriz_Click(object sender, RoutedEventArgs e)
         {
             AuthorizationUser();
+        }
+
+        private void BtnAvtorizvisitor_Click(object sender, RoutedEventArgs e)
+        {
+            int visitor = 1;
+            MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+            MenuInformation menuinfor = new MenuInformation(visitor);
+            this.Close();
+            menuinfor.ShowDialog();
         }
     }
 }

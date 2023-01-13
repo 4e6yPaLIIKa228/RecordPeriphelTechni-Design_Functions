@@ -54,12 +54,22 @@ JOIN VideoCards on Components.IDVideo = VideoCards.ID
 JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
 
 LEFT JOIN RAMs on Components.ID = RAMs.ID";
-        public MenuInformation()
+        public MenuInformation(int s)
         {
             InitializeComponent();
+            if (s == 1) 
+            {
+                Visitor();
+            }            
             LoadDB_InforPcTex();
             LoadDB_InforPerTech();
             LoadDB_InforDopOboryd();
+        }
+
+        public void Visitor()
+        {
+            BtnEddit.IsEnabled = false;
+
         }
 
         public void LoadDB_InforPcTex()
