@@ -27,8 +27,8 @@
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="0,0.1,0,0">
-            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical" Margin="0,0.1,0,0">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
         <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="3" Orientation="Vertical" Margin="0,0.1,0,0" VerticalAlignment="Bottom">
@@ -63,7 +63,7 @@
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
                 <TabItem Header="Компьютерная техника">
                     <Grid>
-                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" >
+                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White"  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Visibility="Hidden" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
                                 <DataGridTextColumn Header="Тип" Visibility="Hidden" FontSize="20" Width="270" Binding="{Binding NameType}"/>
@@ -75,11 +75,11 @@
                                 <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
                                 <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
-                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Comments}"/>
+                              
                             </DataGrid.Columns>
                             <DataGrid.RowDetailsTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
+                                <DataTemplate >
+                                    <StackPanel Orientation="Vertical"  Background="White">
                                         <TextBlock   FontSize="25" Text=" Процессор: " FontWeight="Bold" />
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock   FontSize="25" Text=" Название: " />
@@ -149,6 +149,10 @@
                                             <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory4 }" />
                                             <TextBlock   FontSize="25" Text=" Производитель: " />
                                             <TextBlock   FontSize="25" Text="{Binding Path= Maker4}" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </DataTemplate>

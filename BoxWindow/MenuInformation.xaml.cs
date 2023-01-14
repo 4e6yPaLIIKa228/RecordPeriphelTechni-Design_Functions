@@ -24,7 +24,7 @@ namespace RecordPeriphelTechniс.Windows
     /// </summary>
     public partial class MenuInformation : Window
     {
-        int IndexTabCont;
+        int IndexTabCont, VisitorCheck;
         string DBSearchPC = $@"SELECT MenuPerTech.ID as IDMenuPer, MenuPerTech.Name as NameYstr, TypeTechs.NameType,MenuPerTech.Kabunet ,Organiz.NameOrg, MenuPerTech.Number,
 MenuPerTech.IDComponets as IDComponets, MenuPerTech.StartWork, MenuPerTech.EndWork,
 MenuPerTech.Comments, Status.NameStatus, Works.NameWorks,
@@ -56,8 +56,9 @@ JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
 LEFT JOIN RAMs on Components.ID = RAMs.ID";
         public MenuInformation(int s)
         {
+            VisitorCheck = s;
             InitializeComponent();
-            if (s == 1) 
+            if (VisitorCheck == 1) 
             {
                 Visitor();
             }             
@@ -69,6 +70,7 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
         public void Visitor()
         {
             BtnEddit.IsEnabled = false;
+            BtnAdd.IsEnabled = false;
 
         }
 
@@ -222,62 +224,71 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void Eddit_InforPcTex()
         {
-            if (InforPcTex.SelectedIndex != -1)
+            if (VisitorCheck != 1)
             {
-                int Type = 1;
-                EditTech tech = new EditTech((DataRowView)InforPcTex.SelectedItem, Type);
-                tech.Owner = this;
-                bool? result = tech.ShowDialog();
-                switch (result)
+                if (InforPcTex.SelectedIndex != -1)
                 {
-                    default:
-                        LoadDB_InforPcTex();
-                        break;
+                    int Type = 1;
+                    EditTech tech = new EditTech((DataRowView)InforPcTex.SelectedItem, Type);
+                    tech.Owner = this;
+                    bool? result = tech.ShowDialog();
+                    switch (result)
+                    {
+                        default:
+                            LoadDB_InforPcTex();
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                else
+                {
+                    MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                }
             }
         }
         private void Eddit_InforPerTech()
         {
-            if (InforPerTech.SelectedIndex != -1)
+            if (VisitorCheck != 1)
             {
-                int Type = 2;
-                EditTech tech = new EditTech((DataRowView)InforPerTech.SelectedItem, Type);
-                tech.Owner = this;
-                bool? result = tech.ShowDialog();
-                switch (result)
+                if (InforPerTech.SelectedIndex != -1)
                 {
-                    default:
-                        LoadDB_InforPerTech();
-                        break;
+                    int Type = 2;
+                    EditTech tech = new EditTech((DataRowView)InforPerTech.SelectedItem, Type);
+                    tech.Owner = this;
+                    bool? result = tech.ShowDialog();
+                    switch (result)
+                    {
+                        default:
+                            LoadDB_InforPerTech();
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                else
+                {
+                    MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                }
             }
         }
         private void Eddit_InforDopOboryd()
         {
-            if (InforDopOboryd.SelectedIndex != -1)
+            if (VisitorCheck != 1)
             {
-                int Type = 3;
-                EditTech tech = new EditTech((DataRowView)InforDopOboryd.SelectedItem, Type);
-                tech.Owner = this;
-                bool? result = tech.ShowDialog();
-                switch (result)
+                if (InforDopOboryd.SelectedIndex != -1)
                 {
-                    default:
-                        LoadDB_InforDopOboryd();
-                        break;
+                    int Type = 3;
+                    EditTech tech = new EditTech((DataRowView)InforDopOboryd.SelectedItem, Type);
+                    tech.Owner = this;
+                    bool? result = tech.ShowDialog();
+                    switch (result)
+                    {
+                        default:
+                            LoadDB_InforDopOboryd();
+                            break;
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                else
+                {
+                    MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+                }
             }
         }
         private void InforPcTex_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -294,14 +305,12 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void BtnEddit_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show(Convert.ToString(IndexTabCont));
             if (IndexTabCont == 0)
             {
                 Eddit_InforPcTex();
             }
             else if (IndexTabCont == 1)
             {
-
                 Eddit_InforPerTech();
             }
             else if (IndexTabCont == 2)
@@ -323,6 +332,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+
             AddTech addtech = new AddTech();
             bool? result = addtech.ShowDialog();
             switch (result)
