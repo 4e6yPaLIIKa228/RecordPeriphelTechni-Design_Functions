@@ -411,6 +411,25 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 connection.Open();
                 try
                 {
+                    switch(IndexTabCont)
+                    {
+                        case 0:
+                            if (Organiz.IsSelected == true && IndexTabCont == 0)
+                            {
+                                InforPcTex.ItemsSource = null;
+                                string query = $@"{DBSearchPC}   WHERE (Organiz.NameOrg like '%{TxtSearch.Text.ToLower()}%' or Organiz.NameOrg like '%{TxtSearch.Text.ToUpper()}%')  and  MenuPerTech.IDTypeTech = '1'";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                DataTable DT = new DataTable("MenuPerTech");
+                                SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                                SDA.Fill(DT);
+                                InforPcTex.ItemsSource = DT.DefaultView;
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
                     if (Organiz.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
@@ -489,10 +508,48 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
+                    if (DataEnd.IsSelected == true && IndexTabCont == 0)
+                    {
+                        InforPcTex.ItemsSource = null;
+                        string query = $@"{DBSearchPC}   WHERE MenuPerTech.EndWork like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPcTex.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (DataStart.IsSelected == true && IndexTabCont == 1)
+                    {
+
+                    }
+                    else if (DataStart.IsSelected == true && IndexTabCont == 2)
+                    {
+
+                    }
                     if (Status.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
-                        string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '%{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like '%{TxtSearch.Text.ToUpper()}%' or  Status.NameStatus like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like '{TxtSearch.Text.ToUpper()}%' or  Status.NameStatus like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPcTex.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    else if (Status.IsSelected == true && IndexTabCont == 1)
+                    {
+
+                    }
+                    else if (Status.IsSelected == true && IndexTabCont == 2)
+                    {
+
+                    }
+                    if (Work.IsSelected == true && IndexTabCont == 0)
+                    {
+                        InforPcTex.ItemsSource = null;
+                        string query = $@"{DBSearchPC} WHERE (Works.NameWorks like '{TxtSearch.Text.ToLower()}%' or  Works.NameWorks like '{TxtSearch.Text.ToUpper()}%' or  Works.NameWorks like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -511,7 +568,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     if (Comment.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
-                        string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like '%{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Comments like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like '{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Comments like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("MenuPerTech");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -615,7 +672,6 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-
                     if (TextRAMModel1.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
@@ -792,8 +848,6 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-
-
                 }
                 catch (Exception ex)
                 {

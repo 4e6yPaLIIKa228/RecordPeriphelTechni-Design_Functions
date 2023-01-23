@@ -64,15 +64,13 @@
                 <TabItem Header="Компьютерная техника">
                     <Grid>
                         <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White"  >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" Visibility="Hidden" FontSize="20" Width="30" Binding="{Binding IDMenuPer}"  />
-                                <DataGridTextColumn Header="Тип" Visibility="Hidden" FontSize="20" Width="270" Binding="{Binding NameType}"/>
+                            <DataGrid.Columns>                               
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
-                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
-                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
-                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
                                 <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
                               
@@ -165,17 +163,25 @@
                     <Grid>
                         <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
-                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
-                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
-                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
                                 <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
-                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Path = Comments}"/>
                             </DataGrid.Columns>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate >
+                                    <StackPanel Orientation="Vertical"  Background="White">                                       
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                         </DataGrid>
                     </Grid>
                 </TabItem>
@@ -184,17 +190,25 @@
 
                         <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforDopOboryd" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforDopOboryd_MouseDoubleClick" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Тип" FontSize="20" Width="270" Binding="{Binding NameType}"/>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
-                                <DataGridTextColumn Header="Номер" FontSize="20"  Binding="{Binding Number}"/>
-                                <DataGridTextColumn Header="Кабинет" FontSize="20"  Binding="{Binding Kabunet}"/>
-                                <DataGridTextColumn Header="Имя" FontSize="20"  Binding="{Binding NameYstr}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
+                                <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
+                                <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
                                 <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
-                                <DataGridTextColumn Header="Коментарий" FontSize="20"   Binding="{Binding  Path = Comments}"/>
                             </DataGrid.Columns>
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate >
+                                    <StackPanel Orientation="Vertical"  Background="White">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
+                                            <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                         </DataGrid>
                     </Grid>
                 </TabItem>
