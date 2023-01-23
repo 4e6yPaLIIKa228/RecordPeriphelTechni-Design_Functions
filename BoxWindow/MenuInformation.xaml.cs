@@ -410,25 +410,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             {
                 connection.Open();
                 try
-                {
-                    switch(IndexTabCont)
-                    {
-                        case 0:
-                            if (Organiz.IsSelected == true && IndexTabCont == 0)
-                            {
-                                InforPcTex.ItemsSource = null;
-                                string query = $@"{DBSearchPC}   WHERE (Organiz.NameOrg like '%{TxtSearch.Text.ToLower()}%' or Organiz.NameOrg like '%{TxtSearch.Text.ToUpper()}%')  and  MenuPerTech.IDTypeTech = '1'";
-                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                                DataTable DT = new DataTable("MenuPerTech");
-                                SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
-                                SDA.Fill(DT);
-                                InforPcTex.ItemsSource = DT.DefaultView;
-                                cmd.ExecuteNonQuery();
-                            }
-                            break;
-                        default:
-                            break;
-                    }
+                {              
 
                     if (Organiz.IsSelected == true && IndexTabCont == 0)
                     {
