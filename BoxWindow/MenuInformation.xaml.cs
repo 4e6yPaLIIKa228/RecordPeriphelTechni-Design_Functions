@@ -54,11 +54,11 @@ JOIN VideoCards on Components.IDVideo = VideoCards.ID
 JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
 
 LEFT JOIN RAMs on Components.ID = RAMs.ID";
-        public MenuInformation(int s)
+        public MenuInformation()
         {
-            VisitorCheck = s;
+            //VisitorCheck = s;
             InitializeComponent();
-            if (VisitorCheck == 1) 
+            if (Saver.Visitor == 1) 
             {
                 Visitor();
             }             

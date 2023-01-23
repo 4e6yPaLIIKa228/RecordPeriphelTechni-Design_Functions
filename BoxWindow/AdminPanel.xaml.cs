@@ -70,8 +70,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void InHome_Click(object sender, RoutedEventArgs e)
         {
-            int s = 0 ;
-            MenuInformation addtech = new MenuInformation(s);
+            MenuInformation addtech = new MenuInformation();
             this.Close();
             addtech.ShowDialog();
            
