@@ -93,6 +93,9 @@
     <Compile Include="BoxWindow\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoxWindow\MasterPanel.xaml.cs">
+      <DependentUpon>MasterPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BoxWindow\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BoxWindow\EditTech.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BoxWindow\MasterPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
