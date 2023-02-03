@@ -54,7 +54,7 @@
         </Grid>
 
         <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,5,0" >
-            <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="ListUsers" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
+            <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="ListApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
                     <DataGridTextColumn Header="IDУстройства"  FontSize="20" Width="150"  Binding="{Binding IDDevice}"/>
