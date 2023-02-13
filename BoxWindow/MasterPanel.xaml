@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RecordPeriphelTechniс.BoxWindow"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -11,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
 
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MasterPanel" Height="450" Width="1450">
+        Title="MasterPanel" Height="450" Width="1450"  AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -20,21 +21,34 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="454" />
             <ColumnDefinition/>
             <ColumnDefinition Width="210" />
         </Grid.ColumnDefinitions>
 
 
         <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" >
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Menu  VerticalAlignment="Top">
-                    <MenuItem Header="Списки">
+                    <MenuItem Header="Окна">
+                        <MenuItem Header="Список Устройств" />
+                        <MenuItem Header="Список Заявок" />
+                        <MenuItem Header="Список Пользователей" />
+                    </MenuItem>
+                    <MenuItem Header="Добавить">
+                        <MenuItem Header="Добавить устройство" ></MenuItem>
+                        <MenuItem Header="Добавить пользователя" ></MenuItem>
+                        <MenuItem Header="Отправить заявку" ></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Изменить">
                         <MenuItem Header="Список оборудования" ></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Отчет" >
                         <MenuItem Header="Экспорт в Excel" ></MenuItem>
-                    </MenuItem>                    
+                    </MenuItem>
+                    <MenuItem Header="Помощь">
+                        <MenuItem Header="Список оборудования" ></MenuItem>
+                    </MenuItem>
                 </Menu>
             </StackPanel>
         </Grid>
@@ -43,9 +57,16 @@
             
         </Grid>
 
+        <Grid Grid.Column="1" Grid.Row="0" >
+            <DockPanel  LastChildFill="True" HorizontalAlignment="Left">  
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,0" VerticalAlignment="Center" />
+                <ComboBox Width="200" Height="40" Margin="10,0,0,0" ></ComboBox>
+            </DockPanel>
+        </Grid>
+        
         <Grid  Grid.Column="2" Grid.Row="0">
             <StackPanel Orientation="Vertical" >
-                <Label Content="Вы зашли как:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
+               
             </StackPanel>
         </Grid>
 
