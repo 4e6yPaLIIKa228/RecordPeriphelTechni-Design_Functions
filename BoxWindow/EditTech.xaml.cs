@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using RecordPeriphelTechniс.BoxWindow;
 using RecordPeriphelTechniс.Connection;
 
 namespace RecordPeriphelTechniс.Windows
@@ -286,8 +287,16 @@ namespace RecordPeriphelTechniс.Windows
                                 if (ProverkaPC == 0)
                                 {
                                     string query = $@"UPDATE MenuPerTech SET IDOrganiz='{id}', Kabunet='{TextIDKabuneta.Text}',Number='{TextNumber.Text}',Name='{TextName.Text}', StartWork='{TextDataStart.Text}', 
-                                            EndWork='{TextDataEnd.Text}' ,IDStatus='{id2}',IDWorks='{id3}',Comments='{TextComments.Text}' WHERE ID='{Saver.IDMenuPerPC}';";
+                                            EndWork=@EndWork ,IDStatus='{id2}',IDWorks='{id3}',Comments='{TextComments.Text}' WHERE ID='{Saver.IDMenuPerPC}';";
                                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                    if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                    {
+                                        cmd.Parameters.AddWithValue("@EndWork", null);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                    }
                                     cmd.ExecuteNonQuery();
                                     MessageBox.Show("Информация обновленна", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                                 }
@@ -295,7 +304,7 @@ namespace RecordPeriphelTechniс.Windows
                         }
                         else
                         {
-                            MessageBox.Show($@"Этот номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show($@"Номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
@@ -331,7 +340,14 @@ namespace RecordPeriphelTechniс.Windows
                                 cmd.Parameters.AddWithValue("@Number", TextNumber.Text);
                                 cmd.Parameters.AddWithValue("@Name", TextName.Text);
                                 cmd.Parameters.AddWithValue("@StartWork", TextDataStart.Text);
-                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", null);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                }
                                 cmd.Parameters.AddWithValue("@IDStatus", id2);
                                 cmd.Parameters.AddWithValue("@IDWorks", id3);
                                 cmd.Parameters.AddWithValue("@Comments", TextComments.Text);
@@ -345,7 +361,7 @@ namespace RecordPeriphelTechniс.Windows
                         }
                         else
                         {
-                            MessageBox.Show($@"Этот номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show($@"Номер '{TextNumber.Text}' занят, выберите другой", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                         
                     }
@@ -547,6 +563,19 @@ namespace RecordPeriphelTechniс.Windows
             }
 
         }
+
+        private void BtnMessage_Click(object sender, RoutedEventArgs e)
+        {
+            string numbertech = TextNumber.Text;
+            ReportMessage report = new ReportMessage(numbertech);
+            bool? result = report.ShowDialog();
+            switch (result)
+            {
+                default:                   
+                    break;
+            }
+        }
+
         public void EditPCRams()
         {
             try

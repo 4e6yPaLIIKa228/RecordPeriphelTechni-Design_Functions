@@ -231,11 +231,12 @@
             </TabControl>
         </Grid>
       
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="BtnEdit"  Height="40" Content= "Изменить"  Margin="0,0,25,0" Click="BtnEdit_Click"/>
-                <Button  Height="40" Content="Удалить" Margin="0,0,25,0"/>
-                <Button Width="80" Height="40" Margin="0,0,25,0"/>
+                <Button  x:Name="BtnBack"  Height="40" Width="120" Margin="0,0,25,0" Content= "Назад"/>
+                <Button  x:Name="BtnDell" Height="40" Width="120" Content="Удалить" Margin="0,0,25,0"/>
+                <Button  x:Name="BtnMessage" Height="40" Width="120" Margin="0,0,25,0" Content= "Заявка" Click="BtnMessage_Click" />
+                <Button x:Name="BtnEdit" Height="40" Width="120" Content= "Изменить"  Margin="0,0,25,0" Click="BtnEdit_Click"/>
             </StackPanel>
         </Grid>
         

@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="190" />
+            <ColumnDefinition Width="454" />
             <ColumnDefinition/>
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
@@ -45,35 +45,67 @@
             </Border>
         </Grid>
 
+        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1"  VerticalAlignment="Bottom" Margin="0,0,0,4"  >
+            <StackPanel Orientation="Vertical"  HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Menu  VerticalAlignment="Top">
+                    <MenuItem Name="ListWind"  Header="Окна">
+                        <MenuItem Name="ListService" Header="Список заявок" Click="ListService_Click"  />
+                        <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
+                    </MenuItem>
+                    <MenuItem Name="AddMenu" Header="Добавить">
+                        <MenuItem x:Name="AddTec" Header="Добавить устройство" Click="AddTec_Click" ></MenuItem>
+                        <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Изменить" Name="EdiitTec" Click="EdiitTec_Click" />
+
+                    <MenuItem Header="Отчет" >
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" >
+                            <MenuItem Name="ExcelPc" Header="Компьютерная техника" Click="ExcelPc_Click" ></MenuItem>
+                            <MenuItem Name="ExcelPer" Header="Переферийная устройства"  Cursor="" Click="ExcelPer_Click" ></MenuItem>                           
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Помощь">
+                        <MenuItem Header="Список оборудования" ></MenuItem>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+        </Grid>
+
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
             <DockPanel
               LastChildFill="True">
-                <Button x:Name="BtnSearch"  Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
-                <Button Margin="3,5,8,-6" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />                
-                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,12,0,0" VerticalAlignment="Top" PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
+                <Button x:Name="BtnSearch"  Visibility="Hidden" Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
+                <Button Margin="3,5,8,-6" Visibility="Hidden" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />                
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="400"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,2"  PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
+                
+                <ComboBox x:Name="CombSearchInfo" Width="200" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий" FontSize="14" DropDownClosed="CombSearchInfo_DropDownClosed">
+                    <TextBlock>Tom</TextBlock>
+                    <TextBlock>Bob</TextBlock>
+                    <TextBlock>Sam</TextBlock>
+                    <TextBlock>Alice</TextBlock>
+                </ComboBox>
             </DockPanel>
-            <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Hidden">
                 <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
                 <Button x:Name="BtnAdd"  Height="30" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="BtnAdd_Click" Cursor="Hand"/>
                 <Button Name="BtnPrint" Height="30" Content="Печать" VerticalAlignment="Top" Margin="10" Click="BtnPrint_Click"/>
                 <Button Height="30" VerticalAlignment="Top" Margin="10"/>
             </DockPanel>
         </StackPanel>
-        <Grid Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0">
+        <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,5,0">
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
-                <TabItem Header="Компьютерная техника">
+                <TabItem x:Name="TabitemPCTech" Header="Компьютерная техника">
                     <Grid>
-                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White"  >
+                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex"  CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" HorizontalAlignment="Center"  >
                             <DataGrid.Columns>                               
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
                                 <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
                                 <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
                                 <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= Отсутствует}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
-                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
-                              
+                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>                              
                             </DataGrid.Columns>
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate >
@@ -159,18 +191,18 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Перефирийные устройства">
+                <TabItem x:Name="TabItemPerTech" Header="Перефирийные устройства" >
                     <Grid>
-                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
+                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
+                                <DataGridTextColumn Header="Организация" FontSize="20" Width="150"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
                                 <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
                                 <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
                                 <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= Отсутствует}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
-                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                <DataGridTextColumn Header="Работаспособность" FontSize="20"  Binding="{Binding NameWorks}"/>
                             </DataGrid.Columns>
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate >
@@ -185,19 +217,19 @@
                         </DataGrid>
                     </Grid>
                 </TabItem>
-                <TabItem Header="Доп. оборудование">
+                <TabItem x:Name="TabItemDopOboryd" Header="Доп. оборудование">
                     <Grid>
 
-                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforDopOboryd" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforDopOboryd_MouseDoubleClick" >
+                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforDopOboryd" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="InforDopOboryd_MouseDoubleClick" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
                                 <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
                                 <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
                                 <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork}"/>
+                                <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue = Отсутствует}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
-                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                <DataGridTextColumn Header="Работаспособность" FontSize="20"  Binding="{Binding NameWorks}"/>
                             </DataGrid.Columns>
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate >
@@ -216,24 +248,24 @@
         </Grid>
         <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
-                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock FontSize="20" Text="-" ></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnSazeMax_Click">
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnSazeMax_Click">
                     <StackPanel Orientation="Horizontal" >
                         <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
                     </StackPanel>
                 </Button>
-                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Width="46" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
                     <StackPanel Orientation="Horizontal" >
                         <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
                     </StackPanel>
                 </Button>
             </StackPanel>
         </Grid>       
-        <Grid Grid.Row="1" Grid.Column="0" >
+        <Grid Grid.Row="1" Grid.Column="0" Visibility="Hidden" >
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                 <TreeView MinWidth="220">
                     <TreeViewItem Header="Информация" Name="TreeInfoGlav" Expanded="TreeInfoGlav_Expanded" >

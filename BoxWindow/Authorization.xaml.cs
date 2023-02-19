@@ -67,33 +67,47 @@ namespace RecordPeriphelTechniс.BoxWindow
                             int UsersFound = Convert.ToInt32(cmd.ExecuteScalar());
                             if (UsersFound == 1)
                             {
-                                query = $@"SELECT ID,IDAllowance FROM Users WHERE Login= '{LoginLower}'";
+                                query = $@"SELECT Users.ID,Users.IDAllowance, AllowanceUsers.Allowance FROM Users
+                                        join AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID 
+                                        WHERE Login= '{LoginLower}'";
                                 Saver.LoginUser = LoginLower;
                                 SQLiteDataReader dr = null;
                                 SQLiteCommand cmd1 = new SQLiteCommand(query, connection);
-                                int IDAllowance = 0;
+                                string IDAllowanceString = null;
                                 dr = cmd1.ExecuteReader();
                                 while (dr.Read())
                                 {
                                     Saver.IDUser = dr["ID"].ToString();
-                                    IDAllowance = Convert.ToInt32(dr["IDAllowance"].ToString());
+                                    IDAllowanceString = dr["Allowance"].ToString();
                                     //  Saver.IDAcc = countID;
                                 }
-                                if (IDAllowance == 1)
+                                if (IDAllowanceString == "Администратор")
                                 {
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    AdminPanel admpnl = new AdminPanel();
+                                    Saver.IDAllowanceString = IDAllowanceString;
+                                    AdminPanel admpnl = new AdminPanel();                                   
                                     this.Close();
                                     admpnl.ShowDialog();
                                     connection.Close();
                                 }
-                                else
+                                else if (IDAllowanceString == "Пользователь")
                                 {
                                     Saver.Visitor = 0;
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    MenuInformation menuinfor = new MenuInformation();
+                                    Saver.IDAllowanceString = IDAllowanceString;
+                                    MenuInformation menuinfor = new MenuInformation();                                    
                                     this.Close();
                                     menuinfor.ShowDialog();
+                                    connection.Close();
+                                }
+                                else if (IDAllowanceString == "Мастер")
+                                {
+                                    Saver.Visitor = 0;
+                                    MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    Saver.IDAllowanceString = IDAllowanceString;
+                                    MasterPanel master = new MasterPanel();                                    
+                                    this.Close();
+                                    master.ShowDialog();
                                     connection.Close();
                                 }
 
@@ -209,7 +223,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                             }
                         }
                     }
-                    if (UsersUnBlock == 1)// снятие времменгой блокировки при правельном пароле,при котором время блокировки еще не прошло
+                    if (UsersUnBlock == 1)// снятие времменной блокировки при правельном пароле,при котором время блокировки еще не прошло
                     {
                         query = $@"SELECT IDAllowance,IDProverka FROM Users WHERE Login= '{LoginLower}'";
                         Saver.LoginUser = LoginLower;
@@ -249,31 +263,53 @@ namespace RecordPeriphelTechniс.BoxWindow
                             query = $@"UPDATE Users SET IDStatus='{1}' WHERE Login='{LoginLower}';";
                             cmd = new SQLiteCommand(query, connection);
                             cmd.ExecuteReader();
-                            query = $@"SELECT ID FROM Users WHERE Login= '{LoginLower}'";
+                            query = $@"SELECT ID FROM Users,Users.IDAllowance,AllowanceUsers.Allowance
+                                        join AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID 
+                                        WHERE Login= '{LoginLower}'";
                             Saver.LoginUser = LoginLower;
                             dr = null;
                             cmd1 = new SQLiteCommand(query, connection);
                             dr = cmd1.ExecuteReader();
+                            string IDAllowanceString = null;
                             while (dr.Read())
                             {
                                 Saver.IDUser = dr["ID"].ToString();
+                                Saver.IDAllowanceString = IDAllowanceString;
 
                             }
-                            if (IDAllowance == 1)
+                            if (IDAllowanceString == "Администратор")
                             {
+                                Saver.IDAllowanceString = IDAllowanceString;
                                 MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                                 AdminPanel admpnl = new AdminPanel();
+                                Saver.IDAllowance = IDAllowance;                                
                                 this.Close();
                                 admpnl.ShowDialog();
+                                connection.Close();
                             }
-                            else
+                            else if (IDAllowanceString == "Пользователь")
                             {
-                                Saver.Visitor = 0;;
+                                Saver.Visitor = 0;
+                                Saver.IDAllowanceString = IDAllowanceString;
                                 MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                                 MenuInformation menuinfor = new MenuInformation();
+                                Saver.IDAllowance = IDAllowance;                               
                                 this.Close();
                                 menuinfor.ShowDialog();
+                                connection.Close();
                             }
+                            else if (IDAllowanceString == "Мастер")
+                            {
+                                Saver.Visitor = 0;
+                                Saver.IDAllowanceString = IDAllowanceString;
+                                MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                MasterPanel master = new MasterPanel();
+                                Saver.IDAllowance = IDAllowance;                                
+                                this.Close();
+                                master.ShowDialog();
+                                connection.Close();
+                            }
+                            connection.Close();
                         }
                         else
                         {
@@ -308,10 +344,11 @@ namespace RecordPeriphelTechniс.BoxWindow
         }
 
         private void BtnAvtorizvisitor_Click(object sender, RoutedEventArgs e)
-        {
-            Saver.Visitor = 1;
+        {        
             MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
             MenuInformation menuinfor = new MenuInformation();
+            Saver.Visitor = 1;
+            Saver.IDAllowanceString = "Гость";
             this.Close();
             menuinfor.ShowDialog();
         }

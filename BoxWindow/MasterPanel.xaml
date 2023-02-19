@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
 
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MasterPanel" Height="450" Width="1450"  AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
+        Title="MasterPanel" Height="680" Width="1450"  AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
@@ -23,28 +23,65 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="454" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
 
-        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" >
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontSize="20" Text="-" ></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnSazeMax_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" VerticalAlignment="Bottom" Margin="0,0,0,4" HorizontalAlignment="Right" >
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Menu  VerticalAlignment="Top">
-                    <MenuItem Header="Окна">
-                        <MenuItem Header="Список Устройств" />
-                        <MenuItem Header="Список Заявок" />
-                        <MenuItem Header="Список Пользователей" />
+                    <MenuItem x:Name="ListWind" Header="Окна">
+                        <MenuItem Name="ListTechn" Header="Список устройств" Click="ListTechn_Click" />
+                        <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
                     </MenuItem>
-                    <MenuItem Header="Добавить">
-                        <MenuItem Header="Добавить устройство" ></MenuItem>
-                        <MenuItem Header="Добавить пользователя" ></MenuItem>
-                        <MenuItem Header="Отправить заявку" ></MenuItem>
+                    <MenuItem Header="Добавить" Cursor="">
+                        <MenuItem x:Name="AddTech" Header="Добавить устройство" ></MenuItem>
+                        <MenuItem x:Name="AddUsers" Header="Добавить пользователя" ></MenuItem>
+                        <MenuItem x:Name="Message" Header="Отправить заявку" ></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Изменить">
                         <MenuItem Header="Список оборудования" ></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Отчет" >
-                        <MenuItem Header="Экспорт в Excel" ></MenuItem>
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" ></MenuItem>
                     </MenuItem>
                     <MenuItem Header="Помощь">
                         <MenuItem Header="Список оборудования" ></MenuItem>
@@ -52,35 +89,35 @@
                 </Menu>
             </StackPanel>
         </Grid>
-        
+
         <Grid  Grid.Column="1" Grid.Row="0">
-            
+
         </Grid>
 
         <Grid Grid.Column="1" Grid.Row="0" >
-            <DockPanel  LastChildFill="True" HorizontalAlignment="Left">  
-                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="500"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,0" VerticalAlignment="Center" />
-                <ComboBox Width="200" Height="40" Margin="10,0,0,0" ></ComboBox>
+            <DockPanel  LastChildFill="True" HorizontalAlignment="Left">
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"   Width="400"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,2" VerticalAlignment="Bottom" />
+                <ComboBox Width="200" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"/>
             </DockPanel>
         </Grid>
-        
+
         <Grid  Grid.Column="2" Grid.Row="0">
             <StackPanel Orientation="Vertical" >
-               
+
             </StackPanel>
         </Grid>
 
         <Grid  Grid.Column="0" Grid.Row="1" >
-           
+
         </Grid>
 
-        <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,5,0" >
-            <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="ListApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
+        <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="5,0,5,0" >
+            <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="ListApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
                     <DataGridTextColumn Header="IDУстройства"  FontSize="20" Width="150"  Binding="{Binding IDDevice}"/>
                     <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding Status}"/>
-                    <DataGridTextColumn Header="Отвественный" FontSize="20"  Binding="{Binding Master}"/>
+                    <DataGridTextColumn Header="Мастер" FontSize="20"  Binding="{Binding Master,TargetNullValue= Отсутствует}"/>
                     <DataGridTextColumn Header="Дата обращения" FontSize="20"  Binding="{Binding DateAppeals}"/>
                     <DataGridTextColumn Header="Коментрарий" FontSize="20"  Binding="{Binding Comment}"/>
                 </DataGrid.Columns>

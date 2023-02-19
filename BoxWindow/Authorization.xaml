@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
 
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Authorization" Height="460" Width="450">
+        Title="Authorization" Height="460" Width="450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>

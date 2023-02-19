@@ -23,7 +23,7 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class AddTech : Window
     {
-        int IDMenuPerTech = 0, IDTypeTech = 0, IDTypeTechCombBox = 0, /*ProverkaOsnova = 0,*/ ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0/*, IDSlot1=0*/;
+        int IDMenuPerTech = 0, IDTypeTech = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0;
         string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
         public AddTech()
         {
@@ -120,9 +120,9 @@ namespace RecordPeriphelTechniс.BoxWindow
         }
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-
-            if (IDTypeTechCombBox == 0)
-            {
+            String textcomb = CombTypeTech.Text;
+            if (textcomb == "Компьютерная техника")
+            {               
                 AddOsnovaPC();               
             }
             else
@@ -156,8 +156,17 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             
                             query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','','{TextName.Text}','{TextDataStart.Text}','{TextDataEnd.Text}','{id2}','{id3}','{TextComments.Text}')";
+                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}',@IDComponets,'{TextName.Text}','{TextDataStart.Text}',@EndWork,'{id2}','{id3}','{TextComments.Text}')";                           
                             cmd = new SQLiteCommand(query, connection);
+                            if (String.IsNullOrEmpty(TextDataEnd.Text))
+                            {
+                                cmd.Parameters.AddWithValue("@EndWork", null);
+                            }
+                            else
+                            {
+                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                            }
+                            cmd.Parameters.AddWithValue("@IDComponets", null);
                             cmd.ExecuteNonQuery();
                             query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
                             cmd = new SQLiteCommand(query, connection);
@@ -205,13 +214,20 @@ namespace RecordPeriphelTechniс.BoxWindow
                             if (ProverkaPcCompont == 1)
                             {
                                 query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}','{TextDataEnd.Text}','{id2}','{id3}','{TextComments.Text}')";
+                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}',EndWork,'{id2}','{id3}','{TextComments.Text}')";
                                 cmd = new SQLiteCommand(query, connection);
+                                if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", null);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                }
                                 cmd.ExecuteNonQuery();
                                 query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                                //ProverkaOsnova = 0;
                                 AddRams();
                                 AddComponets();
                                 UpdateMenuPer();
@@ -221,17 +237,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                     else
                     {
                         MessageBox.Show("Измените номер техники");
-                        //ProverkaOsnova = 1;
                     }
                 }
             }
         }
-
-        private void CombTypeTech_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            IDTypeTechCombBox = CombTypeTech.SelectedIndex;
-        }
-
         public void AddPcCompet()
         {
             if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) ||
@@ -367,6 +376,37 @@ namespace RecordPeriphelTechniс.BoxWindow
                     MessageBox.Show(ex.Message);
                 }
             }
+        }       
+
+        private void CombTypeTech_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox cbx = (ComboBox)sender;
+            string s = ((DataRowView)cbx.Items.GetItemAt(cbx.SelectedIndex)).Row.ItemArray[0].ToString();
+            String a = CombTypeTech.Text;
+        }
+
+        private void CuctemBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            String a = CombTypeTech.Text;
+            if (a != "Компьютерная техника")
+            {
+                TextProccModel.IsEnabled= false;
+                TextSpeed.IsEnabled = false;
+                CombProccMaker.IsEnabled = false;
+                TabItemMaterPlat.IsEnabled = false;
+                TabItemVideoCarta.IsEnabled = false;
+                TabItemRAMS.IsEnabled = false;
+            }
+            else
+            {
+                TextProccModel.IsEnabled = true;
+                TextSpeed.IsEnabled = true;
+                CombProccMaker.IsEnabled = true;
+                TabItemMaterPlat.IsEnabled = true;
+                TabItemVideoCarta.IsEnabled = true;
+                TabItemRAMS.IsEnabled = true;
+            }
+            
         }
 
         public void CheckRams()

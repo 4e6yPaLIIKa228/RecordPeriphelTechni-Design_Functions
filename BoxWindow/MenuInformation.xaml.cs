@@ -24,7 +24,7 @@ namespace RecordPeriphelTechniс.Windows
     /// </summary>
     public partial class MenuInformation : Window
     {
-        int IndexTabCont, VisitorCheck;
+        int IndexTabCont;
         string DBSearchPC = $@"SELECT MenuPerTech.ID as IDMenuPer, MenuPerTech.Name as NameYstr, TypeTechs.NameType,MenuPerTech.Kabunet ,Organiz.NameOrg, MenuPerTech.Number,
 MenuPerTech.IDComponets as IDComponets, MenuPerTech.StartWork, MenuPerTech.EndWork,
 MenuPerTech.Comments, Status.NameStatus, Works.NameWorks,
@@ -58,10 +58,17 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
         {
             //VisitorCheck = s;
             InitializeComponent();
-            if (Saver.Visitor == 1) 
+            
+            if (Saver.IDAllowanceString == "Гость")
             {
                 Visitor();
-            }             
+            }else if (Saver.IDAllowanceString == "Пользователь")
+            {
+                Users();
+            }else if (Saver.IDAllowanceString == "Мастер")
+            {
+                Master();
+            }
             LoadDB_InforPcTex();
             LoadDB_InforPerTech();
             LoadDB_InforDopOboryd();
@@ -71,7 +78,22 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
         {
             BtnEddit.IsEnabled = false;
             BtnAdd.IsEnabled = false;
+            ListWind.IsEnabled = false;
+            AddMenu.IsEnabled = false;
+            EdiitTec.IsEnabled = false;
 
+        }
+
+        public void Users()
+        {
+            ListWind.Visibility = Visibility.Collapsed;
+        }
+
+        public void Master()
+        {
+            ListUsers.Visibility = Visibility.Collapsed;
+            AddMenu.Visibility = Visibility.Collapsed;
+            EdiitTec.Visibility = Visibility.Collapsed;
         }
 
         public void LoadDB_InforPcTex()
@@ -224,7 +246,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void Eddit_InforPcTex()
         {
-            if (VisitorCheck != 1)
+            if (Saver.Visitor != 1)
             {
                 if (InforPcTex.SelectedIndex != -1)
                 {
@@ -247,7 +269,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void Eddit_InforPerTech()
         {
-            if (VisitorCheck != 1)
+            if (Saver.Visitor != 1)
             {
                 if (InforPerTech.SelectedIndex != -1)
                 {
@@ -270,7 +292,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         }
         private void Eddit_InforDopOboryd()
         {
-            if (VisitorCheck != 1)
+            if (Saver.Visitor != 1)
             {
                 if (InforDopOboryd.SelectedIndex != -1)
                 {
@@ -344,6 +366,11 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     break;
             }
         }
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void BtnResize_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -362,10 +389,6 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
-        }
-        private void BtnSearch_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -410,8 +433,8 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             {
                 connection.Open();
                 try
-                {              
-
+                {
+                    String combtext = CombSearchInfo.Text;
                     if (Organiz.IsSelected == true && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
@@ -856,15 +879,64 @@ WHERE  MenuPerTech.IDTypeTech = '3'
 
         private void BtnPrint_Click(object sender, RoutedEventArgs e)
         {
-            ExportToExcel();
+            //ExportToExcelPc
         }
-        private void ExportToExcel()
+
+        private void ListService_Click(object sender, RoutedEventArgs e)
+        {
+            MasterPanel master = new MasterPanel();
+            this.Close();
+            master.ShowDialog();
+        }
+        private void ListUsers_Click(object sender, RoutedEventArgs e)
+        {
+            AdminPanel admpnl = new AdminPanel();
+            this.Close();
+            admpnl.ShowDialog();
+        }
+
+        private void AddTec_Click(object sender, RoutedEventArgs e)
+        {
+            AddTech addtech = new AddTech();
+            bool? result = addtech.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_InforPcTex();
+                    LoadDB_InforPerTech();
+                    LoadDB_InforDopOboryd();
+                    break;
+            }
+        }
+
+        private void EdiitTec_Click(object sender, RoutedEventArgs e)
+        {
+            if (IndexTabCont == 0)
+            {
+                Eddit_InforPcTex();
+            }
+            else if (IndexTabCont == 1)
+            {
+                Eddit_InforPerTech();
+            }
+            else if (IndexTabCont == 2)
+            {
+                Eddit_InforDopOboryd();
+            }
+        }
+
+        private void ExcelPc_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcelPc();
+        }
+
+        private void ExportToExcelPc()
         {
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
             excel.Visible = true;
             Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
             Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
-            
+
             for (int j = 0; j < InforPcTex.Columns.Count; j++)
             {
                 try
@@ -877,7 +949,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                }            
+                }
             }
 
 
@@ -886,6 +958,70 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 for (int j = 0; j < InforPcTex.Items.Count; j++)
                 {
                     TextBlock b = InforPcTex.Columns[i].GetCellContent(InforPcTex.Items[j]) as TextBlock;
+
+                    if (b == null)
+                        continue;
+
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+
+                }
+            }
+        }
+
+        private void ExcelPer_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcelPerTech();
+        }
+
+        private void ReportMessgae_Click(object sender, RoutedEventArgs e)
+        {
+            string numbertech = null;
+            ReportMessage report = new ReportMessage(numbertech);
+            bool? result = report.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_InforPcTex();
+                    LoadDB_InforPerTech();
+                    LoadDB_InforDopOboryd();
+                    break;
+            }
+        }
+
+        private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
+        {
+            String combtext = CombSearchInfo.Text;
+            MessageBox.Show(combtext);
+        }
+        private void ExportToExcelPerTech()
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < InforPerTech.Columns.Count; j++)
+            {
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 20;
+                    myRange.Value2 = InforPerTech.Columns[j].Header;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
+            for (int i = 0; i < InforPerTech.Columns.Count; i++)
+            {
+                for (int j = 0; j < InforPerTech.Items.Count; j++)
+                {
+                    TextBlock b = InforPerTech.Columns[i].GetCellContent(InforPerTech.Items[j]) as TextBlock;
 
                     if (b == null)
                         continue;
