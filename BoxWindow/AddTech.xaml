@@ -93,8 +93,8 @@
                                     <ComboBox Width="350" FontSize="20" x:Name="CombIDStatus" Margin="188.3,0,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Статус" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
-                                    <TextBlock   FontSize="20" Text="Работа" Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <ComboBox Width="350" FontSize="20" x:Name="CombIDWorks" Margin="190,0,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Работоспособность"/>
+                                    <TextBlock   FontSize="20" Text="Работаспособность" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <ComboBox Width="350" FontSize="20" x:Name="CombIDWorks" Margin="70,0,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Работоспособность"/>
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>

@@ -380,8 +380,8 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void CombTypeTech_DropDownClosed(object sender, EventArgs e)
         {
-            ComboBox cbx = (ComboBox)sender;
-            string s = ((DataRowView)cbx.Items.GetItemAt(cbx.SelectedIndex)).Row.ItemArray[0].ToString();
+            //ComboBox cbx = (ComboBox)sender;
+            //string s = ((DataRowView)cbx.Items.GetItemAt(cbx.SelectedIndex)).Row.ItemArray[0].ToString();
             String a = CombTypeTech.Text;
         }
 
@@ -396,6 +396,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                 TabItemMaterPlat.IsEnabled = false;
                 TabItemVideoCarta.IsEnabled = false;
                 TabItemRAMS.IsEnabled = false;
+            }else if (a == "")
+            {
+                TextProccModel.IsEnabled = true;
+                TextSpeed.IsEnabled = true;
+                CombProccMaker.IsEnabled = true;
+                TabItemMaterPlat.IsEnabled = true;
+                TabItemVideoCarta.IsEnabled = true;
+                TabItemRAMS.IsEnabled = true;
             }
             else
             {

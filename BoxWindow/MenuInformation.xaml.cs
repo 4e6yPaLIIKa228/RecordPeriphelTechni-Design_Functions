@@ -435,7 +435,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 try
                 {
                     String combtext = CombSearchInfo.Text;
-                    if (Organiz.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Организация" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}   WHERE (Organiz.NameOrg like '%{TxtSearch.Text.ToLower()}%' or Organiz.NameOrg like '%{TxtSearch.Text.ToUpper()}%')  and  MenuPerTech.IDTypeTech = '1'";
@@ -455,7 +455,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         // InforPcTex.ItemsSource = null;
                     }
 
-                    if (Kabunet.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Кабинет" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}  WHERE (MenuPerTech.Kabunet like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Kabunet like '%{TxtSearch.Text.ToUpper()}%') and  MenuPerTech.IDTypeTech = '1'";
@@ -475,7 +475,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
 
                     }
 
-                    if (Number.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Номер" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}   WHERE MenuPerTech.Number like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
@@ -494,7 +494,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (DataStart.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Дата начала" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}   WHERE MenuPerTech.StartWork like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
@@ -513,7 +513,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (DataEnd.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Дата окончания" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC}   WHERE MenuPerTech.EndWork like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
@@ -532,7 +532,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (Status.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Статус" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like '{TxtSearch.Text.ToUpper()}%' or  Status.NameStatus like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -551,7 +551,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (Work.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Работоспособность" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Works.NameWorks like '{TxtSearch.Text.ToLower()}%' or  Works.NameWorks like '{TxtSearch.Text.ToUpper()}%' or  Works.NameWorks like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -570,7 +570,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (Comment.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Коментарий" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like '{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Comments like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -589,7 +589,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     {
 
                     }
-                    if (ModelProcces.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель процессора" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (NameProcces like '%{TxtSearch.Text.ToLower()}%' or NameProcces like '%{TxtSearch.Text.ToUpper()}%' or NameProcces like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -600,7 +600,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (SpeedProcces.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Скорость процессора" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (SpeedProcces like '%{TxtSearch.Text.ToLower()}%' or SpeedProcces like '%{TxtSearch.Text.ToUpper()}%' or SpeedProcces like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -611,7 +611,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (MakerProcces.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель процессора" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (MakerProcc like '%{TxtSearch.Text.ToLower()}%' or MakerProcc like '%{TxtSearch.Text.ToUpper()}%' or MakerProcc like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -622,7 +622,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (ModelMaterPlat.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель материнской платы" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (ModelMatePlat like '%{TxtSearch.Text.ToLower()}%' or ModelMatePlat like '%{TxtSearch.Text.ToUpper()}%' or ModelMatePlat like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -633,7 +633,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (MakerMaterPlat.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель материнской платы" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (MakerMaterPlat like '%{TxtSearch.Text.ToLower()}%' or MakerMaterPlat like '%{TxtSearch.Text.ToUpper()}%' or MakerMaterPlat like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -644,7 +644,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (ModelVideoCard.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель видеокарты" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (ModelVideos like '%{TxtSearch.Text.ToLower()}%' or ModelVideos like '%{TxtSearch.Text.ToUpper()}%' or ModelVideos like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -655,7 +655,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (VVideoCard.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Объем памяти видеокарты" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (VVideoMemory like '%{TxtSearch.Text.ToLower()}%' or VVideoMemory like '%{TxtSearch.Text.ToUpper()}%' or VVideoMemory like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -666,7 +666,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (MakerVideoCard.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель видеокарты" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (MakerVideoCard like '%{TxtSearch.Text.ToLower()}%' or MakerVideoCard like '%{TxtSearch.Text.ToUpper()}%' or MakerVideoCard like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -677,7 +677,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextRAMModel1.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель RAM1" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Model1 like '%{TxtSearch.Text.ToLower()}%' or Model1 like '%{TxtSearch.Text.ToUpper()}%' or Model1 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -688,7 +688,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextVmemory1.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Объем RAM1" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (V1 like '%{TxtSearch.Text.ToLower()}%' or V1 like '%{TxtSearch.Text.ToUpper()}%' or V1 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -699,7 +699,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextTypeMemory1.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Тип памяти RAM1" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (TypeMemory1 like '%{TxtSearch.Text.ToLower()}%' or TypeMemory1 like '%{TxtSearch.Text.ToUpper()}%' or TypeMemory1 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -710,7 +710,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextMaker1.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель RAM1" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Maker1 like '%{TxtSearch.Text.ToLower()}%' or Maker1 like '%{TxtSearch.Text.ToUpper()}%' or Maker1 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -721,7 +721,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextRAMModel2.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель RAM2"  && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Model2 like '%{TxtSearch.Text.ToLower()}%' or Model2 like '%{TxtSearch.Text.ToUpper()}%' or Model2 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -732,7 +732,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextVmemory2.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Объем RAM2" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (V2 like '%{TxtSearch.Text.ToLower()}%' or V2 like '%{TxtSearch.Text.ToUpper()}%' or V2 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -743,7 +743,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextTypeMemory2.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Тип памяти RAM2" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (TypeMemory2 like '%{TxtSearch.Text.ToLower()}%' or TypeMemory2 like '%{TxtSearch.Text.ToUpper()}%' or TypeMemory2 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -754,7 +754,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextMaker2.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель RAM2" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Maker2 like '%{TxtSearch.Text.ToLower()}%' or Maker2 like '%{TxtSearch.Text.ToUpper()}%' or Maker2 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -765,7 +765,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextRAMModel3.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель RAM3" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Model3 like '%{TxtSearch.Text.ToLower()}%' or Model3 like '%{TxtSearch.Text.ToUpper()}%' or Model3 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -776,7 +776,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextVmemory3.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Объем RAM3" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (V3 like '%{TxtSearch.Text.ToLower()}%' or V3 like '%{TxtSearch.Text.ToUpper()}%' or V3 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -787,7 +787,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextTypeMemory3.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Тип памяти RAM3" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (TypeMemory3 like '%{TxtSearch.Text.ToLower()}%' or TypeMemory3 like '%{TxtSearch.Text.ToUpper()}%' or TypeMemory3 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -798,7 +798,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextMaker3.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель RAM3" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Maker3 like '%{TxtSearch.Text.ToLower()}%' or Maker3 like '%{TxtSearch.Text.ToUpper()}%' or Maker3 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -809,7 +809,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextRAMModel4.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Модель RAM4" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Model4 like '%{TxtSearch.Text.ToLower()}%' or Model4 like '%{TxtSearch.Text.ToUpper()}%' or Model4 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -820,7 +820,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextVmemory4.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Объем RAM4" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (V4 like '%{TxtSearch.Text.ToLower()}%' or V4 like '%{TxtSearch.Text.ToUpper()}%' or V4 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -831,7 +831,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextTypeMemory4.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Тип памяти RAM4" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (TypeMemory4 like '%{TxtSearch.Text.ToLower()}%' or TypeMemory4 like '%{TxtSearch.Text.ToUpper()}%' or TypeMemory4 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
@@ -842,7 +842,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    if (TextMaker4.IsSelected == true && IndexTabCont == 0)
+                    if (combtext == "Производитель RAM4" && IndexTabCont == 0)
                     {
                         InforPcTex.ItemsSource = null;
                         string query = $@"{DBSearchPC} WHERE (Maker4 like '%{TxtSearch.Text.ToLower()}%' or Maker4 like '%{TxtSearch.Text.ToUpper()}%' or Maker4 like '%{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";

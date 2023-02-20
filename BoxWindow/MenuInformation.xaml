@@ -76,13 +76,40 @@
               LastChildFill="True">
                 <Button x:Name="BtnSearch"  Visibility="Hidden" Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
                 <Button Margin="3,5,8,-6" Visibility="Hidden" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />                
-                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="400"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,2"  PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
-                
-                <ComboBox x:Name="CombSearchInfo" Width="200" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий" FontSize="14" DropDownClosed="CombSearchInfo_DropDownClosed">
-                    <TextBlock>Tom</TextBlock>
-                    <TextBlock>Bob</TextBlock>
-                    <TextBlock>Sam</TextBlock>
-                    <TextBlock>Alice</TextBlock>
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290"  materialDesign:HintAssist.Hint="Поиск" FontSize="15" Margin="5,0,0,2"  PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
+
+                <ComboBox x:Name="CombSearchInfo" Width="290" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="60" ScrollViewer.VerticalScrollBarVisibility="Visible"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
+                    <TextBlock>Организация</TextBlock>
+                    <TextBlock>Кабинет</TextBlock>
+                    <TextBlock>Номер</TextBlock>
+                    <TextBlock>Дата начала</TextBlock>
+                    <TextBlock>Дата окончания</TextBlock>
+                    <TextBlock>Статус</TextBlock>
+                    <TextBlock>Работоспособность</TextBlock>
+                    <TextBlock>Коментарий</TextBlock>
+                    <TextBlock>Модель процессора</TextBlock>
+                    <TextBlock>Производитель процессора</TextBlock>
+                    <TextBlock>Модель материнской платы</TextBlock>
+                    <TextBlock>Производитель материнской платы</TextBlock>
+                    <TextBlock>Модель видеокарты</TextBlock>
+                    <TextBlock>Объем памяти видеокарты</TextBlock>
+                    <TextBlock>Производитель видеокарты</TextBlock>
+                    <TextBlock>Модель RAM1</TextBlock>
+                    <TextBlock>Объем RAM1</TextBlock>
+                    <TextBlock>Тип памяти RAM1</TextBlock>
+                    <TextBlock>Производитель RAM1</TextBlock>
+                    <TextBlock>Модель RAM2</TextBlock>
+                    <TextBlock>Объем RAM2</TextBlock>
+                    <TextBlock>Тип памяти RAM2</TextBlock>
+                    <TextBlock>Производитель RAM2</TextBlock>
+                    <TextBlock>Модель RAM3</TextBlock>
+                    <TextBlock>Объем RAM3</TextBlock>
+                    <TextBlock>Тип памяти RAM3</TextBlock>
+                    <TextBlock>Производитель RAM3</TextBlock>
+                    <TextBlock>Модель RAM4</TextBlock>
+                    <TextBlock>Объем RAM4</TextBlock>
+                    <TextBlock>Тип памяти RAM4</TextBlock>
+                    <TextBlock>Производитель RAM4</TextBlock>
                 </ComboBox>
             </DockPanel>
             <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Hidden">
