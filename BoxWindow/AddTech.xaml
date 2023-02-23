@@ -54,6 +54,7 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
                                     <TextBlock   FontSize="20" Text=" Тип"  Margin="0,0,0,0" VerticalAlignment="Center"   />
                                     <ComboBox Width="350" FontSize="20" x:Name="CombTypeTech" Margin="222.4,0,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Типы"  DropDownClosed="CombTypeTech_DropDownClosed" />
+                                    <Button x:Name="BtnAddOrganiz" Background="White" Foreground="Black" Width="39" Height="39" Content="+" Margin="5,0,0,0"   />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">

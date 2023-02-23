@@ -446,9 +446,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Organiz.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Организация" && IndexTabCont == 1)
                     {
-                        // InforPcTex.ItemsSource = null;
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC}   WHERE (Organiz.NameOrg like '%{TxtSearch.Text.ToLower()}%' or Organiz.NameOrg like '%{TxtSearch.Text.ToUpper()}%')  and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Organiz.IsSelected == true && IndexTabCont == 2)
                     {
@@ -466,9 +473,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Kabunet.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Кабинет" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC}  WHERE (MenuPerTech.Kabunet like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Kabunet like '%{TxtSearch.Text.ToUpper()}%') and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Kabunet.IsSelected == true && IndexTabCont == 2)
                     {
@@ -486,9 +500,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Number.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Номер" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC}   WHERE MenuPerTech.Number like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Number.IsSelected == true && IndexTabCont == 2)
                     {
@@ -505,9 +526,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (DataStart.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Дата начала" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC}   WHERE MenuPerTech.StartWork like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (DataStart.IsSelected == true && IndexTabCont == 2)
                     {
@@ -524,9 +552,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (DataStart.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Дата окончания" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC}   WHERE MenuPerTech.EndWork like '%{TxtSearch.Text}%' and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (DataStart.IsSelected == true && IndexTabCont == 2)
                     {
@@ -543,9 +578,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Status.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Статус" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC} WHERE (Status.NameStatus like '{TxtSearch.Text.ToLower()}%' or  Status.NameStatus like '{TxtSearch.Text.ToUpper()}%' or  Status.NameStatus like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Status.IsSelected == true && IndexTabCont == 2)
                     {
@@ -562,9 +604,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Status.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Работоспособность" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC} WHERE (Works.NameWorks like '{TxtSearch.Text.ToLower()}%' or  Works.NameWorks like '{TxtSearch.Text.ToUpper()}%' or  Works.NameWorks like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Status.IsSelected == true && IndexTabCont == 2)
                     {
@@ -581,9 +630,16 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                         InforPcTex.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-                    else if (Comment.IsSelected == true && IndexTabCont == 1)
+                    else if (combtext == "Коментарий" && IndexTabCont == 1)
                     {
-
+                        InforPerTech.ItemsSource = null;
+                        string query = $@"{DBSearchPC} WHERE (MenuPerTech.Comments like '{TxtSearch.Text.ToLower()}%' or MenuPerTech.Comments like '{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Comments like '{TxtSearch.Text}%' ) and  MenuPerTech.IDTypeTech = '1'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("MenuPerTech");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        InforPerTech.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
                     }
                     else if (Comment.IsSelected == true && IndexTabCont == 2)
                     {
@@ -1030,6 +1086,20 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     myRange.Value2 = b.Text;
 
                 }
+            }
+        }
+
+        private void AddComponet_Click(object sender, RoutedEventArgs e)
+        {
+            AddComponets adddell = new AddComponets();
+            bool? result = adddell.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_InforPcTex();
+                    LoadDB_InforPerTech();
+                    LoadDB_InforDopOboryd();
+                    break;
             }
         }
     }

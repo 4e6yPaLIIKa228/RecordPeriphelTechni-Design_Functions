@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoxWindow\AddComponets.xaml.cs">
+      <DependentUpon>AddComponets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BoxWindow\AddTech.xaml.cs">
       <DependentUpon>AddTech.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
     <Compile Include="PrintDG.cs" />
     <Compile Include="Saver.cs" />
     <Compile Include="SimpleComand.cs" />
+    <Page Include="BoxWindow\AddComponets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BoxWindow\AddTech.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
