@@ -37,16 +37,18 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    string query = $@"SELECT RepairDevice.ID, RepairDevice.IDMaster, RepairDevice.IDDevice, StatusApplications.NameStatus as Status , Users.Surname as Master,
+                    string query = $@"SELECT RepairDevice.ID, RepairDevice.IDMaster, RepairDevice.IDDevice,MenuPerTech.Name as NameDevice, MenuPerTech.IDTypeTech, TypeTechs.NameType as NameType, MenuPerTech.Number as NumberDevice, StatusApplications.NameStatus as Status , Users.Surname as Master,
                     RepairDevice.DateAppeals, RepairDevice.Comment  FROM RepairDevice
+					LEFT JOIN MenuPerTech on  RepairDevice.IDDevice = MenuPerTech.ID
+					Left Join TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
                     Left JOIN StatusApplications on RepairDevice.IDStatus  =  StatusApplications.ID
-                    left JOIN Users on RepairDevice.IDMaster = Users.ID";                    
+                    Left JOIN Users on RepairDevice.IDMaster = Users.ID";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     DataTable DT = new DataTable("RepairDevice");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                     SDA.Fill(DT);
                     ListApplications.ItemsSource = DT.DefaultView;
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();                  
                     connection.Close();
                 }
 
@@ -93,13 +95,6 @@ namespace RecordPeriphelTechniс.BoxWindow
             this.Close();
             menuinfor.ShowDialog();
         }
-
-        //private void ListService_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MasterPanel master = new MasterPanel();
-        //    this.Close();
-        //    master.ShowDialog();
-        //}
 
         private void ListUsers_Click(object sender, RoutedEventArgs e)
         {
@@ -149,5 +144,46 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             ExportToExcel();
         }
-    }
+
+        private void TxtSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ItemInfoTech_Click(object sender, RoutedEventArgs e)
+        {
+            Eddit_InforPcTex();
+        }
+
+        private void Eddit_InforPcTex()
+        {
+
+            if (ListApplications.SelectedIndex != -1)
+            {
+                EdditMessageReport tech = new EdditMessageReport((DataRowView)ListApplications.SelectedItem);
+                tech.Owner = this;
+                bool? result = tech.ShowDialog();
+                switch (result)
+                {
+                    default:
+                        LoadDB_Application();
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+            }
+        }
+    } 
 }

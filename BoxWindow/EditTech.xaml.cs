@@ -23,8 +23,8 @@ namespace RecordPeriphelTechniс.Windows
     /// </summary>
     public partial class EditTech : Window
     {
-        int TypeEdit, ProverkaPC = 0, /*ProverkaOsnova=0,*/ ProverkaRams = 0;
-        string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "", CheckNumber="";
+        int TypeEdit, ProverkaPC = 0,  /*ProverkaOsnova=0,*/ ProverkaRams = 0;
+        string TextRamInfo2 = "", IDMenuPerTech = null, TextRamInfo3 = "", TextRamInfo4 = "", CheckNumber="";
 
         public EditTech(DataRowView drv, int Type)
         {
@@ -32,8 +32,8 @@ namespace RecordPeriphelTechniс.Windows
             InitializeComponent();
             TypeEdit = Type;
             CombBoxDowmload();            
-            Saver.IDMenuPerTech = drv["IDMenuPer"].ToString();
-            Saver.IDMenuOboryd = drv["IDMenuPer"].ToString();
+            IDMenuPerTech = drv["IDMenuPer"].ToString();
+            //IDMenuOboryd = drv["IDMenuPer"].ToString();
             CombTypeTech.Text = drv["NameType"].ToString();
             CombIDOrgamniz.Text = drv["NameOrg"].ToString();
             TextIDKabuneta.Text = drv["Kabunet"].ToString();
@@ -54,7 +54,8 @@ namespace RecordPeriphelTechniс.Windows
                 Saver.MaterPlatID = drv["MaterPlatID"].ToString();
                 Saver.VideCardID = drv["VideoCardID"].ToString();
                 Saver.IDRAM = drv["IDRAM"].ToString();
-                Saver.IDMenuPerTech = drv["IDMenuPer"].ToString();
+                //Saver.IDMenuPerTech = drv["IDMenuPer"].ToString();
+                IDMenuPerTech = drv["IDMenuPer"].ToString();
                 TextProccModel.Text = drv["NameProcces"].ToString();
                 TextSpeed.Text = drv["SpeedProcces"].ToString();
                 CombProccMaker.Text = drv["MakerProcc"].ToString();
@@ -287,7 +288,7 @@ namespace RecordPeriphelTechniс.Windows
                                 if (ProverkaPC == 0)
                                 {
                                     string query = $@"UPDATE MenuPerTech SET IDOrganiz='{id}', Kabunet='{TextIDKabuneta.Text}',Number='{TextNumber.Text}',Name='{TextName.Text}', StartWork='{TextDataStart.Text}', 
-                                            EndWork=@EndWork ,IDStatus='{id2}',IDWorks='{id3}',Comments='{TextComments.Text}' WHERE ID='{Saver.IDMenuPerPC}';";
+                                            EndWork=@EndWork ,IDStatus='{id2}',IDWorks='{id3}',Comments='{TextComments.Text}' WHERE ID='{IDMenuPerTech}';";
                                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                                     if (String.IsNullOrEmpty(TextDataEnd.Text))
                                     {
@@ -329,11 +330,11 @@ namespace RecordPeriphelTechniс.Windows
                             {
                                 if (TypeEdit == 2)
                                 {
-                                    cmd.Parameters.AddWithValue("@ID", Saver.IDMenuPerTech);
+                                    cmd.Parameters.AddWithValue("@ID", IDMenuPerTech);
                                 }
                                 else if (TypeEdit == 3)
                                 {
-                                    cmd.Parameters.AddWithValue("@ID", Saver.IDMenuOboryd);
+                                    cmd.Parameters.AddWithValue("@ID", IDMenuPerTech);
                                 }
                                 cmd.Parameters.AddWithValue("@IDOrganiz", id);
                                 cmd.Parameters.AddWithValue("@Kabunet", TextIDKabuneta.Text);

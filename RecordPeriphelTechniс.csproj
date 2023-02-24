@@ -96,6 +96,12 @@
     <Compile Include="BoxWindow\Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoxWindow\DellComponets.xaml.cs">
+      <DependentUpon>DellComponets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BoxWindow\EdditMessageReport.xaml.cs">
+      <DependentUpon>EdditMessageReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BoxWindow\MasterPanel.xaml.cs">
       <DependentUpon>MasterPanel.xaml</DependentUpon>
     </Compile>
@@ -135,6 +141,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BoxWindow\Authorization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BoxWindow\DellComponets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BoxWindow\EdditMessageReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

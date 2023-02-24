@@ -52,7 +52,7 @@
                         <MenuItem Name="ListService" Header="Список заявок" Click="ListService_Click"  />
                         <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
                     </MenuItem>
-                    <MenuItem Name="AddMenu" Header="Добавить">
+                    <MenuItem Name="MenuData" Header="Данные">
                         <MenuItem x:Name="AddTec" Header="Добавить устройство" Click="AddTec_Click" ></MenuItem>                       
                         <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>
 
@@ -67,7 +67,7 @@
                     </MenuItem>
                     <MenuItem Header="Компоненты">                        
                             <MenuItem x:Name="AddComponet" Header="Добавить компонет(ы)" Click="AddComponet_Click" />
-                            <MenuItem x:Name="DellComponet" Header="Удалить компонет(ы)" />
+                            <MenuItem x:Name="DellComponet" Header="Удалить компонет(ы)" Click="DellComponet_Click"  />
                     </MenuItem>
                     <MenuItem Header="Помощь">
                         <MenuItem Header="Список оборудования" ></MenuItem>
@@ -77,13 +77,10 @@
         </Grid>
 
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
-            <DockPanel
-              LastChildFill="True">
-                <Button x:Name="BtnSearch"  Visibility="Hidden" Margin="-5,5,8,-6" Content="{materialDesign:PackIcon Kind=CogOutline}"  DockPanel.Dock="Right" Cursor="Hand" Height="50" Background="Black" Click="BtnSearch_Click" />
-                <Button Margin="3,5,8,-6" Visibility="Hidden" Content="{materialDesign:PackIcon Kind=Search}" DockPanel.Dock="Right"  Cursor="Hand" Height="50" Background="Black" />
+            <DockPanel  LastChildFill="True">               
                 <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2"  PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
 
-                <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="60" ScrollViewer.VerticalScrollBarVisibility="Visible"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
+                <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
                     <TextBlock>Организация</TextBlock>
                     <TextBlock>Кабинет</TextBlock>
                     <TextBlock>Номер</TextBlock>
@@ -116,14 +113,9 @@
                     <TextBlock>Тип памяти RAM4</TextBlock>
                     <TextBlock>Производитель RAM4</TextBlock>
                 </ComboBox>
-            </DockPanel>
-            <DockPanel  HorizontalAlignment="Left" VerticalAlignment="Bottom" Visibility="Hidden">
-                <Button Name="BtnEddit" Height="30" Content="Изменить" VerticalAlignment="Top" Margin="10" Click="BtnEddit_Click"/>
-                <Button x:Name="BtnAdd"  Height="30" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="BtnAdd_Click" Cursor="Hand"/>
-                <Button Name="BtnPrint" Height="30" Content="Печать" VerticalAlignment="Top" Margin="10" Click="BtnPrint_Click"/>
-                <Button Height="30" VerticalAlignment="Top" Margin="10"/>
-            </DockPanel>
+            </DockPanel>            
         </StackPanel>
+        
         <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,5,0">
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
                 <TabItem x:Name="TabitemPCTech" Header="Компьютерная техника">

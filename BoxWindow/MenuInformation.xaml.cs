@@ -38,20 +38,20 @@ RAMs.Model3 as Model3, RAMs.Vmemory3 as V3, RAMs.TypeMemory3 as TypeMemory3 , RA
 RAMs.Model4 as Model4, RAMs.Vmemory4 as V4, RAMs.TypeMemory4 as TypeMemory4 , RAMs.Maker4 as Maker4    
 
 FROM MenuPerTech
-JOIN TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
-JOIN Organiz on MenuPerTech.IDOrganiz = Organiz.ID
-JOIN Components on MenuPerTech.IDComponets = Components.ID
-JOIN Status on MenuPerTech.IDStatus = Status.ID
-JOIN Works on MenuPerTech.IDWorks = Works.ID
+LEFT JOIN TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
+LEFT JOIN Organiz on MenuPerTech.IDOrganiz = Organiz.ID
+LEFT JOIN Components on MenuPerTech.IDComponets = Components.ID
+LEFT JOIN Status on MenuPerTech.IDStatus = Status.ID
+LEFT JOIN Works on MenuPerTech.IDWorks = Works.ID
 
-JOIN Procces on Components.IDProcces = Procces.ID
+LEFT JOIN Procces on Components.IDProcces = Procces.ID
 LEFT JOIN MakersProcc ON Procces.IDMaker = MakersProcc.ID
 
-JOIN MaterPlatas on Components.IDMaterPlata = MaterPlatas.ID
-JOIN MakersMaterPlat on MaterPlatas.IDMaker = MakersMaterPlat.ID
+LEFT JOIN MaterPlatas on Components.IDMaterPlata = MaterPlatas.ID
+LEFT JOIN MakersMaterPlat on MaterPlatas.IDMaker = MakersMaterPlat.ID
 
-JOIN VideoCards on Components.IDVideo = VideoCards.ID
-JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
+LEFT JOIN VideoCards on Components.IDVideo = VideoCards.ID
+LEFT JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
 
 LEFT JOIN RAMs on Components.ID = RAMs.ID";
         public MenuInformation()
@@ -75,11 +75,9 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
         }
 
         public void Visitor()
-        {
-            BtnEddit.IsEnabled = false;
-            BtnAdd.IsEnabled = false;
+        {           
             ListWind.IsEnabled = false;
-            AddMenu.IsEnabled = false;
+            MenuData.IsEnabled = false;
             EdiitTec.IsEnabled = false;
 
         }
@@ -92,7 +90,7 @@ LEFT JOIN RAMs on Components.ID = RAMs.ID";
         public void Master()
         {
             ListUsers.Visibility = Visibility.Collapsed;
-            AddMenu.Visibility = Visibility.Collapsed;
+            MenuData.Visibility = Visibility.Collapsed;
             EdiitTec.Visibility = Visibility.Collapsed;
         }
 
@@ -1091,8 +1089,22 @@ WHERE  MenuPerTech.IDTypeTech = '3'
 
         private void AddComponet_Click(object sender, RoutedEventArgs e)
         {
-            AddComponets adddell = new AddComponets();
-            bool? result = adddell.ShowDialog();
+            AddComponets addcomp = new AddComponets();
+            bool? result = addcomp.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_InforPcTex();
+                    LoadDB_InforPerTech();
+                    LoadDB_InforDopOboryd();
+                    break;
+            }
+        }
+
+        private void DellComponet_Click(object sender, RoutedEventArgs e)
+        {
+            DellComponets dellcomp = new DellComponets();
+            bool? result = dellcomp.ShowDialog();
             switch (result)
             {
                 default:

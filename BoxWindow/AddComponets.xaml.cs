@@ -65,6 +65,12 @@ namespace RecordPeriphelTechniс.BoxWindow
             MessageBox.Show(combtext);
         }
 
+        public void CheckerText()
+        {
+            SimpleComand.CheckComboBox(CombKruterui);
+            SimpleComand.CheckTextBox(TextComponet);
+        } //Проверка пустых строк(подсветка)
+
         public void AddComponet()
         {
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
@@ -74,77 +80,82 @@ namespace RecordPeriphelTechniс.BoxWindow
                 {
                     if (String.IsNullOrEmpty(CombKruterui.Text) || String.IsNullOrEmpty(TextComponet.Text))
                     {
+                        CheckerText();
                         MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
                     }
                     else
                     {
-                        String combtext = CombKruterui.Text;
-                        if (combtext == "Организация")
-                        {                           
-                            string query = $@"SELECT count(NameOrg) FROM Organiz where Organiz.NameOrg = '{TextComponet.Text.ToUpper()}'";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (ProverkaComponet == 0)
-                            {
-                                query = $@"INSERT INTO Organiz('NameOrg') values ('{TextComponet.Text.ToUpper()}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteScalar(); 
-                                MessageBox.Show("Компонет добавлен в базу","Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                        }
-                        else if (combtext == "Производитель процессора")
+                        if (MessageBox.Show("Вы уверены что хотите добавить этот компонет?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
-                            string query = $@"SELECT count() FROM MakersProcc where MakersProcc.Name = '{TextComponet.Text.ToUpper()}'";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (ProverkaComponet == 0)
+                            String combtext = CombKruterui.Text;
+                            if (combtext == "Организация")
                             {
-                                query = $@"INSERT INTO MakersProcc('Name') values ('{TextComponet.Text.ToUpper()}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteScalar();
-                                MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                string query = $@"SELECT count(NameOrg) FROM Organiz where Organiz.NameOrg = '{TextComponet.Text.ToUpper()}'";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (ProverkaComponet == 0)
+                                {
+                                    query = $@"INSERT INTO Organiz('NameOrg') values ('{TextComponet.Text.ToUpper()}')";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteScalar();
+                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                            else
+                            else if (combtext == "Производитель процессора")
                             {
-                                MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                string query = $@"SELECT count() FROM MakersProcc where MakersProcc.Name = '{TextComponet.Text.ToUpper()}'";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (ProverkaComponet == 0)
+                                {
+                                    query = $@"INSERT INTO MakersProcc('Name') values ('{TextComponet.Text.ToUpper()}')";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteScalar();
+                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                        }
-                        else if (combtext == "Производитель материнской платы" )
-                        {
-                            string query = $@"SELECT count() FROM MakersMaterPlat where MakersMaterPlat.Name ='{TextComponet.Text.ToUpper()}'";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (ProverkaComponet == 0)
+                            else if (combtext == "Производитель материнской платы")
                             {
-                                query = $@"INSERT INTO MakersMaterPlat('Name') values ('{TextComponet.Text.ToUpper()}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteScalar();
-                                MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                string query = $@"SELECT count() FROM MakersMaterPlat where MakersMaterPlat.Name ='{TextComponet.Text.ToUpper()}'";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (ProverkaComponet == 0)
+                                {
+                                    query = $@"INSERT INTO MakersMaterPlat('Name') values ('{TextComponet.Text.ToUpper()}')";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteScalar();
+                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                            else
+                            else if (combtext == "Производитель видеокарты")
                             {
-                                MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
-                            }
-                        }
-                        else if (combtext == "Производитель видеокарты" )
-                        {
-                            string query = $@"SELECT count() FROM MakersVideoCard where MakersVideoCard.Name = '{TextComponet.Text.ToUpper()}'";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (ProverkaComponet == 0)
-                            {
-                                query = $@"INSERT INTO MakersVideoCard('Name') values ('{TextComponet.Text.ToUpper()}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteScalar();
-                                MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                string query = $@"SELECT count() FROM MakersVideoCard where MakersVideoCard.Name = '{TextComponet.Text.ToUpper()}'";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                int ProverkaComponet = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (ProverkaComponet == 0)
+                                {
+                                    query = $@"INSERT INTO MakersVideoCard('Name') values ('{TextComponet.Text.ToUpper()}')";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteScalar();
+                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
                         }
                     }
@@ -155,10 +166,37 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+        public void ClearData()
+        {
+            CombKruterui.Text = string.Empty;
+            TextComponet.Text = string.Empty;
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearData();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void BtnAddcomponet_Click(object sender, RoutedEventArgs e)
         {
             AddComponet();
         }
+
+        private void TextComponet_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CheckerText();
+        }
+
+        private void CombKruterui_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CheckerText();
+        }
+        
     }
 }
 
