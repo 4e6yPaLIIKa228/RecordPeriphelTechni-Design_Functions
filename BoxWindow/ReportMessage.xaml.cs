@@ -101,12 +101,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 IDTechnic = dr["ID"].ToString();
                                 //  Saver.IDAcc = countID;
                             }
-                            query = $@"SELECT  COUNT(1) FROM  RepairDevice where IDDevice =  '{IDTechnic}'";
+                            query = $@"SELECT  COUNT(1) FROM  RepairDevice
+                                    join StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
+                                    where IDDevice =  '{IDTechnic}' and StatusApplications.NameStatus != 'Выполнина'";
                             cmd = new SQLiteCommand(query, connection);
                             int IDDeviceSearch = Convert.ToInt32(cmd.ExecuteScalar());
                             if (IDDeviceSearch == 0)
                             {//заявка создается
-                                string DateNow =  DateTime.Now.ToString("d/MM//yyyy");
+                                string DateNow =  DateTime.Now.ToString("d/MM/yyyy");
                                 query = $@"INSERT INTO RepairDevice('IDDevice','IDStatus',IDMaster,'DateAppeals','Comment')
                                 values ('{IDTechnic}','{1}', @IDMaster,'{DateNow}' , '{TextComments.Text}' )";
                                 cmd = new SQLiteCommand(query, connection);

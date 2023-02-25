@@ -26,11 +26,20 @@ namespace RecordPeriphelTechniс.BoxWindow
         public EdditMessageReport(DataRowView drv)
         {
             InitializeComponent();
-            IDMenuPerTech = drv["IDDevice"].ToString();
-            TypeTech = drv["NameType"].ToString();            
             CombBoxDowmload();
             EnableInfp();
-            LoadInfo(); 
+            LoadInfo();
+            IDMenuPerTech = drv["IDDevice"].ToString();
+            TypeTech = drv["NameType"].ToString();
+            CombStatus.Text = drv["Status"].ToString();
+            TextNameTech.Text = drv["NameDevice"].ToString();            
+            TextNameMaster.Text = drv["Master"].ToString();
+            if (TextNameMaster.Text == null)
+            {
+                TextNameMaster.Text = "Отуствует";
+            }
+           TextCommentsProblems.Text = drv["Comment"].ToString();
+            
 
         }
         private void BtnResize_Click(object sender, RoutedEventArgs e)
@@ -97,40 +106,41 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         public void EnableInfp()
         {
-            CombTypeTech.IsEnabled= false;
+           // CombTypeTech.IsEnabled= false;
+            CombTypeTech.IsHitTestVisible = false; 
             CombIDOrgamniz.IsEnabled = false;
-            TextIDKabuneta.IsEnabled = false;
-            TextName.IsEnabled = false;
-            TextNumber.IsEnabled = false;
-            TextDataStart.IsEnabled = false;
+            TextIDKabuneta.IsReadOnly = true; 
+            TextName.IsReadOnly = true;
+            TextNumber.IsReadOnly = true;
+            TextDataStart.IsEnabled = false;        
             TextDataEnd.IsEnabled = false;
             CombIDStatus.IsEnabled = false;
             CombIDWorks.IsEnabled = false;
-            TextComments.IsEnabled = false;           
-            TextProccModel.IsEnabled = false;
-            TextSpeed.IsEnabled = false;
+            TextComments.IsReadOnly = true;           
+            TextProccModel.IsReadOnly = true;
+            TextSpeed.IsReadOnly = true;
             CombProccMaker.IsEnabled = false;
-            TextMatePlatModel.IsEnabled = false;
+            TextMatePlatModel.IsReadOnly = true;
             CombMatePlatMaker.IsEnabled = false;
-            TextRAMModel1.IsEnabled = false;
-            TextVmemory1.IsEnabled = false;
-            TextTypeMemory1.IsEnabled = false;
-            TextMaker1.IsEnabled = false;
-            TextRAMModel2.IsEnabled = false;
-            TextVmemory2.IsEnabled = false;
-            TextTypeMemory2.IsEnabled = false;
-            TextMaker2.IsEnabled = false;
-            TextRAMModel3.IsEnabled = false;
-            TextVmemory3.IsEnabled = false;
-            TextTypeMemory3.IsEnabled = false;
-            TextMaker3.IsEnabled = false;
-            TextRAMModel4.IsEnabled = false;
-            TextVmemory4.IsEnabled = false;
-            TextTypeMemory4.IsEnabled = false;
-            TextMaker4.IsEnabled = false;
-            TextVideoModel.IsEnabled = false;
-            TextVideoMemory.IsEnabled = false;
-            CombVidieoMaker.IsEnabled = false;
+            TextRAMModel1.IsReadOnly = true;
+            TextVmemory1.IsReadOnly = true;
+            TextTypeMemory1.IsReadOnly = true;
+            TextMaker1.IsReadOnly = true;
+            TextRAMModel2.IsReadOnly = true;
+            TextVmemory2.IsReadOnly = true;
+            TextTypeMemory2.IsReadOnly = true;
+            TextMaker2.IsReadOnly = true;
+            TextRAMModel3.IsReadOnly = true;
+            TextVmemory3.IsReadOnly = true;
+            TextTypeMemory3.IsReadOnly = true;
+            TextMaker3.IsReadOnly = true;
+            TextRAMModel4.IsReadOnly = true;
+            TextVmemory4.IsReadOnly = true;
+            TextTypeMemory4.IsReadOnly = true;
+            TextMaker4.IsReadOnly = true;
+            TextVideoModel.IsReadOnly = true;
+            TextVideoMemory.IsReadOnly = true;
+            CombVidieoMaker.IsReadOnly = true;
             }
 
         public void LoadInfo()
@@ -176,10 +186,12 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
+                       
+
                         CombTypeTech.Text = dr["NameType"].ToString();
                         CombIDOrgamniz.Text = dr["NameOrg"].ToString();
                         TextIDKabuneta.Text = dr["Kabunet"].ToString();
-                        TextName.Text = dr["NameYstr"].ToString();
+                        TextName.Text = dr["NameYstr"].ToString();                        
                         TextNumber.Text = dr["Number"].ToString();
                         TextDataStart.Text = dr["StartWork"].ToString();
                         TextDataEnd.Text = dr["EndWork"].ToString();
@@ -245,6 +257,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     string query6 = $@"SELECT * FROM MakersProcc"; // 
                     string query7 = $@"SELECT * FROM MakersMaterPlat"; // 
                     string query8 = $@"SELECT * FROM MakersVideoCard"; // 
+                    string query9 = $@"SELECT * FROM StatusApplications";
 
                     //----------------------------------------------
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
@@ -254,6 +267,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     SQLiteCommand cmd6 = new SQLiteCommand(query6, connection);
                     SQLiteCommand cmd7 = new SQLiteCommand(query7, connection);
                     SQLiteCommand cmd8 = new SQLiteCommand(query8, connection);
+                    SQLiteCommand cmd9 = new SQLiteCommand(query9, connection);
 
                     //----------------------------------------------
                     SQLiteDataAdapter SDA1 = new SQLiteDataAdapter(cmd1);
@@ -263,6 +277,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     SQLiteDataAdapter SDA6 = new SQLiteDataAdapter(cmd6);
                     SQLiteDataAdapter SDA7 = new SQLiteDataAdapter(cmd7);
                     SQLiteDataAdapter SDA8 = new SQLiteDataAdapter(cmd8);
+                    SQLiteDataAdapter SDA9 = new SQLiteDataAdapter(cmd9);
                     //----------------------------------------------
                     DataTable dt1 = new DataTable("TypeTechs");
                     DataTable dt2 = new DataTable("Organiz");
@@ -271,6 +286,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     DataTable dt6 = new DataTable("MakersProcc");
                     DataTable dt7 = new DataTable("MakersMaterPlat");
                     DataTable dt8 = new DataTable("MakersVideoCard");
+                    DataTable dt9 = new DataTable("StatusApplications");
                     //----------------------------------------------
                     SDA1.Fill(dt1);
                     SDA2.Fill(dt2);
@@ -279,6 +295,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     SDA6.Fill(dt6);
                     SDA7.Fill(dt7);
                     SDA8.Fill(dt8);
+                    SDA9.Fill(dt9);
                     //----------------------------------------------
                     CombTypeTech.ItemsSource = dt1.DefaultView;
                     CombTypeTech.DisplayMemberPath = "NameType";
@@ -308,6 +325,10 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     CombVidieoMaker.ItemsSource = dt8.DefaultView;
                     CombVidieoMaker.DisplayMemberPath = "Name";
                     CombVidieoMaker.SelectedValuePath = "ID";
+                    //----------------------------------------------
+                    CombStatus.ItemsSource = dt9.DefaultView;
+                    CombStatus.DisplayMemberPath = "NameStatus";
+                    CombStatus.SelectedValuePath = "ID";
                 }
                 catch (Exception ex)
                 {

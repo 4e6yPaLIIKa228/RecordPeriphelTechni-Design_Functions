@@ -46,14 +46,42 @@
         </StackPanel>
 
         <Grid HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0" >
-            <TabControl>                
+            <TabControl>
+                <TabItem Header="Информаця о заявке">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="451" Width="397"  >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBox x:Name="TextNameTech"  IsReadOnly="True"  Width="350"  FontSize="20" Margin="0,20,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ComboBox Width="350"  FontSize="20" x:Name="CombStatus" Margin="0,20,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Статус" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBox x:Name="TextNameMaster"  VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="0,20,0,0" materialDesign:HintAssist.Hint="Мастер"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBox x:Name="TextCommentsProblems" IsReadOnly="True" Width="392" FontSize="20"  MaxLength="999" Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Описание проблемы" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Margin="5,5,0,0" Height="191" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="Информация">
                     <TabControl TabStripPlacement="Left"  >
                         <TabItem Header="Основная информация">
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
                                     <TextBlock   FontSize="20" Text=" Тип"  Margin="0,0,0,0" VerticalAlignment="Center"   />
-                                    <ComboBox Width="350" FontSize="20" x:Name="CombTypeTech" Margin="222.4,0,0,0"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Типы"   />
+                                    <ComboBox Width="350" FontSize="20" x:Name="CombTypeTech"  Margin="222.4,0,0,0"   Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Типы"   />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
