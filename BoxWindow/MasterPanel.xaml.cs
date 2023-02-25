@@ -185,5 +185,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                 MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
             }
         }
+
+        private void ListApplications_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Eddit_InforPcTex();
+        }
     } 
 }

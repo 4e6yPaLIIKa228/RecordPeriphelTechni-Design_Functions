@@ -22,24 +22,27 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class EdditMessageReport : Window
     {
-        string IDMenuPerTech = null, TypeTech= null;
+        string IDMenuPerTech = null, TypeTech= null,IDRepairDevice = null;
         public EdditMessageReport(DataRowView drv)
         {
             InitializeComponent();
             CombBoxDowmload();
-            EnableInfp();
-            LoadInfo();
+
+            IDRepairDevice = drv["ID"].ToString();
             IDMenuPerTech = drv["IDDevice"].ToString();
             TypeTech = drv["NameType"].ToString();
             CombStatus.Text = drv["Status"].ToString();
-            TextNameTech.Text = drv["NameDevice"].ToString();            
+            TextNameTech.Text = drv["NameDevice"].ToString();
             TextNameMaster.Text = drv["Master"].ToString();
-            if (TextNameMaster.Text == null)
+            if (TextNameMaster.Text == "")
             {
                 TextNameMaster.Text = "Отуствует";
             }
-           TextCommentsProblems.Text = drv["Comment"].ToString();
+            TextCommentsProblems.Text = drv["Comment"].ToString();
+            LoadInfo();
+            EnableInfp();
             
+
 
         }
         private void BtnResize_Click(object sender, RoutedEventArgs e)
@@ -101,47 +104,119 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            AcceptReport();
+        }
 
+        public void AcceptReport()
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    String combtext = CombStatus.Text;
+                    if (combtext == "Принята")
+                    {
+                        if (MessageBox.Show("Вы уверены что хотите принять эту заявку?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        {
+                            connection.Open();
+                            string query = $@"SELECT count() from RepairDevice 
+                                       JOIN StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
+                                       WHERE StatusApplications.NameStatus = 'Выполнина' or StatusApplications.NameStatus = 'Принята' and  RepairDevice.ID = '{IDRepairDevice}';";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            int CheckDevice = Convert.ToInt32(cmd.ExecuteScalar());
+                            if (CheckDevice == 0)
+                            {
+                                bool resultCon = int.TryParse(CombStatus.SelectedValue.ToString(), out int id3);
+                                query = $@"UPDATE RepairDevice SET IDStatus='{id3}', IDMaster='{Saver.IDUser}' WHERE ID='{IDRepairDevice}';";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Зявка принята!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Отказано в изменении!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                           
+                        }
+                    }
+                    else if (combtext == "Выполнина")
+                    {
+                        if (MessageBox.Show("Вы уверены что заявка выполнена?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        {
+                            connection.Open();
+                            bool resultCon = int.TryParse(CombStatus.SelectedValue.ToString(), out int id3);
+                            string query = $@"UPDATE RepairDevice SET IDStatus='{id3}' WHERE ID='{IDRepairDevice}' and  IDMaster = '{Saver.IDUser}';";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            cmd.ExecuteNonQuery();
+                            query = $@"SELECT count() from RepairDevice 
+                                       JOIN StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
+                                       WHERE StatusApplications.NameStatus = 'Выполнина' and RepairDevice.ID = '{IDRepairDevice}';";
+                            cmd = new SQLiteCommand(query, connection);
+                            int  CheckDevice = Convert.ToInt32(cmd.ExecuteScalar());
+                            if (CheckDevice == 1)
+                            {
+                                MessageBox.Show("Зявка выполнена!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Вы не принимали эту заявку. Отказано в изменении", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+                          
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void EnableInfp()
         {
            // CombTypeTech.IsEnabled= false;
-            CombTypeTech.IsHitTestVisible = false; 
-            CombIDOrgamniz.IsEnabled = false;
-            TextIDKabuneta.IsReadOnly = true; 
-            TextName.IsReadOnly = true;
-            TextNumber.IsReadOnly = true;
-            TextDataStart.IsEnabled = false;        
-            TextDataEnd.IsEnabled = false;
-            CombIDStatus.IsEnabled = false;
-            CombIDWorks.IsEnabled = false;
-            TextComments.IsReadOnly = true;           
-            TextProccModel.IsReadOnly = true;
-            TextSpeed.IsReadOnly = true;
-            CombProccMaker.IsEnabled = false;
-            TextMatePlatModel.IsReadOnly = true;
-            CombMatePlatMaker.IsEnabled = false;
-            TextRAMModel1.IsReadOnly = true;
-            TextVmemory1.IsReadOnly = true;
-            TextTypeMemory1.IsReadOnly = true;
-            TextMaker1.IsReadOnly = true;
-            TextRAMModel2.IsReadOnly = true;
-            TextVmemory2.IsReadOnly = true;
-            TextTypeMemory2.IsReadOnly = true;
-            TextMaker2.IsReadOnly = true;
-            TextRAMModel3.IsReadOnly = true;
-            TextVmemory3.IsReadOnly = true;
-            TextTypeMemory3.IsReadOnly = true;
-            TextMaker3.IsReadOnly = true;
-            TextRAMModel4.IsReadOnly = true;
-            TextVmemory4.IsReadOnly = true;
-            TextTypeMemory4.IsReadOnly = true;
-            TextMaker4.IsReadOnly = true;
-            TextVideoModel.IsReadOnly = true;
-            TextVideoMemory.IsReadOnly = true;
-            CombVidieoMaker.IsReadOnly = true;
+            //CombTypeTech.IsHitTestVisible = false; 
+            //CombIDOrgamniz.IsEnabled = false;
+            //TextIDKabuneta.IsReadOnly = true; 
+            //TextName.IsReadOnly = true;
+            //TextNumber.IsReadOnly = true;
+            //TextDataStart.IsEnabled = false;        
+            //TextDataEnd.IsEnabled = false;
+            //CombIDStatus.IsEnabled = false;
+            //CombIDWorks.IsEnabled = false;
+            //TextComments.IsReadOnly = true;           
+            //TextProccModel.IsReadOnly = true;
+            //TextSpeed.IsReadOnly = true;
+            //CombProccMaker.IsEnabled = false;
+            //TextMatePlatModel.IsReadOnly = true;
+            //CombMatePlatMaker.IsEnabled = false;
+            //TextRAMModel1.IsReadOnly = true;
+            //TextVmemory1.IsReadOnly = true;
+            //TextTypeMemory1.IsReadOnly = true;
+            //TextMaker1.IsReadOnly = true;
+            //TextRAMModel2.IsReadOnly = true;
+            //TextVmemory2.IsReadOnly = true;
+            //TextTypeMemory2.IsReadOnly = true;
+            //TextMaker2.IsReadOnly = true;
+            //TextRAMModel3.IsReadOnly = true;
+            //TextVmemory3.IsReadOnly = true;
+            //TextTypeMemory3.IsReadOnly = true;
+            //TextMaker3.IsReadOnly = true;
+            //TextRAMModel4.IsReadOnly = true;
+            //TextVmemory4.IsReadOnly = true;
+            //TextTypeMemory4.IsReadOnly = true;
+            //TextMaker4.IsReadOnly = true;
+            //TextVideoModel.IsReadOnly = true;
+            //TextVideoMemory.IsReadOnly = true;
+            //CombVidieoMaker.IsReadOnly = true;
             }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
 
         public void LoadInfo()
         {
@@ -185,9 +260,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                     SQLiteDataReader dr = null;
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
-                    {
-                       
-
+                    {  
                         CombTypeTech.Text = dr["NameType"].ToString();
                         CombIDOrgamniz.Text = dr["NameOrg"].ToString();
                         TextIDKabuneta.Text = dr["Kabunet"].ToString();
@@ -230,9 +303,8 @@ where IDMenuPer = '{IDMenuPerTech}'";
                         {
                             CuctemBlock.Visibility = Visibility.Hidden;
                         }
-
                     }
-                    connection.Close();
+                   
                 }
 
             }
