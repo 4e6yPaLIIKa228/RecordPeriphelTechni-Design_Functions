@@ -271,7 +271,7 @@ where IDMenuPer = '{IDMenuPerTech}'";
                         CombIDStatus.Text = dr["NameStatus"].ToString();
                         CombIDWorks.Text = dr["NameWorks"].ToString();
                         TextComments.Text = dr["Comments"].ToString();
-                        if (TypeTech == "Компьютерная техника")
+                        if (TypeTech == "Компьютерная техника" | TypeTech == "компьютерная техника")
                         {
                             IDMenuPerTech = dr["IDMenuPer"].ToString();
                             TextProccModel.Text = dr["NameProcces"].ToString();

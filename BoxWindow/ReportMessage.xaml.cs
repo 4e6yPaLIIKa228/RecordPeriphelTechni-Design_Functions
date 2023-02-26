@@ -36,7 +36,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             SimpleComand.CheckTextBox(TextNumberTech);
             SimpleComand.CheckTextBox(TextComments);
-        } 
+        }
 
         private void BtnResize_Click(object sender, RoutedEventArgs e)
         {

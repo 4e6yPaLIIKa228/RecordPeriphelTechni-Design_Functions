@@ -94,6 +94,35 @@ namespace RecordPeriphelTechniс.Windows
             }            
         }
 
+        public void CheckerTextOsnova() // подцветка при пустоте
+        {
+            SimpleComand.CheckComboBox(CombTypeTech);
+            SimpleComand.CheckComboBox(CombIDOrgamniz);
+            SimpleComand.CheckTextBox(TextIDKabuneta);
+            SimpleComand.CheckTextBox(TextName);
+            SimpleComand.CheckTextBox(TextNumber);
+            SimpleComand.CheckComboBox(CombIDStatus);
+            SimpleComand.CheckTextBox(TextName);
+            SimpleComand.CheckComboBox(CombIDWorks);
+            SimpleComand.CheckDatePicker(TextDataStart);
+        }
+        public void CheckerTextComponets()
+        {
+
+            SimpleComand.CheckTextBox(TextProccModel);
+            SimpleComand.CheckTextBox(TextSpeed);
+            SimpleComand.CheckComboBox(CombProccMaker);
+            SimpleComand.CheckTextBox(TextMatePlatModel);
+            SimpleComand.CheckComboBox(CombMatePlatMaker);
+            SimpleComand.CheckTextBox(TextRAMModel1);
+            SimpleComand.CheckTextBox(TextVmemory1);
+            SimpleComand.CheckTextBox(TextTypeMemory1);
+            SimpleComand.CheckTextBox(TextMaker1);
+            SimpleComand.CheckTextBox(TextVideoModel);
+            SimpleComand.CheckTextBox(TextVideoMemory);
+            SimpleComand.CheckComboBox(CombVidieoMaker);
+        }
+
 
         public void CombBoxDowmload()  //Данные для комбобоксов 
         {
@@ -258,6 +287,7 @@ namespace RecordPeriphelTechniс.Windows
                     String.IsNullOrEmpty(CombIDWorks.Text))
                 {
                     MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    CheckerTextOsnova();
                     //ProverkaOsnova = 1;
                 }
                 else
@@ -384,6 +414,7 @@ namespace RecordPeriphelTechniс.Windows
                         String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || String.IsNullOrEmpty(CombVidieoMaker.Text))
                     {
                         MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CheckerTextComponets();
                         ProverkaPC = 1;
                     }
                     else
@@ -700,6 +731,12 @@ namespace RecordPeriphelTechniс.Windows
             Expander3.IsExpanded = false;
             Expander4.IsExpanded = false;
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void Expander3_Expanded(object sender, RoutedEventArgs e)
         {
             Expander1.IsExpanded = false;
@@ -711,6 +748,38 @@ namespace RecordPeriphelTechniс.Windows
             Expander1.IsExpanded = false;
             Expander2.IsExpanded = false;
             Expander3.IsExpanded = false;
+        }
+
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void BtnSazeMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            //Environment.Exit(0);
+            this.Close();
+        }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
         }
 
     }

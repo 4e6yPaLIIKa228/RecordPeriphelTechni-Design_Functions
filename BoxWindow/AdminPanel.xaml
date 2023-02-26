@@ -13,39 +13,128 @@
         TextOptions.TextRenderingMode="Auto"
 
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="AdminPanel" Height="450" Width="1450">
+        Title="AdminPanel" Height="680" Width="1450" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition/>
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="522" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="210" />
+            <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
-        <Grid  Grid.Column="0" Grid.Row="0">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                <TextBlock Text="Панель Администратора" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+
+        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1"  VerticalAlignment="Top" Margin="0,13,0,0"  HorizontalAlignment="Left" >
+            <StackPanel Orientation="Vertical"  VerticalAlignment="Bottom">
+                <Menu  VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14">
+                    <MenuItem Name="ListWind"  Header="Окна"  HorizontalAlignment="Left" >
+                        <MenuItem Name="ListTechnic" Header="Список устройтсв" Click="ListTechnic_Click"  />
+                        <MenuItem Name="ListService" Header="Список заявок" Click="ListService_Click"  />
+                    </MenuItem>
+                    <MenuItem Name="MenuData" Header="Данные">
+                        <MenuItem x:Name="AddTec" Header="Добавить устройство" Click="AddTec_Click" ></MenuItem>
+                        <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>
+                        <MenuItem Header="Изменить даныне устроства" Name="EdiitTec" Click="EdiitTec_Click" />
+                    </MenuItem>
+                    <MenuItem Header="Отчет" >
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" >
+                            <MenuItem Name="ExcelPc" Header="Компьютерная техника" Click="ExcelPc_Click" ></MenuItem>
+                            <MenuItem Name="ExcelPer" Header="Переферийная устройства"  Cursor="" Click="ExcelPer_Click" ></MenuItem>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Header="Компоненты">
+                        <MenuItem x:Name="AddComponet" Header="Добавить компонет(ы)" Click="AddComponet_Click" />
+                        <MenuItem x:Name="DellComponet" Header="Удалить компонет(ы)" Click="DellComponet_Click"  />
+                    </MenuItem>
+                    <MenuItem Header="Помощь">
+                        <MenuItem Header="Список оборудования" ></MenuItem>
+                    </MenuItem>
+                </Menu>
             </StackPanel>
         </Grid>
 
-        <Grid  Grid.Column="1" Grid.Row="0">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                <Label Content="Список Пользователей" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+        <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
+            <DockPanel  LastChildFill="True">
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2"  />
+
+                <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
+                    <TextBlock>Организация</TextBlock>
+                    <TextBlock>Кабинет</TextBlock>
+                    <TextBlock>Номер</TextBlock>
+                    <TextBlock>Дата начала</TextBlock>
+                    <TextBlock>Дата окончания</TextBlock>
+                    <TextBlock>Статус</TextBlock>
+                    <TextBlock>Работоспособность</TextBlock>
+                    <TextBlock>Коментарий</TextBlock>
+                    <TextBlock>Модель процессора</TextBlock>
+                    <TextBlock>Производитель процессора</TextBlock>
+                    <TextBlock>Модель материнской платы</TextBlock>
+                    <TextBlock>Производитель материнской платы</TextBlock>
+                    <TextBlock>Модель видеокарты</TextBlock>
+                    <TextBlock>Объем памяти видеокарты</TextBlock>
+                    <TextBlock>Производитель видеокарты</TextBlock>
+                    <TextBlock>Модель RAM1</TextBlock>
+                    <TextBlock>Объем RAM1</TextBlock>
+                    <TextBlock>Тип памяти RAM1</TextBlock>
+                    <TextBlock>Производитель RAM1</TextBlock>
+                    <TextBlock>Модель RAM2</TextBlock>
+                    <TextBlock>Объем RAM2</TextBlock>
+                    <TextBlock>Тип памяти RAM2</TextBlock>
+                    <TextBlock>Производитель RAM2</TextBlock>
+                    <TextBlock>Модель RAM3</TextBlock>
+                    <TextBlock>Объем RAM3</TextBlock>
+                    <TextBlock>Тип памяти RAM3</TextBlock>
+                    <TextBlock>Производитель RAM3</TextBlock>
+                    <TextBlock>Модель RAM4</TextBlock>
+                    <TextBlock>Объем RAM4</TextBlock>
+                    <TextBlock>Тип памяти RAM4</TextBlock>
+                    <TextBlock>Производитель RAM4</TextBlock>
+                </ComboBox>
+            </DockPanel>
+        </StackPanel>
+        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontSize="20" Text="-" ></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnSazeMax_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Width="46" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
 
-        <Grid  Grid.Column="2" Grid.Row="0">
-            <StackPanel Orientation="Vertical" >
-                <Label Content="Вы зашли как:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
-            </StackPanel>
-        </Grid>
 
-        <Grid  Grid.Column="0" Grid.Row="1" >
+
+        <Grid  Grid.Column="0" Grid.Row="1" Visibility="Hidden" >
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
                 <Button Name="BtnEddit" Height="30" Content="Изменить данные" VerticalAlignment="Top" Margin="10" />
                 <Button Name="AddComponent" Height="30" Content="Добавить компонент" VerticalAlignment="Top" Margin="10"/>
@@ -54,8 +143,8 @@
             </StackPanel>
         </Grid>
 
-        <Grid  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,5,0" >
-            <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="ListUsers" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
+        <Grid   Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="3" Margin="5,5,5,0"  >
+            <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="DataGridUsers" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
                     <DataGridTextColumn Header="Логин"  FontSize="20" Width="150"  Binding="{Binding Login}"/>

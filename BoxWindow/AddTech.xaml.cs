@@ -13,8 +13,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Office.Interop.Excel;
 using RecordPeriphelTechniс.Connection;
-
+using DataTable = System.Data.DataTable;
+using Window = System.Windows.Window;
 
 namespace RecordPeriphelTechniс.BoxWindow
 {
@@ -121,7 +123,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             String textcomb = CombTypeTech.Text;
-            if (textcomb == "Компьютерная техника")
+            if (textcomb == "компьютерная техника" || textcomb == "Компьютерная техника")
             {               
                 AddOsnovaPC();               
             }
@@ -131,6 +133,35 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
            
         }
+        public void CheckerTextOsnova() // подцветка при пустоте
+        {
+            SimpleComand.CheckComboBox(CombTypeTech);
+            SimpleComand.CheckComboBox(CombIDOrgamniz);
+            SimpleComand.CheckTextBox(TextIDKabuneta);
+            SimpleComand.CheckTextBox(TextName);
+            SimpleComand.CheckTextBox(TextNumber);
+            SimpleComand.CheckComboBox(CombIDStatus);
+            SimpleComand.CheckTextBox(TextName);
+            SimpleComand.CheckComboBox(CombIDWorks);
+            SimpleComand.CheckDatePicker(TextDataStart);  
+        }
+        public void CheckerTextComponets()
+        {
+           
+            SimpleComand.CheckTextBox(TextProccModel);
+            SimpleComand.CheckTextBox(TextSpeed);
+            SimpleComand.CheckComboBox(CombProccMaker);
+            SimpleComand.CheckTextBox(TextMatePlatModel);
+            SimpleComand.CheckComboBox(CombMatePlatMaker);
+            SimpleComand.CheckTextBox(TextRAMModel1);
+            SimpleComand.CheckTextBox(TextVmemory1);
+            SimpleComand.CheckTextBox(TextTypeMemory1);
+            SimpleComand.CheckTextBox(TextMaker1);
+            SimpleComand.CheckTextBox(TextVideoModel);
+            SimpleComand.CheckTextBox(TextVideoMemory);
+            SimpleComand.CheckComboBox(CombVidieoMaker);
+        }
+
         public void AddOsnovaPerTech()
         {
             try
@@ -138,10 +169,11 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) ||
-                        String.IsNullOrEmpty(CombIDWorks.Text))
+                    if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) || String.IsNullOrEmpty(TextDataStart.Text) 
+                        || String.IsNullOrEmpty(CombIDWorks.Text))
                     {
-                        MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        CheckerTextOsnova();
                     }
                     else
                     {
@@ -171,11 +203,11 @@ namespace RecordPeriphelTechniс.BoxWindow
                             query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
                             cmd = new SQLiteCommand(query, connection);
                             IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                            MessageBox.Show("Данные добавлены");
+                            MessageBox.Show("Данные добавлены","Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                         }
                         else
                         {
-                            MessageBox.Show("Измените номер техники");
+                            MessageBox.Show("Измените номер техники","Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
@@ -191,10 +223,12 @@ namespace RecordPeriphelTechniс.BoxWindow
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
             {
                 connection.Open();
-                if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) ||
-                    String.IsNullOrEmpty(CombIDWorks.Text))
+                if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) || 
+                    String.IsNullOrEmpty(CombIDWorks.Text) || String.IsNullOrEmpty(TextDataStart.Text))
                 {
-                    MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    CheckerTextOsnova();
+                    CheckerTextComponets();
+                    MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
@@ -214,7 +248,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                             if (ProverkaPcCompont == 1)
                             {
                                 query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}',EndWork,'{id2}','{id3}','{TextComments.Text}')";
+                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}',@EndWork,'{id2}','{id3}','{TextComments.Text}')";
                                 cmd = new SQLiteCommand(query, connection);
                                 if (String.IsNullOrEmpty(TextDataEnd.Text))
                                 {
@@ -225,7 +259,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
                                 }
                                 cmd.ExecuteNonQuery();
-                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
+                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}'  and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
                                 AddRams();
@@ -236,18 +270,19 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        MessageBox.Show("Измените номер техники");
+                        MessageBox.Show("Измените номер техники","Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
         }
         public void AddPcCompet()
         {
-            if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) ||
-                       String.IsNullOrEmpty(CombMatePlatMaker.Text) || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
+            if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) 
+                       || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
                        String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || String.IsNullOrEmpty(CombVidieoMaker.Text))
             {
-                MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                CheckerTextComponets();
+                MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 ProverkaPcCompont = 0;
             }
             else
@@ -388,7 +423,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void CuctemBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             String a = CombTypeTech.Text;
-            if (a != "Компьютерная техника")
+            if (a != "Компьютерная техника" && a != "компьютерная техника")
             {
                 TextProccModel.IsEnabled= false;
                 TextSpeed.IsEnabled = false;
@@ -520,7 +555,45 @@ namespace RecordPeriphelTechniс.BoxWindow
                 MessageBox.Show(TextRamInfo2 + '\n' + TextRamInfo3 + '\n' + TextRamInfo4);
             }
             
-        }    
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        public void ClearData()
+        {
+            if (MessageBox.Show("Вы уверены что хотите очистить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CombTypeTech.Text = null;
+                CombIDOrgamniz.Text = null;
+                TextIDKabuneta.Text = null;
+                TextName.Text = null;
+                TextNumber.Text = null;
+                CombIDStatus.Text = null;
+                TextName.Text = null;
+                CombIDWorks.Text = null;
+                TextDataStart.Text = null;
+                TextProccModel.Text = null;
+                TextSpeed.Text = null;
+                CombProccMaker.Text = null;
+                TextMatePlatModel.Text = null;
+                CombMatePlatMaker.Text = null;
+                TextRAMModel1.Text = null;
+                TextVmemory1.Text = null;
+                TextTypeMemory1.Text = null;
+                TextMaker1.Text = null;
+                TextVideoModel.Text = null;
+                TextVideoMemory.Text = null;
+                CombVidieoMaker.Text = null;
+            }
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            ClearData();
+        }
 
         public void AddRams()
         {
@@ -614,7 +687,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     string query = $@"UPDATE MenuPerTech SET IDComponets ='{IDComponets}' WHERE ID ='{IDMenuPerTech}' ";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Данные добавлены");
+                    MessageBox.Show("Данные добавлены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)

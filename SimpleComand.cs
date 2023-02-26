@@ -54,7 +54,7 @@ namespace RecordPeriphelTechniс
         }
         public static bool CheckDatePicker(DatePicker dp)
         {
-            if (dp.Text == null)
+            if (dp.Text == "")
             {
                 dp.BorderBrush = Brushes.Red;
                 return false;

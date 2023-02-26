@@ -55,7 +55,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     DataTable DT = new DataTable("MenuPerTech");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                     SDA.Fill(DT);
-                    ListUsers.ItemsSource = DT.DefaultView;
+                    DataGridUsers.ItemsSource = DT.DefaultView;
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
@@ -74,6 +74,97 @@ namespace RecordPeriphelTechniс.BoxWindow
             this.Close();
             addtech.ShowDialog();
            
+        }
+
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void BtnSazeMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void ListService_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListUsers_Click(object sender, RoutedEventArgs e)
+        {
+            MenuInformation addtech = new MenuInformation();
+            this.Close();
+            addtech.ShowDialog();
+        }
+
+        private void AddTec_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReportMessgae_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EdiitTec_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExcelPc_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExcelPer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddComponet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DellComponet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListTechnic_Click(object sender, RoutedEventArgs e)
+        {
+            MenuInformation addtech = new MenuInformation();
+            this.Close();
+            addtech.ShowDialog();
         }
     }
 }
