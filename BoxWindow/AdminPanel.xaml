@@ -152,7 +152,7 @@
                     <DataGridTextColumn Header="Имя" FontSize="20" >
                         <DataGridTextColumn.Binding>
                             <MultiBinding StringFormat="{}{0} x {1}">
-                                <Binding Path="Surname" />
+                                <Binding Path="Surname" TargetNullValue= "отсутствует" />
                                 <Binding Path="Surname" />
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
