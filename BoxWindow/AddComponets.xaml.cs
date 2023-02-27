@@ -61,8 +61,8 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
         {
-            String combtext = CombKruterui.Text;
-            MessageBox.Show(combtext);
+           // String combtext = CombKruterui.Text;
+           // MessageBox.Show(combtext);
         }
 
         public void CheckerText()
@@ -189,12 +189,12 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void TextComponet_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CheckerText();
+            //CheckerText();
         }
 
         private void CombKruterui_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckerText();
+            //CheckerText();
         }
         
     }

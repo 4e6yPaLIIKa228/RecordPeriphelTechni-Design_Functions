@@ -57,9 +57,7 @@
                         <MenuItem Header="Изменить даныне устроства" Name="EdiitTec" Click="EdiitTec_Click" />
                     </MenuItem>                
                     <MenuItem Header="Отчет" >
-                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" >
-                            <MenuItem Name="ExcelPc" Header="Компьютерная техника" Click="ExcelPc_Click" ></MenuItem>
-                            <MenuItem Name="ExcelPer" Header="Переферийная устройства"  Cursor="" Click="ExcelPer_Click" ></MenuItem>
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" >                            
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Компоненты">                        
@@ -116,9 +114,10 @@
         
         <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,5,0">
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
-                <TabItem x:Name="TabitemPCTech" Header="Компьютерная техника">
+                <TabItem x:Name="TabitemPCTech" Header="Компьютерная техника" ContextMenuOpening="TabitemPCTech_ContextMenuOpening">
                     <Grid>
-                        <DataGrid  IsReadOnly="True" ColumnWidth="*"  x:Name="InforPcTex"  CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" HorizontalAlignment="Center"  >
+                        <ScrollViewer >
+                            <DataGrid  IsReadOnly="True" ColumnWidth="*" ScrollViewer.CanContentScroll="True"   x:Name="InforPcTex"  CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" HorizontalAlignment="Center"  >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
                                 <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
@@ -211,10 +210,12 @@
                             </DataGrid.RowDetailsTemplate>
 
                         </DataGrid>
+                        </ScrollViewer>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="TabItemPerTech" Header="Перефирийные устройства" >
                     <Grid>
+                        <ScrollViewer>
                         <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Организация" FontSize="20" Width="150"  Binding="{Binding NameOrg}"/>
@@ -237,6 +238,7 @@
                                 </DataTemplate>
                             </DataGrid.RowDetailsTemplate>
                         </DataGrid>
+                        </ScrollViewer>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="TabItemDopOboryd" Header="Доп. оборудование">

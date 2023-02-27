@@ -966,6 +966,31 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         private void ExcelPc_Click(object sender, RoutedEventArgs e)
         {
             ExportToExcelPc();
+        }       
+
+        private void ExcelPer_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcelPerTech();
+        }
+
+        private void ReportMessgae_Click(object sender, RoutedEventArgs e)
+        {
+            string numbertech = null;
+            ReportMessage report = new ReportMessage(numbertech);
+            bool? result = report.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_InforPcTex();
+                    LoadDB_InforPerTech();
+                    LoadDB_InforDopOboryd();
+                    break;
+            }
+        }
+
+        private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
+        {
+           // String combtext = CombSearchInfo.Text;
         }
 
         private void ExportToExcelPc()
@@ -1007,30 +1032,6 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             }
         }
 
-        private void ExcelPer_Click(object sender, RoutedEventArgs e)
-        {
-            ExportToExcelPerTech();
-        }
-
-        private void ReportMessgae_Click(object sender, RoutedEventArgs e)
-        {
-            string numbertech = null;
-            ReportMessage report = new ReportMessage(numbertech);
-            bool? result = report.ShowDialog();
-            switch (result)
-            {
-                default:
-                    LoadDB_InforPcTex();
-                    LoadDB_InforPerTech();
-                    LoadDB_InforDopOboryd();
-                    break;
-            }
-        }
-
-        private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
-        {
-           // String combtext = CombSearchInfo.Text;
-        }
         private void ExportToExcelPerTech()
         {
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
@@ -1101,6 +1102,30 @@ WHERE  MenuPerTech.IDTypeTech = '3'
         private void DockPanel_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
+        }
+
+        private void ExsportExcel_Click(object sender, RoutedEventArgs e)
+        {
+            if (IndexTabCont ==0) 
+            {
+                ExportToExcelPc();
+            }            
+            else if (IndexTabCont ==1) 
+            {
+                ExportToExcelPerTech();
+            }
+            else if (IndexTabCont ==2) 
+            { 
+
+            }
+            
+        }
+
+        private void TabitemPCTech_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            LoadDB_InforPcTex();
+            //LoadDB_InforPerTech();
+            //LoadDB_InforDopOboryd();
         }
     }
 }

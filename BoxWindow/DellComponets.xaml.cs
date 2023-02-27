@@ -228,7 +228,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             String combtext = CombKruterui.Text;
            // MessageBox.Show(combtext);
-            LoadComboBox();
+         //   LoadComboBox();
         }
 
         public void CheckerText()
@@ -260,12 +260,12 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void TextComponet_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CheckerText();
+          //  CheckerText();
         }
 
         private void CombKruterui_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckerText();
+           // CheckerText();
         }
     }
 }
