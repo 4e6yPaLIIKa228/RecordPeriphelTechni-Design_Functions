@@ -33,7 +33,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             TypeTech = drv["NameType"].ToString();
             CombStatus.Text = drv["Status"].ToString();
             TextNameTech.Text = drv["NameDevice"].ToString();
-            TextNameMaster.Text = drv["Master"].ToString();
+            TextNameMaster.Text = drv["Surname"].ToString();
             if (TextNameMaster.Text == "")
             {
                 TextNameMaster.Text = "Отуствует";
@@ -114,7 +114,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     String combtext = CombStatus.Text;
-                    if (combtext == "Принята")
+                    if (combtext == "Принята" || combtext == "принята")
                     {
                         if (MessageBox.Show("Вы уверены что хотите принять эту заявку?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
@@ -137,10 +137,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                             {
                                 MessageBox.Show("Отказано в изменении!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                           
+
                         }
                     }
-                    else if (combtext == "Выполнина")
+                    else if (combtext == "Выполнина" || combtext == "выполнина")
                     {
                         if (MessageBox.Show("Вы уверены что заявка выполнена?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {

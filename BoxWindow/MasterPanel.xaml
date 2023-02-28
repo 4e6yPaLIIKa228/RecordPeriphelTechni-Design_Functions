@@ -120,10 +120,12 @@
                     <DataGridTextColumn Header="Имя"  FontSize="20" Width="150"  Binding="{Binding NameDevice}"/>
                     <DataGridTextColumn Header="Номер"  FontSize="20" Width="150"  Binding="{Binding NumberDevice}"/>
                     <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding Status}"/>
-                    <DataGridTextColumn Header="Имя" FontSize="20" >
+                    <DataGridTextColumn Header="Мастер" FontSize="20" >
                         <DataGridTextColumn.Binding>
-                            <MultiBinding StringFormat="{}{0}">
-                                <Binding Path="Master" TargetNullValue= "отсутствует" />
+                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                <Binding Path="Surname"  TargetNullValue= "отсутствует" />
+                                <Binding Path="Name"/>
+                                <Binding Path="MiddleName"/>
                             </MultiBinding>
                         </DataGridTextColumn.Binding>
                     </DataGridTextColumn>

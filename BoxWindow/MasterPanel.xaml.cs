@@ -37,8 +37,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    string query = $@"SELECT RepairDevice.ID, RepairDevice.IDMaster, RepairDevice.IDDevice,MenuPerTech.Name as NameDevice, MenuPerTech.IDTypeTech, TypeTechs.NameType as NameType, MenuPerTech.Number as NumberDevice, StatusApplications.NameStatus as Status , Users.Surname as Master,
-                    RepairDevice.DateAppeals, RepairDevice.Comment  FROM RepairDevice
+                    string query = $@"SELECT RepairDevice.ID, RepairDevice.IDMaster, RepairDevice.IDDevice,MenuPerTech.Name as NameDevice, MenuPerTech.IDTypeTech, TypeTechs.NameType as NameType, MenuPerTech.Number as NumberDevice, StatusApplications.NameStatus as Status , 
+                    Users.Surname as Surname, Users.Name as Name, Users.MiddleName as MiddleName,RepairDevice.DateAppeals, RepairDevice.Comment FROM RepairDevice
 					LEFT JOIN MenuPerTech on  RepairDevice.IDDevice = MenuPerTech.ID
 					Left Join TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
                     Left JOIN StatusApplications on RepairDevice.IDStatus  =  StatusApplications.ID
