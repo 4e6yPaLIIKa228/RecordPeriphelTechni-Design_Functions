@@ -177,37 +177,40 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
-                        bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
-                        bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
-                        bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
-                        string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
-                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                        ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
-                        if (ProverkaNumber != 1)
+                        if (MessageBox.Show("Вы уверены что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
-                            
-                            query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}',@IDComponets,'{TextName.Text}','{TextDataStart.Text}',@EndWork,'{id2}','{id3}','{TextComments.Text}')";                           
-                            cmd = new SQLiteCommand(query, connection);
-                            if (String.IsNullOrEmpty(TextDataEnd.Text))
+                            bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                            bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                            bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                            bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
+                            string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text.ToLower()}'";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                            if (ProverkaNumber != 1)
                             {
-                                cmd.Parameters.AddWithValue("@EndWork", null);
+
+                                query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TextNumber.Text.ToLower()}',@IDComponets,'{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
+                                cmd = new SQLiteCommand(query, connection);
+                                if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", null);
+                                }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                }
+                                cmd.Parameters.AddWithValue("@IDComponets", null);
+                                cmd.ExecuteNonQuery();
+                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TextNumber.Text.ToLower()}' and Name = '{TextName.Text.ToLower()}' and StartWork = '{TextDataStart.Text.ToLower()}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                                MessageBox.Show("Устройство добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                             }
                             else
                             {
-                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                            cmd.Parameters.AddWithValue("@IDComponets", null);
-                            cmd.ExecuteNonQuery();
-                            query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}' and StartWork = '{TextDataStart.Text}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
-                            cmd = new SQLiteCommand(query, connection);
-                            IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                            MessageBox.Show("Данные добавлены","Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Измените номер техники","Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
@@ -232,45 +235,48 @@ namespace RecordPeriphelTechniс.BoxWindow
                 }
                 else
                 {
-                    bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
-                    bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
-                    bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
-                    bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
-                    string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text}'";
-                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                    ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
-                    if (ProverkaNumber != 1)
+                    if (MessageBox.Show("Вы уверены что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
-                        CheckRams();
-                        if (ProverkaRams == 0)
+                        bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                        bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                        bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                        bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
+                        string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text.ToLower()}'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (ProverkaNumber != 1)
                         {
-                            AddPcCompet();
-                            if (ProverkaPcCompont == 1)
+                            CheckRams();
+                            if (ProverkaRams == 0)
                             {
-                                query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text}','{TextNumber.Text}','{null}','{TextName.Text}','{TextDataStart.Text}',@EndWork,'{id2}','{id3}','{TextComments.Text}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                AddPcCompet();
+                                if (ProverkaPcCompont == 1)
                                 {
-                                    cmd.Parameters.AddWithValue("@EndWork", null);
+                                    query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TextNumber.Text.ToLower()}','{null}','{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    if (String.IsNullOrEmpty(TextDataEnd.Text))
+                                    {
+                                        cmd.Parameters.AddWithValue("@EndWork", null);
+                                    }
+                                    else
+                                    {
+                                        cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                    }
+                                    cmd.ExecuteNonQuery();
+                                    query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TextNumber.Text.ToLower()}' and Name = '{TextName.Text.ToLower()}'  and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                                    AddRams();
+                                    AddComponets();
+                                    UpdateMenuPer();
                                 }
-                                else
-                                {
-                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                                }
-                                cmd.ExecuteNonQuery();
-                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text}' and  Number = '{TextNumber.Text}' and Name = '{TextName.Text}'  and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text}' ";
-                                cmd = new SQLiteCommand(query, connection);
-                                IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                                AddRams();
-                                AddComponets();
-                                UpdateMenuPer();
                             }
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Измените номер техники","Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        else
+                        {
+                            MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
                 }
             }
@@ -296,10 +302,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                         bool resultBrand = int.TryParse(CombMatePlatMaker.SelectedValue.ToString(), out int id5);
                         bool resultModel = int.TryParse(CombVidieoMaker.SelectedValue.ToString(), out int id6);
 
-                        string query = $@"INSERT INTO Procces ('Model', 'Speed','IDMaker') VALUES ('{TextProccModel.Text}','{TextSpeed.Text}','{id4}');";
+                        string query = $@"INSERT INTO Procces ('Model', 'Speed','IDMaker') VALUES ('{TextProccModel.Text.ToLower()}','{TextSpeed.Text.ToLower()}','{id4}');";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
-                        query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}'";
+                        query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text.ToLower()}' and Speed = '{TextSpeed.Text.ToLower()}' and IDMaker = '{id4}'";
                         cmd = new SQLiteCommand(query, connection);
                         int CheckIDProcces = Convert.ToInt32(cmd.ExecuteScalar());
                         int IDProccesCheck = 0;
@@ -307,10 +313,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             while (CheckIDProcces >= 1)
                             {
-                                query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}' ";
+                                query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text.ToLower()}' and Speed = '{TextSpeed.Text.ToLower()}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDProccesCheck = Convert.ToInt32(cmd.ExecuteScalar());
-                                query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}'";
+                                query = $@"SELECT count (ID) FROM Procces WHERE Model = '{TextProccModel.Text.ToLower()}' and Speed = '{TextSpeed.Text.ToLower()}' and IDMaker = '{id4}' and ID > '{IDProccesCheck}'";
                                 cmd = new SQLiteCommand(query, connection);
                                 CheckIDProcces = Convert.ToInt32(cmd.ExecuteScalar());
                             }
@@ -318,15 +324,15 @@ namespace RecordPeriphelTechniс.BoxWindow
                         }
                         else
                         {
-                            query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text}' and Speed = '{TextSpeed.Text}' and IDMaker = '{id4}' ";
+                            query = $@"SELECT ID FROM Procces WHERE Model = '{TextProccModel.Text.ToLower()}' and Speed = '{TextSpeed.Text.ToLower()}' and IDMaker = '{id4}' ";
                             cmd = new SQLiteCommand(query, connection);
                             IDProcces = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
-                        query = $@"INSERT INTO MaterPlatas ('Model','IDMaker') VALUES ('{TextMatePlatModel.Text}','{id5}');";
+                        query = $@"INSERT INTO MaterPlatas ('Model','IDMaker') VALUES ('{TextMatePlatModel.Text.ToLower()}','{id5}');";
                         cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
-                        query = $@"SELECT count (ID) FROM  MaterPlatas WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}'";
+                        query = $@"SELECT count (ID) FROM  MaterPlatas WHERE Model = '{TextMatePlatModel.Text.ToLower()}' and IDMaker = '{id5}'";
                         cmd = new SQLiteCommand(query, connection);
                         int CheckIDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
                         int IDMaterPlatCheck = 0;
@@ -334,10 +340,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             while (CheckIDMaterPlat >= 1)
                             {
-                                query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}' ";
+                                query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text.ToLower()}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDMaterPlatCheck = Convert.ToInt32(cmd.ExecuteScalar());
-                                query = $@"SELECT count (ID) FROM  MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}'";
+                                query = $@"SELECT count (ID) FROM  MaterPlatas  WHERE Model = '{TextMatePlatModel.Text.ToLower()}' and IDMaker = '{id5}' and ID > '{IDMaterPlatCheck}'";
                                 cmd = new SQLiteCommand(query, connection);
                                 CheckIDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
                             }
@@ -345,15 +351,15 @@ namespace RecordPeriphelTechniс.BoxWindow
                         }
                         else
                         {
-                            query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text}' and IDMaker = '{id5}' ";
+                            query = $@"SELECT ID FROM MaterPlatas  WHERE Model = '{TextMatePlatModel.Text.ToLower()}' and IDMaker = '{id5}' ";
                             cmd = new SQLiteCommand(query, connection);
                             IDMaterPlat = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
-                        query = $@"INSERT INTO VideoCards ('Model','VVideoMemory','IDMaker') VALUES ('{TextVideoModel.Text}','{TextVideoMemory.Text}','{id6}');";
+                        query = $@"INSERT INTO VideoCards ('Model','VVideoMemory','IDMaker') VALUES ('{TextVideoModel.Text.ToLower()}','{TextVideoMemory.Text.ToLower()}','{id6}');";
                         cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
-                        query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}'";
+                        query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text.ToLower()}' and VVideoMemory = '{TextVideoMemory.Text.ToLower()}' and IDMaker = '{id6}'";
                         cmd = new SQLiteCommand(query, connection);
                         int CheckIDVideCards = Convert.ToInt32(cmd.ExecuteScalar());
                         int IDVideoCardsCheck = 0;
@@ -361,10 +367,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             while (CheckIDVideCards >= 1)
                             {
-                                query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}' ";
+                                query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text.ToLower()}' and VVideoMemory = '{TextVideoMemory.Text.ToLower()}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDVideoCardsCheck = Convert.ToInt32(cmd.ExecuteScalar());
-                                query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}'";
+                                query = $@"SELECT count (ID) FROM  VideoCards  WHERE Model = '{TextVideoModel.Text.ToLower()}' and VVideoMemory = '{TextVideoMemory.Text.ToLower()}' and IDMaker = '{id6}' and ID > '{IDVideoCardsCheck}'";
                                 cmd = new SQLiteCommand(query, connection);
                                 CheckIDVideCards = Convert.ToInt32(cmd.ExecuteScalar());
                             }
@@ -372,15 +378,15 @@ namespace RecordPeriphelTechniс.BoxWindow
                         }
                         else
                         {
-                            query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text}' and VVideoMemory = '{TextVideoMemory.Text}' and IDMaker = '{id6}' ";
+                            query = $@"SELECT ID FROM VideoCards  WHERE Model = '{TextVideoModel.Text.ToLower()}' and VVideoMemory = '{TextVideoMemory.Text.ToLower()}' and IDMaker = '{id6}' ";
                             cmd = new SQLiteCommand(query, connection);
                             IDVideoCard = Convert.ToInt32(cmd.ExecuteScalar());
                         }
 
-                        query = $@"INSERT INTO RAMs  ('Model1','Vmemory1','TypeMemory1','Maker1') VALUES ('{TextRAMModel1.Text}','{TextVmemory1.Text}','{TextTypeMemory1.Text}','{TextMaker1.Text}');";
+                        query = $@"INSERT INTO RAMs  ('Model1','Vmemory1','TypeMemory1','Maker1') VALUES ('{TextRAMModel1.Text.ToLower()}','{TextVmemory1.Text.ToLower()}','{TextTypeMemory1.Text.ToLower()}','{TextMaker1.Text.ToLower()}');";
                         cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
-                        query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}'";
+                        query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text.ToLower()}' and Vmemory1 = '{TextVmemory1.Text.ToLower()}' and TypeMemory1 = '{TextTypeMemory1.Text.ToLower()}' and Maker1 = '{TextMaker1.Text.ToLower()}'";
                         cmd = new SQLiteCommand(query, connection);
                         int CheckIDRams = Convert.ToInt32(cmd.ExecuteScalar());
                         int IDRamsCheck = 0;
@@ -388,10 +394,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             while (CheckIDRams != 0)
                             {
-                                query = $@"SELECT ID FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}' and ID > '{IDRamsCheck}' ";
+                                query = $@"SELECT ID FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text.ToLower()}' and Vmemory1 = '{TextVmemory1.Text.ToLower()}' and TypeMemory1 = '{TextTypeMemory1.Text.ToLower()}' and Maker1 = '{TextMaker1.Text.ToLower()}' and ID > '{IDRamsCheck}' ";
                                 cmd = new SQLiteCommand(query, connection);
                                 IDRamsCheck = Convert.ToInt32(cmd.ExecuteScalar());
-                                query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}' and ID > '{IDRamsCheck}'";
+                                query = $@"SELECT count (ID) FROM  RAMs WHERE Model1 = '{TextRAMModel1.Text.ToLower()}' and Vmemory1 = '{TextVmemory1.Text.ToLower()}' and TypeMemory1 = '{TextTypeMemory1.Text.ToLower()}' and Maker1 = '{TextMaker1.Text.ToLower()}' and ID > '{IDRamsCheck}'";
                                 cmd = new SQLiteCommand(query, connection);
                                 CheckIDRams = Convert.ToInt32(cmd.ExecuteScalar());
                             }
@@ -399,7 +405,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         }
                         else
                         {
-                            query = $@"SELECT ID FROM RAMs WHERE Model1 = '{TextRAMModel1.Text}' and Vmemory1 = '{TextVmemory1.Text}' and TypeMemory1 = '{TextTypeMemory1.Text}' and Maker1 = '{TextMaker1.Text}'";
+                            query = $@"SELECT ID FROM RAMs WHERE Model1 = '{TextRAMModel1.Text.ToLower()}' and Vmemory1 = '{TextVmemory1.Text.ToLower()}' and TypeMemory1 = '{TextTypeMemory1.Text.ToLower()}' and Maker1 = '{TextMaker1.Text.ToLower()}'";
                             cmd = new SQLiteCommand(query, connection);
                             IDRams = Convert.ToInt32(cmd.ExecuteScalar());
                         }
@@ -466,7 +472,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
             {
                 MessageBox.Show("Все пусто");
-                string query1 = $@"UPDATE RAMs SET  Model2='Нет', Vmemory2='Нет',TypeMemory2='Нет',Maker2='Нет' WHERE ID='{IDRams}'";               
+                string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRams}'";               
                 TextRamInfo2 = "";
             }
             else
@@ -497,7 +503,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
             {
                 //  MessageBox.Show("Все пусто");
-                string query1 = $@"UPDATE RAMs SET  Model3='Нет', Vmemory3='Нет',TypeMemory3='Нет',Maker3='Нет' WHERE ID='{IDRams}'";               
+                string query1 = $@"UPDATE RAMs SET  Model3='нет', Vmemory3='нет',TypeMemory3='нет',Maker3='нет' WHERE ID='{IDRams}'";               
                 TextRamInfo3 = "";
             }
             else
@@ -605,14 +611,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                     if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
                     {
                        // MessageBox.Show("заполнено все2");
-                        string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text}', Vmemory2='{TextVmemory2.Text}',TypeMemory2='{TextTypeMemory2.Text}',Maker2='{TextMaker2.Text}' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text.ToLower()}', Vmemory2='{TextVmemory2.Text.ToLower()}',TypeMemory2='{TextTypeMemory2.Text.ToLower()}',Maker2='{TextMaker2.Text.ToLower()}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
                     }                    
                     else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
                     {
                        // MessageBox.Show("Все пусто");
-                        string query1 = $@"UPDATE RAMs SET  Model2='Нет', Vmemory2='Нет',TypeMemory2='Нет',Maker2='Нет' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
 
@@ -620,7 +626,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
                     {
                         //MessageBox.Show("заполнено все3");
-                        string query1 = $@"UPDATE RAMs SET Model3 ='{TextRAMModel3.Text}', Vmemory3='{TextVmemory3.Text}',TypeMemory3='{TextTypeMemory3.Text}',Maker3='{TextMaker3.Text}' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET Model3 ='{TextRAMModel3.Text.ToLower()}', Vmemory3='{TextVmemory3.Text.ToLower()}',TypeMemory3='{TextTypeMemory3.Text.ToLower()}',Maker3='{TextMaker3.Text.ToLower()}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
 
@@ -628,7 +634,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
-                        string query1 = $@"UPDATE RAMs SET  Model3='Нет', Vmemory3='Нет',TypeMemory3='Нет',Maker3='Нет' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET  Model3='нет', Vmemory3='нет',TypeMemory3='нет',Maker3='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
                  
@@ -636,7 +642,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     if (TextRAMModel4.Text != "" && TextVmemory4.Text != "" && TextTypeMemory4.Text != "" && TextMaker4.Text != "")
                     {
                         //MessageBox.Show("заполнено все4");
-                        string query1 = $@"UPDATE RAMs SET Model4='{TextRAMModel4.Text}', Vmemory4='{TextVmemory4.Text}',TypeMemory4='{TextTypeMemory4.Text}',Maker4='{TextMaker4.Text}' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET Model4='{TextRAMModel4.Text.ToLower()}', Vmemory4='{TextVmemory4.Text.ToLower()}',TypeMemory4='{TextTypeMemory4.Text.ToLower()}',Maker4='{TextMaker4.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
                       
@@ -644,7 +650,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     else if (TextRAMModel4.Text == "" && (TextVmemory4.Text == "" && TextTypeMemory4.Text == "" && TextMaker4.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
-                        string query1 = $@"UPDATE RAMs SET  Model4='Нет', Vmemory4='Нет',TypeMemory4='Нет',Maker4='Нет' WHERE ID='{IDRams}'";
+                        string query1 = $@"UPDATE RAMs SET  Model4='нет', Vmemory4='нет',TypeMemory4='нет',Maker4='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();                       
                     }                   
@@ -687,7 +693,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     string query = $@"UPDATE MenuPerTech SET IDComponets ='{IDComponets}' WHERE ID ='{IDMenuPerTech}' ";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Данные добавлены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Устройство добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)

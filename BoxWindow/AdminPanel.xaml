@@ -75,40 +75,16 @@
 
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
             <DockPanel  LastChildFill="True">
-                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2"  />
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2" TextChanged="TxtSearch_TextChanged"  />
 
                 <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
-                    <TextBlock>Организация</TextBlock>
-                    <TextBlock>Кабинет</TextBlock>
-                    <TextBlock>Номер</TextBlock>
-                    <TextBlock>Дата начала</TextBlock>
-                    <TextBlock>Дата окончания</TextBlock>
+                    <TextBlock>ID</TextBlock>
+                    <TextBlock>Логин</TextBlock>
+                    <TextBlock>Фамилия</TextBlock>
+                    <TextBlock>Имя</TextBlock>
+                    <TextBlock>Отчество</TextBlock>
+                    <TextBlock>Дата регистрации</TextBlock>
                     <TextBlock>Статус</TextBlock>
-                    <TextBlock>Работоспособность</TextBlock>
-                    <TextBlock>Коментарий</TextBlock>
-                    <TextBlock>Модель процессора</TextBlock>
-                    <TextBlock>Производитель процессора</TextBlock>
-                    <TextBlock>Модель материнской платы</TextBlock>
-                    <TextBlock>Производитель материнской платы</TextBlock>
-                    <TextBlock>Модель видеокарты</TextBlock>
-                    <TextBlock>Объем памяти видеокарты</TextBlock>
-                    <TextBlock>Производитель видеокарты</TextBlock>
-                    <TextBlock>Модель RAM1</TextBlock>
-                    <TextBlock>Объем RAM1</TextBlock>
-                    <TextBlock>Тип памяти RAM1</TextBlock>
-                    <TextBlock>Производитель RAM1</TextBlock>
-                    <TextBlock>Модель RAM2</TextBlock>
-                    <TextBlock>Объем RAM2</TextBlock>
-                    <TextBlock>Тип памяти RAM2</TextBlock>
-                    <TextBlock>Производитель RAM2</TextBlock>
-                    <TextBlock>Модель RAM3</TextBlock>
-                    <TextBlock>Объем RAM3</TextBlock>
-                    <TextBlock>Тип памяти RAM3</TextBlock>
-                    <TextBlock>Производитель RAM3</TextBlock>
-                    <TextBlock>Модель RAM4</TextBlock>
-                    <TextBlock>Объем RAM4</TextBlock>
-                    <TextBlock>Тип памяти RAM4</TextBlock>
-                    <TextBlock>Производитель RAM4</TextBlock>
                 </ComboBox>
             </DockPanel>
         </StackPanel>

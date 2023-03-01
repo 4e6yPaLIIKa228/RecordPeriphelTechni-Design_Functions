@@ -72,7 +72,7 @@
                         <MenuItem Name="ListTechn" Header="Список устройств" Click="ListTechn_Click" />
                         <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
                     </MenuItem>                   
-                    <MenuItem x:Name="ItemInfoTech" Header="Характеристики" Click="ItemInfoTech_Click" >                       
+                    <MenuItem x:Name="ItemInfoTech" Header="Информация" Click="ItemInfoTech_Click" >                       
                     </MenuItem>
                     <MenuItem Header="Отчет" >
                         <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" ></MenuItem>
@@ -90,14 +90,16 @@
 
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
             <DockPanel  LastChildFill="True"> 
-                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2"  PreviewTextInput="TxtSearch_PreviewTextInput" TextChanged="TxtSearch_TextChanged" />
+                <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2" TextChanged="TxtSearch_TextChanged" />
 
                 <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
-                    <TextBlock>Имя</TextBlock>
+                    <TextBlock>ID</TextBlock>
+                    <TextBlock>Тип устройства</TextBlock>
                     <TextBlock>Номер</TextBlock>
                     <TextBlock>Статус</TextBlock>
+                    <TextBlock>Мастер</TextBlock>
                     <TextBlock>Дата обращения</TextBlock>
-                    <TextBlock>Коментарий</TextBlock>                   
+                    <TextBlock>Коментарий</TextBlock>
                 </ComboBox>
             </DockPanel>
         </StackPanel>
@@ -113,7 +115,7 @@
         </Grid>
 
         <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="5,0,5,0" >
-            <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="ListApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="ListApplications_MouseDoubleClick" >
+            <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="DataGridApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="ListApplications_MouseDoubleClick" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
                     <DataGridTextColumn Header="Тип устройства"  FontSize="20" Width="150"  Binding="{Binding NameType}"/>

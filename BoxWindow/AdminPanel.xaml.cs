@@ -166,5 +166,104 @@ namespace RecordPeriphelTechniс.BoxWindow
             this.Close();
             addtech.ShowDialog();
         }
+
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchInfo(sender, e);
+        }
+        public void SearchInfo(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    connection.Open();
+                    string DBSearch = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
+                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID";
+                    String combtext = CombSearchInfo.Text;
+                    if (combtext == "ID")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch} WHERE  Users.ID like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Логин")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE Users.Login like '%{TxtSearch.Text.ToLower()}%' or Users.Login like '%{TxtSearch.Text.ToUpper()}%' or Users.Login like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Фамилия")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE Users.Surname like '%{TxtSearch.Text.ToLower()}%' or Users.Surname like '%{TxtSearch.Text.ToUpper()}%' or Users.Surname like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Имя")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE Users.Name like '%{TxtSearch.Text.ToLower()}%' or Users.Name like '%{TxtSearch.Text.ToUpper()}%' or Users.Name like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Отчество")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE Users.MiddleName like '%{TxtSearch.Text.ToLower()}%' or Users.MiddleName like '%{TxtSearch.Text.ToUpper()}%' or Users.MiddleName like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Дата регистрации")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE Users.DataRegist like '%{TxtSearch.Text.ToLower()}%' or Users.DataRegist like '%{TxtSearch.Text.ToUpper()}%' or Users.MiddleName like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Статус")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE StatusUsers.StatusUser like '%{TxtSearch.Text.ToLower()}%' or StatusUsers.StatusUser like '%{TxtSearch.Text.ToUpper()}%' or StatusUsers.StatusUser like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

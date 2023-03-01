@@ -47,7 +47,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     DataTable DT = new DataTable("RepairDevice");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
                     SDA.Fill(DT);
-                    ListApplications.ItemsSource = DT.DefaultView;
+                    DataGridApplications.ItemsSource = DT.DefaultView;
                     cmd.ExecuteNonQuery();                  
                     connection.Close();
                 }
@@ -109,14 +109,14 @@ namespace RecordPeriphelTechniс.BoxWindow
             Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
             Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
 
-            for (int j = 0; j < ListApplications.Columns.Count; j++)
+            for (int j = 0; j < DataGridApplications.Columns.Count; j++)
             {
                 try
                 {
                     Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
                     sheet1.Cells[1, j + 1].Font.Bold = true;
                     sheet1.Columns[j + 1].ColumnWidth = 20;
-                    myRange.Value2 = ListApplications.Columns[j].Header;
+                    myRange.Value2 = DataGridApplications.Columns[j].Header;
                 }
                 catch (Exception ex)
                 {
@@ -125,11 +125,11 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
 
 
-            for (int i = 0; i < ListApplications.Columns.Count; i++)
+            for (int i = 0; i < DataGridApplications.Columns.Count; i++)
             {
-                for (int j = 0; j < ListApplications.Items.Count; j++)
+                for (int j = 0; j < DataGridApplications.Items.Count; j++)
                 {
-                    TextBlock b = ListApplications.Columns[i].GetCellContent(ListApplications.Items[j]) as TextBlock;
+                    TextBlock b = DataGridApplications.Columns[i].GetCellContent(DataGridApplications.Items[j]) as TextBlock;
 
                     if (b == null)
                         continue;
@@ -145,14 +145,9 @@ namespace RecordPeriphelTechniс.BoxWindow
             ExportToExcel();
         }
 
-        private void TxtSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
-        }
-
         private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            SearchInfo(sender, e);
         }
 
         private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
@@ -165,12 +160,118 @@ namespace RecordPeriphelTechniс.BoxWindow
             Eddit_InforPcTex();
         }
 
+        public void SearchInfo(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
+                    connection.Open();
+                    string DBSearch = $@"SELECT RepairDevice.ID, RepairDevice.IDMaster, RepairDevice.IDDevice,MenuPerTech.Name as NameDevice, MenuPerTech.IDTypeTech, TypeTechs.NameType as NameType, MenuPerTech.Number as NumberDevice, StatusApplications.NameStatus as Status , 
+                    Users.Surname as Surname, Users.Name as Name, Users.MiddleName as MiddleName,RepairDevice.DateAppeals, RepairDevice.Comment FROM RepairDevice
+					LEFT JOIN MenuPerTech on  RepairDevice.IDDevice = MenuPerTech.ID
+					Left Join TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
+                    Left JOIN StatusApplications on RepairDevice.IDStatus  =  StatusApplications.ID
+                    Left JOIN Users on RepairDevice.IDMaster = Users.ID";
+                    String combtext = CombSearchInfo.Text;
+                    if (combtext == "ID")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}   WHERE RepairDevice.ID like '%{TxtSearch.Text.ToLower()}%' or RepairDevice.ID like '%{TxtSearch.Text.ToUpper()}%' or RepairDevice.ID like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Тип устройства")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE TypeTechs.NameType like '%{TxtSearch.Text.ToLower()}%' or TypeTechs.NameType like '%{TxtSearch.Text.ToUpper()}%' or TypeTechs.NameType like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Номер")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE MenuPerTech.Number like '%{TxtSearch.Text.ToLower()}%' or MenuPerTech.Number like '%{TxtSearch.Text.ToUpper()}%' or MenuPerTech.Number like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Статус")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE StatusApplications.NameStatus like '%{TxtSearch.Text.ToLower()}%' or StatusApplications.NameStatus like '%{TxtSearch.Text.ToUpper()}%' or StatusApplications.NameStatus like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Мастер")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  ??????";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Дата обращения")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE RepairDevice.DateAppeals like '%{TxtSearch.Text.ToLower()}%' or RepairDevice.DateAppeals like '%{TxtSearch.Text.ToUpper()}%' or RepairDevice.DateAppeals like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+                    if (combtext == "Коментарий")
+                    {
+                        DataGridApplications.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE RepairDevice.Comment like '%{TxtSearch.Text.ToLower()}%' or RepairDevice.Comment like '%{TxtSearch.Text.ToUpper()}%' or RepairDevice.Comment like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("RepairDevice");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridApplications.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+
+
+
+
         private void Eddit_InforPcTex()
         {
-
-            if (ListApplications.SelectedIndex != -1)
+            if (DataGridApplications.SelectedIndex != -1)
             {
-                EdditMessageReport tech = new EdditMessageReport((DataRowView)ListApplications.SelectedItem);
+                EdditMessageReport tech = new EdditMessageReport((DataRowView)DataGridApplications.SelectedItem);
                 tech.Owner = this;
                 bool? result = tech.ShowDialog();
                 switch (result)

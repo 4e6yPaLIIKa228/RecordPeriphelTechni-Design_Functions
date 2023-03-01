@@ -84,50 +84,53 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else // поиск устройства
                     {
-                        connection.Open();
-                        string NumberLower = TextNumberTech.Text.ToLower();
-                        string query = $@"SELECT  COUNT(1) FROM MenuPerTech WHERE Number = '{NumberLower}'";
-                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                        int NumberSearch = Convert.ToInt32(cmd.ExecuteScalar());
-                        if (NumberSearch == 1)
+                        if (MessageBox.Show("Вы уверены что хотите отравить заявку на ремонт?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
-                            query = $@"SELECT ID FROM MenuPerTech WHERE Number = '{NumberLower}'";
-                            cmd = new SQLiteCommand(query, connection);
-                            SQLiteDataReader dr = null;                            
-                            string IDTechnic = null;
-                            dr = cmd.ExecuteReader();
-                            while (dr.Read())
+                            connection.Open();
+                            string NumberLower = TextNumberTech.Text.ToLower();
+                            string query = $@"SELECT  COUNT(1) FROM MenuPerTech WHERE Number = '{NumberLower}'";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            int NumberSearch = Convert.ToInt32(cmd.ExecuteScalar());
+                            if (NumberSearch == 1)
                             {
-                                IDTechnic = dr["ID"].ToString();
-                                //  Saver.IDAcc = countID;
-                            }
-                            query = $@"SELECT  COUNT(1) FROM  RepairDevice
+                                query = $@"SELECT ID FROM MenuPerTech WHERE Number = '{NumberLower}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                SQLiteDataReader dr = null;
+                                string IDTechnic = null;
+                                dr = cmd.ExecuteReader();
+                                while (dr.Read())
+                                {
+                                    IDTechnic = dr["ID"].ToString();
+                                    //  Saver.IDAcc = countID;
+                                }
+                                query = $@"SELECT  COUNT(1) FROM  RepairDevice
                                     join StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
                                     where IDDevice =  '{IDTechnic}' and StatusApplications.NameStatus != 'Выполнина'";
-                            cmd = new SQLiteCommand(query, connection);
-                            int IDDeviceSearch = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (IDDeviceSearch == 0)
-                            {//заявка создается
-                                string DateNow =  DateTime.Now.ToString("d/MM/yyyy");
-                                query = $@"INSERT INTO RepairDevice('IDDevice','IDStatus',IDMaster,'DateAppeals','Comment')
+                                cmd = new SQLiteCommand(query, connection);
+                                int IDDeviceSearch = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (IDDeviceSearch == 0)
+                                {//заявка создается
+                                    string DateNow = DateTime.Now.ToString("d/MM/yyyy");
+                                    query = $@"INSERT INTO RepairDevice('IDDevice','IDStatus',IDMaster,'DateAppeals','Comment')
                                 values ('{IDTechnic}','{1}', @IDMaster,'{DateNow}' , '{TextComments.Text}' )";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.Parameters.AddWithValue("@IDMaster", null);
-                                cmd.ExecuteNonQuery();
-                                query = $@"UPDATE MenuPerTech SET IDWorks='{2}' where ID = '{IDTechnic}'";
-                                cmd = new SQLiteCommand(query, connection);
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show("Заявка отправленна!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.Parameters.AddWithValue("@IDMaster", null);
+                                    cmd.ExecuteNonQuery();
+                                    query = $@"UPDATE MenuPerTech SET IDWorks='{2}' where ID = '{IDTechnic}'";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Заявка отправленна!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
 
+                                }
+                                else // уже была отправлена заявка
+                                {
+                                    MessageBox.Show($@"Устройстов с номером: " + NumberLower + " уже была отправлена заявка на ремонт ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
                             }
-                            else // уже была отправлена заявка
+                            else //нет такого устройства
                             {
-                                MessageBox.Show($@"Устройстов с номером: " + NumberLower + " уже была отправлена заявка на ремонт ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                MessageBox.Show($@"Устройстов с номером: " + NumberLower + " не найдено", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                             }
-                        }
-                        else //нте такого устройства
-                        {
-                            MessageBox.Show($@"Устройстов с номером: " + NumberLower + " не найдено", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                 }
@@ -142,6 +145,10 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             MessageReport();
         }
-               
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

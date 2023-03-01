@@ -57,7 +57,8 @@
                         <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>                        
                     </MenuItem>                
                     <MenuItem Header="Отчет" >
-                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" >                            
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" > 
+                            
                         </MenuItem>
                     </MenuItem>
                     <MenuItem Header="Компоненты">                        

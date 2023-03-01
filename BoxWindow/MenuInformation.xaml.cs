@@ -249,7 +249,8 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 if (InforPcTex.SelectedIndex != -1)
                 {
                     int Type = 1;
-                    EditTech tech = new EditTech((DataRowView)InforPcTex.SelectedItem, Type);
+                    string NameType = "Компьютерная техника";
+                    EditTech tech = new EditTech((DataRowView)InforPcTex.SelectedItem, Type, NameType);
                     tech.Owner = this;
                     bool? result = tech.ShowDialog();
                     switch (result)
@@ -272,7 +273,8 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 if (InforPerTech.SelectedIndex != -1)
                 {
                     int Type = 2;
-                    EditTech tech = new EditTech((DataRowView)InforPerTech.SelectedItem, Type);
+                    string NameType = "Переферийное устройство";
+                    EditTech tech = new EditTech((DataRowView)InforPerTech.SelectedItem, Type, NameType);
                     tech.Owner = this;
                     bool? result = tech.ShowDialog();
                     switch (result)
@@ -295,7 +297,8 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                 if (InforDopOboryd.SelectedIndex != -1)
                 {
                     int Type = 3;
-                    EditTech tech = new EditTech((DataRowView)InforDopOboryd.SelectedItem, Type);
+                    string NameType = "Доб. устройство";
+                    EditTech tech = new EditTech((DataRowView)InforDopOboryd.SelectedItem, Type, NameType);
                     tech.Owner = this;
                     bool? result = tech.ShowDialog();
                     switch (result)
@@ -1007,6 +1010,7 @@ WHERE  MenuPerTech.IDTypeTech = '3'
                     Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
                     sheet1.Cells[1, j + 1].Font.Bold = true;
                     sheet1.Columns[j + 1].ColumnWidth = 20;
+                    sheet1.Columns[j + 1].NumberFormat = "@";
                     myRange.Value2 = InforPcTex.Columns[j].Header;
                 }
                 catch (Exception ex)
