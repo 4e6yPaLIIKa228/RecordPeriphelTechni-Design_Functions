@@ -13,34 +13,33 @@
         TextOptions.TextRenderingMode="Auto"
 
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Registration" Height="650" Width="570" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+        Title="Registration" Height="670" Width="570" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="65"/>
             <RowDefinition/>
-            <RowDefinition Height="61"/>
+            <RowDefinition Height="55"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="156" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="162" />
+            <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Orientation="Vertical" Margin="0,0.1,0,0">
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
             <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
-        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="3" Orientation="Vertical" Margin="0,0.1,0,0" VerticalAlignment="Bottom">
-            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
-            </Border>
-        </StackPanel>
-
-        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left"  >
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left" Width="2"  >
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
         </Grid>
-        <Grid Grid.Column="3"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right"  >
+        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
         </Grid>
@@ -48,17 +47,17 @@
 
         <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
-                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
                     <StackPanel Orientation="Horizontal" >
                         <TextBlock FontSize="20" Text="-" ></TextBlock>
                     </StackPanel>
                 </Button>
-                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnSazeMax_Click">
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnSazeMax_Click">
                     <StackPanel Orientation="Horizontal" >
                         <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
                     </StackPanel>
                 </Button>
-                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Width="46" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
                     <StackPanel Orientation="Horizontal" >
                         <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
                     </StackPanel>
@@ -66,49 +65,51 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="10,0,0,0">
-            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="30,0,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,25,0,0" >
                 <TextBlock   FontSize="20" Text="Логин"  Margin="0,0,0,0" VerticalAlignment="Center"   />
-                <TextBlock   FontSize="18" Text=" * "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
-                <TextBox Width="350" FontSize="20" Name="TextBoxLogin" Margin="82,0,0,0"  Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Логин" TextChanged="TextBoxLogin_TextChanged" />
+                <TextBlock   FontSize="18" Text="  "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
+                <TextBox Width="350" FontSize="20" HorizontalAlignment="Right" Name="TextBoxLogin" Margin="82,0,0,0"  Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Логин" TextChanged="TextBoxLogin_TextChanged" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
                 <TextBlock   FontSize="20" VerticalAlignment="Center" Text="Пароль" Margin="0,0,0,0" />
-                <TextBlock   FontSize="18" Text=" * "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
-                <PasswordBox Width="350"  FontSize="20" Name="PassBox" Margin="69,0,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Пароль" PasswordChanged="PassBox_PasswordChanged" />
+                <TextBlock   FontSize="18" Text="  "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
+                <PasswordBox Width="350"  FontSize="20" Name="PassBox" HorizontalAlignment="Right" Margin="69,0,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Пароль" PasswordChanged="PassBox_PasswordChanged" />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
                 <TextBlock   FontSize="20" Text="Фамилия"  VerticalAlignment="Center"   Margin="0 0 0 0" />
-                <TextBlock   FontSize="18" Text=" * "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
-                <TextBox Name="TextFamili"  VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="53,0,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextFamili_TextChanged"/>
+                <TextBlock   FontSize="18" Text="  "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
+                <TextBox Name="TextFamili"  VerticalAlignment="Top"  HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="53,0,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextFamili_TextChanged"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
                 <TextBlock   FontSize="20" Text="Имя" VerticalAlignment="Center"   Margin="0,0,0,0" HorizontalAlignment="Right" />
-                <TextBlock   FontSize="18" Text=" * "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
-                <TextBox x:Name="TextName"  VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="99,0,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextName_TextChanged"/>
+                <TextBlock   FontSize="18" Text="  "  VerticalAlignment="Center"   Margin="0,0,0,0" Foreground="Red"/>
+                <TextBox x:Name="TextName"  VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="99,0,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextName_TextChanged"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
                 <TextBlock   FontSize="20" Text="Отчество" VerticalAlignment="Center"   Margin="0,0,0,0"/>
-                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="68,0,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="60,0,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Margin="0,25,0,0">
                 <TextBlock   FontSize="20" Text="Доступ" VerticalAlignment="Center"   Margin="0,0,0,0"/>
-                <ComboBox x:Name="CombAllowance" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="93,0,0,0" materialDesign:HintAssist.Hint="Доступ"   Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectionChanged="CombAllowance_SelectionChanged" />
+                <ComboBox x:Name="CombAllowance" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="80,0,0,0" materialDesign:HintAssist.Hint="Доступ"   Style="{StaticResource MaterialDesignOutlinedComboBox}" SelectionChanged="CombAllowance_SelectionChanged" />
             </StackPanel>
-        </StackPanel>
+            </StackPanel>
+        </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Grid.ColumnSpan="2" Width="400" >
+        <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Grid.ColumnSpan="2" Visibility="Hidden" Width="400" >
             <StackPanel Orientation="Horizontal">
                 <TextBlock   FontSize="45" Text=" * "  VerticalAlignment="Stretch"   Margin="0,8,0,0" Foreground="Red"/>
                 <TextBlock   FontSize="20" Text=" - поля, обязательные для заполнения "  VerticalAlignment="Center"   Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Button Name="InHome" Height="30" Width="150" Content="Назад" VerticalAlignment="Top" Margin="10" Click="InHome_Click"/>
-                <Button Name="AddUser" Height="30" Width="150" Content="Добавить" VerticalAlignment="Top" Margin="10" Click="AddUser_Click"/>                
+        <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"    >
+            <StackPanel Orientation="Horizontal">
+                <Button Name="InHome" Height="40" Width="120" Margin="025,0,25,0"  Content="Назад"   Click="InHome_Click"/>
+                <Button Name="AddUser" Height="40" Width="120" Margin="0,0,25,0" Content="Добавить"   Click="AddUser_Click"/>
             </StackPanel>
         </Grid>
 

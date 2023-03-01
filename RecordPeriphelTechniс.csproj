@@ -102,6 +102,9 @@
     <Compile Include="BoxWindow\EdditMessageReport.xaml.cs">
       <DependentUpon>EdditMessageReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BoxWindow\EdditUsers.xaml.cs">
+      <DependentUpon>EdditUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BoxWindow\MasterPanel.xaml.cs">
       <DependentUpon>MasterPanel.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BoxWindow\EdditMessageReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BoxWindow\EdditUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

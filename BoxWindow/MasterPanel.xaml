@@ -115,6 +115,7 @@
         </Grid>
 
         <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="5,0,5,0" >
+          <ScrollViewer >
             <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="DataGridApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="ListApplications_MouseDoubleClick" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
@@ -135,6 +136,7 @@
                     <DataGridTextColumn Header="Коментрарий" FontSize="20"  Binding="{Binding Comment}"/>
                 </DataGrid.Columns>
             </DataGrid>
+         </ScrollViewer >
         </Grid>
 
 

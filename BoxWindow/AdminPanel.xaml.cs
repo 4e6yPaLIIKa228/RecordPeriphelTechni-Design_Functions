@@ -28,19 +28,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             InitializeComponent();
             LoadDB_Users();
-        }
-
-        private void AddUsers_Click(object sender, RoutedEventArgs e)
-        {
-            Registration addtech = new Registration();
-            bool? result = addtech.ShowDialog();
-            switch (result)
-            {
-                default:
-                    LoadDB_Users();
-                    break;
-            }
-        }
+        }        
 
         public void LoadDB_Users()
         {
@@ -110,15 +98,10 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void ListService_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void ListUsers_Click(object sender, RoutedEventArgs e)
-        {
-            MenuInformation addtech = new MenuInformation();
+            MasterPanel addtech = new MasterPanel();
             this.Close();
             addtech.ShowDialog();
-        }
+        }              
 
         private void AddTec_Click(object sender, RoutedEventArgs e)
         {
@@ -158,6 +141,11 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void CombSearchInfo_DropDownClosed(object sender, EventArgs e)
         {
 
+        }
+
+        private void ExsportExcel_Click(object sender, RoutedEventArgs e)
+        {
+            ExportToExcel();
         }
 
         private void ListTechnic_Click(object sender, RoutedEventArgs e)
@@ -263,6 +251,58 @@ namespace RecordPeriphelTechniс.BoxWindow
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ExportToExcel()
+        {
+            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            excel.Visible = true;
+            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Microsoft.Office.Interop.Excel.Worksheet sheet1 = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < DataGridUsers.Columns.Count; j++)
+            {
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 20;
+                    sheet1.Columns[j + 1].NumberFormat = "@";
+                    myRange.Value2 = DataGridUsers.Columns[j].Header;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
+            for (int i = 0; i < DataGridUsers.Columns.Count; i++)
+            {
+                for (int j = 0; j < DataGridUsers.Items.Count; j++)
+                {
+                    TextBlock b = DataGridUsers.Columns[i].GetCellContent(DataGridUsers.Items[j]) as TextBlock;
+
+                    if (b == null)
+                        continue;
+
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+
+                }
+            }
+        }
+
+        private void AddUsers_Click(object sender, RoutedEventArgs e)
+        {
+            Registration addtech = new Registration();
+            bool? result = addtech.ShowDialog();
+            switch (result)
+            {
+                default:
+                    LoadDB_Users();
+                    break;
             }
         }
     }

@@ -116,6 +116,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[1, j + 1];
                     sheet1.Cells[1, j + 1].Font.Bold = true;
                     sheet1.Columns[j + 1].ColumnWidth = 20;
+                    sheet1.Columns[j + 1].NumberFormat = "@";
                     myRange.Value2 = DataGridApplications.Columns[j].Header;
                 }
                 catch (Exception ex)
@@ -251,8 +252,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         DataGridApplications.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
-
-
                 }
             }
             catch (Exception ex)
@@ -260,12 +259,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
-
-
-
 
         private void Eddit_InforPcTex()
         {

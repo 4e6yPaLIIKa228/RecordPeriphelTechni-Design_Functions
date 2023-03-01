@@ -34,7 +34,6 @@
             <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
-
         <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left" Width="2"  >
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
