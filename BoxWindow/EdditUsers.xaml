@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"
        
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="EdditUsers" Height="500" Width="800">
+        Title="EdditUsers" Height="500" Width="800" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="46"/>
@@ -30,8 +30,9 @@
         <Grid HorizontalAlignment="Center" Grid.Row="1"  Grid.RowSpan="2" >
             <StackPanel Orientation="Vertical">
                 <TextBox Width="350" FontSize="20" HorizontalAlignment="Right" Name="TextBoxLogin" Margin="0,15,0,0"  Style="{StaticResource MaterialDesignOutlinedTextBox}" materialDesign:HintAssist.Hint="Логин"  />
-                <PasswordBox Width="350"  FontSize="20" Name="PassBox" HorizontalAlignment="Right" Margin="0,15,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="пароль"  />
+                <PasswordBox Width="350"  FontSize="20" Name="PassBox" HorizontalAlignment="Right" Margin="0,15,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Пароль"  />
                 <ComboBox x:Name="CombAllowance" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Доступ"   Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                <ComboBox x:Name="CombStatus" VerticalAlignment="Top" HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Статус"   Style="{StaticResource MaterialDesignOutlinedComboBox}" />
             </StackPanel>
         </Grid>
         <Grid HorizontalAlignment="Left" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="14,0,0,0"  >
@@ -48,7 +49,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button Name="InHome" Height="40" Width="120" Margin="25,0,25,0"  Content="Назад"/>
                 <Button Name="DellUser" Height="40" Width="120" Margin="0,0,25,0" Content="Удалить"/>
-                <Button Name="AddUser" Height="40" Width="120" Margin="0,0,25,0" Content="Изменить"/>
+                <Button x:Name="EdditUser" Height="40" Width="120" Margin="0,0,25,0" Content="Изменить" Click="EdditUser_Click"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">

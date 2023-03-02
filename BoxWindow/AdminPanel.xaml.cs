@@ -28,17 +28,18 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             InitializeComponent();
             LoadDB_Users();
-        }        
+        }
 
         public void LoadDB_Users()
         {
             try
             {
-               using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
-                {               
+                using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                {
                     connection.Open();
-                    string query = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
-                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID";
+                    string query = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser, AllowanceUsers.Allowance  FROM Users
+                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID
+								JOIN AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     DataTable DT = new DataTable("MenuPerTech");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -47,7 +48,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     cmd.ExecuteNonQuery();
                     connection.Close();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -61,7 +62,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             MenuInformation addtech = new MenuInformation();
             this.Close();
             addtech.ShowDialog();
-           
+
         }
 
         private void BtnResize_Click(object sender, RoutedEventArgs e)
@@ -101,7 +102,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             MasterPanel addtech = new MasterPanel();
             this.Close();
             addtech.ShowDialog();
-        }              
+        }
 
         private void AddTec_Click(object sender, RoutedEventArgs e)
         {
@@ -115,7 +116,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void EdiitTec_Click(object sender, RoutedEventArgs e)
         {
-
+            Eddit_User();
         }
 
         private void ExcelPc_Click(object sender, RoutedEventArgs e)
@@ -166,8 +167,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    string DBSearch = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser FROM Users
-                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID";
+                    string DBSearch = $@"SELECT  Users.ID,Users.Login, Users.Password,Users.Surname,Users.Name,Users.MiddleName,Users.DataRegist, StatusUsers.StatusUser, AllowanceUsers.Allowance  FROM Users
+                                JOIN StatusUsers on Users.IDStatus = StatusUsers.ID
+								JOIN AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID";
                     String combtext = CombSearchInfo.Text;
                     if (combtext == "ID")
                     {
@@ -305,5 +307,33 @@ namespace RecordPeriphelTechniс.BoxWindow
                     break;
             }
         }
+
+
+
+        private void DataGridUsers_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Eddit_User();
+        }
+        private void Eddit_User()
+        {
+            if (DataGridUsers.SelectedIndex != -1)
+            {
+                EdditUsers tech = new EdditUsers((DataRowView)DataGridUsers.SelectedItem);
+                tech.Owner = this;
+                bool? result = tech.ShowDialog();
+                switch (result)
+                {
+                    default:
+                        LoadDB_Users();
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите строку с данными,чтобы ее изменить");
+            }
+
+        }
+
     }
 }

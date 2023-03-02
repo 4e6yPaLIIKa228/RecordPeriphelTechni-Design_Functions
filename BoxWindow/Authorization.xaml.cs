@@ -81,7 +81,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     IDAllowanceString = dr["Allowance"].ToString();
                                     //  Saver.IDAcc = countID;
                                 }
-                                if (IDAllowanceString == "Администратор")
+                                if (IDAllowanceString == "Администратор" || IDAllowanceString == "администратор")
                                 {
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                                     Saver.IDAllowanceString = IDAllowanceString;
@@ -90,7 +90,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     admpnl.ShowDialog();
                                     connection.Close();
                                 }
-                                else if (IDAllowanceString == "Пользователь")
+                                else if (IDAllowanceString == "Пользователь" || IDAllowanceString == "пользователь")
                                 {
                                     Saver.Visitor = 0;
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -100,7 +100,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     menuinfor.ShowDialog();
                                     connection.Close();
                                 }
-                                else if (IDAllowanceString == "Мастер")
+                                else if (IDAllowanceString == "Мастер" || IDAllowanceString == "пользователь")
                                 {
                                     Saver.Visitor = 0;
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
