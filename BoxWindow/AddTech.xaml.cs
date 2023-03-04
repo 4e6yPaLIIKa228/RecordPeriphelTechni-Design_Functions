@@ -25,7 +25,7 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class AddTech : Window
     {
-        int IDMenuPerTech = 0, IDTypeTech = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0;
+        int IDMenuPerTech = 0, IDTypeTech = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0, IDDisk=0,IDSoundCard=0,IDBlockPower=0,IDCorpus=0;
         string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
         public AddTech()
         {
@@ -46,44 +46,51 @@ namespace RecordPeriphelTechniс.BoxWindow
                     string query6 = $@"SELECT * FROM MakersProcc"; // 
                     string query7 = $@"SELECT * FROM MakersMaterPlat"; // 
                     string query8 = $@"SELECT * FROM MakersVideoCard"; // 
+                    string query9 = $@"SELECT * FROM DiskType"; // 
+                    string query10 = $@"SELECT * FROM SoundCardsType"; // 
+
 
                     //----------------------------------------------
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                     SQLiteCommand cmd2 = new SQLiteCommand(query2, connection);
-                    //SQLiteCommand cmd3 = new SQLiteCommand(query3, connection);
                     SQLiteCommand cmd4 = new SQLiteCommand(query4, connection);
                     SQLiteCommand cmd5 = new SQLiteCommand(query5, connection);
                     SQLiteCommand cmd6 = new SQLiteCommand(query6, connection);
                     SQLiteCommand cmd7 = new SQLiteCommand(query7, connection);
                     SQLiteCommand cmd8 = new SQLiteCommand(query8, connection);
+                    SQLiteCommand cmd9 = new SQLiteCommand(query9, connection);
+                    SQLiteCommand cmd10 = new SQLiteCommand(query10, connection);
 
                     //----------------------------------------------
                     SQLiteDataAdapter SDA1 = new SQLiteDataAdapter(cmd1);
                     SQLiteDataAdapter SDA2 = new SQLiteDataAdapter(cmd2);
-                    //SQLiteDataAdapter SDA3 = new SQLiteDataAdapter(cmd3);
                     SQLiteDataAdapter SDA4 = new SQLiteDataAdapter(cmd4);
                     SQLiteDataAdapter SDA5 = new SQLiteDataAdapter(cmd5);
                     SQLiteDataAdapter SDA6 = new SQLiteDataAdapter(cmd6);
                     SQLiteDataAdapter SDA7 = new SQLiteDataAdapter(cmd7);
                     SQLiteDataAdapter SDA8 = new SQLiteDataAdapter(cmd8);
+                    SQLiteDataAdapter SDA9 = new SQLiteDataAdapter(cmd9);
+                    SQLiteDataAdapter SDA10 = new SQLiteDataAdapter(cmd10);
                     //----------------------------------------------
                     DataTable dt1 = new DataTable("TypeTechs");
                     DataTable dt2 = new DataTable("Organiz");
-                    // DataTable dt3 = new DataTable("NumberKabs");
                     DataTable dt4 = new DataTable("Status");
                     DataTable dt5 = new DataTable("Works");
                     DataTable dt6 = new DataTable("MakersProcc");
                     DataTable dt7 = new DataTable("MakersMaterPlat");
                     DataTable dt8 = new DataTable("MakersVideoCard");
+                    DataTable dt9 = new DataTable("DiskType");
+                    DataTable dt10 = new DataTable("SoundCardsType");
                     //----------------------------------------------
                     SDA1.Fill(dt1);
                     SDA2.Fill(dt2);
-                    //SDA3.Fill(dt3);
                     SDA4.Fill(dt4);
                     SDA5.Fill(dt5);
                     SDA6.Fill(dt6);
                     SDA7.Fill(dt7);
                     SDA8.Fill(dt8);
+                    SDA9.Fill(dt9);
+                    SDA10.Fill(dt10);
                     //----------------------------------------------
                     CombTypeTech.ItemsSource = dt1.DefaultView;
                     CombTypeTech.DisplayMemberPath = "NameType";
@@ -113,6 +120,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                     CombVidieoMaker.ItemsSource = dt8.DefaultView;
                     CombVidieoMaker.DisplayMemberPath = "Name";
                     CombVidieoMaker.SelectedValuePath = "ID";
+                    //----------------------------------------------
+                    CombDiskType.ItemsSource = dt9.DefaultView;
+                    CombDiskType.DisplayMemberPath = "TypeName";
+                    CombDiskType.SelectedValuePath = "ID";
+                    //----------------------------------------------
+                    CombSoundCardVud.ItemsSource = dt10.DefaultView;
+                    CombSoundCardVud.DisplayMemberPath = "TypeName";
+                    CombSoundCardVud.SelectedValuePath = "ID";
                 }
                 catch (Exception ex)
                 {
@@ -160,6 +175,14 @@ namespace RecordPeriphelTechniс.BoxWindow
             SimpleComand.CheckTextBox(TextVideoModel);
             SimpleComand.CheckTextBox(TextVideoMemory);
             SimpleComand.CheckComboBox(CombVidieoMaker);
+            SimpleComand.CheckTextBox(TextDiskModel);
+            SimpleComand.CheckTextBox(TextSizeDisk);
+            SimpleComand.CheckComboBox(CombDiskType);
+            SimpleComand.CheckTextBox(TextSoundCardModel);
+            SimpleComand.CheckComboBox(CombSoundCardVud);
+            SimpleComand.CheckTextBox(TextPowerBlockEnergy);
+            SimpleComand.CheckTextBox(TextPowerBlockName);
+            SimpleComand.CheckTextBox(TextCorpusModel);
         }
 
         public void AddOsnovaPerTech()
@@ -285,7 +308,10 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) 
                        || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
-                       String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || String.IsNullOrEmpty(CombVidieoMaker.Text))
+                       String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || 
+                       String.IsNullOrEmpty(CombVidieoMaker.Text) || String.IsNullOrEmpty(TextDiskModel.Text) || String.IsNullOrEmpty(TextSizeDisk.Text) || String.IsNullOrEmpty(CombDiskType.Text)
+                       || String.IsNullOrEmpty(TextSoundCardModel.Text) || String.IsNullOrEmpty(CombSoundCardVud.Text) || String.IsNullOrEmpty(TextPowerBlockName.Text) || String.IsNullOrEmpty(TextPowerBlockEnergy.Text)
+                       || String.IsNullOrEmpty(TextCorpusModel.Text))
             {
                 CheckerTextComponets();
                 MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -301,6 +327,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                         bool resultTitl = int.TryParse(CombProccMaker.SelectedValue.ToString(), out int id4);
                         bool resultBrand = int.TryParse(CombMatePlatMaker.SelectedValue.ToString(), out int id5);
                         bool resultModel = int.TryParse(CombVidieoMaker.SelectedValue.ToString(), out int id6);
+                        bool resultDisk = int.TryParse(CombDiskType.SelectedValue.ToString(), out int id7);
+                        bool resultSounCard = int.TryParse(CombSoundCardVud.SelectedValue.ToString(), out int id8);
 
                         string query = $@"INSERT INTO Procces ('Model', 'Speed','IDMaker') VALUES ('{TextProccModel.Text.ToLower()}','{TextSpeed.Text.ToLower()}','{id4}');";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
@@ -409,6 +437,118 @@ namespace RecordPeriphelTechniс.BoxWindow
                             cmd = new SQLiteCommand(query, connection);
                             IDRams = Convert.ToInt32(cmd.ExecuteScalar());
                         }
+
+                        query = $@"INSERT INTO Disks ('Model','Size','IDTypeDisk') VALUES ('{TextDiskModel.Text.ToLower()}','{TextSizeDisk.Text.ToLower()}','{id7}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  Disks  WHERE Model = '{TextDiskModel.Text.ToLower()}' and Size = '{TextSizeDisk.Text.ToLower()}' and IDTypeDisk = '{id7}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDDisk = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDDiskCheck = 0;
+                        if (CheckIDDisk != 0)
+                        {
+                            while (CheckIDDisk >= 1)
+                            {
+                                query = $@"SELECT ID FROM Disks  WHERE Model = '{TextDiskModel.Text.ToLower()}' and Size = '{TextSizeDisk.Text.ToLower()}' and IDTypeDisk = '{id7}' and ID > '{IDDiskCheck}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDDiskCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  Disks  WHERE Model = '{TextDiskModel.Text.ToLower()}' and Size = '{TextSizeDisk.Text.ToLower()}' and IDTypeDisk = '{id7}' and ID > '{IDDiskCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDDisk = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDDisk = IDDiskCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM Disks  WHERE Model = '{TextDiskModel.Text.ToLower()}' and Size = '{TextSizeDisk.Text.ToLower()}' and IDTypeDisk = '{id7}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDDisk = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        query = $@"INSERT INTO SoundCards ('Model','IDTypeCards') VALUES ('{TextSoundCardModel.Text.ToLower()}','{id8}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  SoundCards  WHERE Model = '{TextSoundCardModel.Text.ToLower()}' and IDTypeCards = '{id8}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDSoundCards = Convert.ToInt32(cmd.ExecuteScalar()); 
+                        int IDSoundCardsCheck = 0; 
+                        if (CheckIDSoundCards != 0)
+                        {
+                            while (CheckIDSoundCards >= 1)
+                            {
+                                query = $@"SELECT ID FROM SoundCards  WHERE Model = '{TextSoundCardModel.Text.ToLower()}' and IDTypeCards = '{id8}' and ID > '{IDSoundCardsCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDSoundCardsCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  SoundCards  WHERE Model = '{TextSoundCardModel.Text.ToLower()}' and IDTypeCards = '{id8}' and ID > '{IDSoundCardsCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDSoundCards = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDSoundCard = IDSoundCardsCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM SoundCards  WHERE Model = '{TextSoundCardModel.Text.ToLower()}' and IDTypeCards = '{id8}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDSoundCard = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        query = $@"INSERT INTO PowerBlocks ('Model','Energy') VALUES ('{TextPowerBlockName.Text.ToLower()}','{TextPowerBlockEnergy.Text.ToLower()}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  PowerBlocks  WHERE Model = '{TextPowerBlockName.Text.ToLower()}' and Energy = '{TextPowerBlockEnergy.Text.ToLower()}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDBlockPower = Convert.ToInt32(cmd.ExecuteScalar()); 
+                        int IDBlockPowerCheck = 0; 
+                        if (CheckIDBlockPower != 0)
+                        {
+                            while (CheckIDBlockPower >= 1)
+                            {
+                                query = $@"SELECT ID FROM PowerBlocks  WHERE Model = '{TextPowerBlockName.Text.ToLower()}' and Energy = '{TextPowerBlockEnergy.Text.ToLower()}' and ID > '{IDBlockPowerCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDBlockPowerCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  PowerBlocks  WHERE Model = '{TextPowerBlockName.Text.ToLower()}' and Energy = '{TextPowerBlockEnergy.Text.ToLower()}' and ID > '{IDBlockPowerCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDBlockPower = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDBlockPower = IDBlockPowerCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM PowerBlocks  WHERE Model = '{TextPowerBlockName.Text.ToLower()}' and Energy = '{TextPowerBlockEnergy.Text.ToLower()}'";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDBlockPower = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+                        query = $@"INSERT INTO Corpus ('Model') VALUES ('{TextCorpusModel.Text.ToLower()}');";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"SELECT count (ID) FROM  Corpus  WHERE Model = '{TextCorpusModel.Text.ToLower()}'";
+                        cmd = new SQLiteCommand(query, connection);
+                        int CheckIDCorpus = Convert.ToInt32(cmd.ExecuteScalar()); 
+                        int IDCorpusCheck = 0; 
+                        if (CheckIDCorpus != 0)
+                        {
+                            while (CheckIDCorpus >= 1)
+                            {
+                                query = $@"SELECT ID FROM Corpus  WHERE Model = '{TextCorpusModel.Text.ToLower()}' and ID > '{IDCorpusCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDCorpusCheck = Convert.ToInt32(cmd.ExecuteScalar());
+                                query = $@"SELECT count (ID) FROM  Corpus  WHERE Model = '{TextCorpusModel.Text.ToLower()}' and ID > '{IDCorpusCheck}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                CheckIDCorpus = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
+                            IDCorpus = IDCorpusCheck;
+                        }
+                        else
+                        {
+                            query = $@"SELECT ID FROM PoweBlocks  WHERE Model = '{TextCorpusModel.Text.ToLower()}'";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDCorpus = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+
+
+
+
                         ProverkaPcCompont = 1;
                     }
                 }
@@ -423,37 +563,54 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             //ComboBox cbx = (ComboBox)sender;
             //string s = ((DataRowView)cbx.Items.GetItemAt(cbx.SelectedIndex)).Row.ItemArray[0].ToString();
+            // String a = CombTypeTech.Text;
             String a = CombTypeTech.Text;
+            if (a == "Компьютерная техника" || a == "компьютерная техника")
+            {
+                TextName.Text = "пк";
+                TextName.IsReadOnly = true;
+            }
+            else
+            {
+                TextName.Text = string.Empty;
+                TextName.IsReadOnly = false;
+            }
         }
 
         private void CuctemBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             String a = CombTypeTech.Text;
-            if (a != "Компьютерная техника" && a != "компьютерная техника")
+            if (a == "Компьютерная техника" || a == "компьютерная техника")
             {
-                TextProccModel.IsEnabled= false;
+                
+                TabProcces.IsEnabled = true;
+                TextProccModel.IsEnabled = true;
+                TextSpeed.IsEnabled = true;
+                CombProccMaker.IsEnabled = true;
+                TabItemMaterPlat.IsEnabled = true;
+                TabItemVideoCarta.IsEnabled = true;
+                TabItemRAMS.IsEnabled = true;
+                TabItemDisk.IsEnabled = true;
+                TabItemSoundCard.IsEnabled = true;
+                TabItemPoweBlock.IsEnabled = true;
+                TabItemCorpus.IsEnabled = true;
+
+            }           
+            else
+            {
+                TabProcces.IsSelected = true;
+                TabProcces.IsEnabled = false;
+                TextProccModel.IsEnabled = false;
                 TextSpeed.IsEnabled = false;
                 CombProccMaker.IsEnabled = false;
                 TabItemMaterPlat.IsEnabled = false;
                 TabItemVideoCarta.IsEnabled = false;
                 TabItemRAMS.IsEnabled = false;
-            }else if (a == "")
-            {
-                TextProccModel.IsEnabled = true;
-                TextSpeed.IsEnabled = true;
-                CombProccMaker.IsEnabled = true;
-                TabItemMaterPlat.IsEnabled = true;
-                TabItemVideoCarta.IsEnabled = true;
-                TabItemRAMS.IsEnabled = true;
-            }
-            else
-            {
-                TextProccModel.IsEnabled = true;
-                TextSpeed.IsEnabled = true;
-                CombProccMaker.IsEnabled = true;
-                TabItemMaterPlat.IsEnabled = true;
-                TabItemVideoCarta.IsEnabled = true;
-                TabItemRAMS.IsEnabled = true;
+                TabItemDisk.IsEnabled = false;
+                TabItemSoundCard.IsEnabled = false;
+                TabItemPoweBlock.IsEnabled = false;
+                TabItemCorpus.IsEnabled = false;
+
             }
             
         }
@@ -669,10 +826,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    string query = $@"INSERT INTO Components  ('IDProcces', 'IDMaterPlata','IDRAM','IDVideo') VALUES ('{IDProcces}','{IDMaterPlat}','{IDRams}','{IDVideoCard}') ";
+                    string query = $@"INSERT INTO Components  ('IDProcces', 'IDMaterPlata','IDRAM','IDVideo','IDDisk','IDSoundCard','IDPowerBlock','IDCorpus' ) VALUES ('{IDProcces}','{IDMaterPlat}','{IDRams}','{IDVideoCard}','{IDDisk}','{IDSoundCard}','{IDBlockPower}','{IDCorpus}') ";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
-                    query = $@"SELECT ID FROM Components WHERE IDProcces = '{IDProcces}' and IDMaterPlata = '{IDMaterPlat}' and IDRAM = '{IDRams}' and IDVideo = '{IDVideoCard}'";
+                    query = $@"SELECT ID FROM Components WHERE IDProcces = '{IDProcces}' and IDMaterPlata = '{IDMaterPlat}' and IDRAM = '{IDRams}' and IDVideo = '{IDVideoCard}' and IDDisk = '{IDDisk}' and IDSoundCard = '{IDSoundCard}' and IDPowerBlock = '{IDBlockPower}' and IDCorpus= '{IDCorpus}'";
                     cmd = new SQLiteCommand(query, connection);
                     IDComponets = Convert.ToInt32(cmd.ExecuteScalar());
                 }

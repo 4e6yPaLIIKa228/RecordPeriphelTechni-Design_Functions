@@ -100,7 +100,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     menuinfor.ShowDialog();
                                     connection.Close();
                                 }
-                                else if (IDAllowanceString == "Мастер" || IDAllowanceString == "пользователь")
+                                else if (IDAllowanceString == "Мастер" || IDAllowanceString == "мастер")
                                 {
                                     Saver.Visitor = 0;
                                     MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -277,7 +277,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 Saver.IDAllowanceString = IDAllowanceString;
 
                             }
-                            if (IDAllowanceString == "Администратор")
+                            if (IDAllowanceString == "Администратор" || IDAllowanceString == "администратор")
                             {
                                 Saver.IDAllowanceString = IDAllowanceString;
                                 MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -287,7 +287,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 admpnl.ShowDialog();
                                 connection.Close();
                             }
-                            else if (IDAllowanceString == "Пользователь")
+                            else if (IDAllowanceString == "Пользователь" || IDAllowanceString == "пользователь")
                             {
                                 Saver.Visitor = 0;
                                 Saver.IDAllowanceString = IDAllowanceString;
@@ -298,7 +298,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 menuinfor.ShowDialog();
                                 connection.Close();
                             }
-                            else if (IDAllowanceString == "Мастер")
+                            else if (IDAllowanceString == "Мастер" || IDAllowanceString == "мастер")
                             {
                                 Saver.Visitor = 0;
                                 Saver.IDAllowanceString = IDAllowanceString;
@@ -351,6 +351,37 @@ namespace RecordPeriphelTechniс.BoxWindow
             Saver.IDAllowanceString = "Гость";
             this.Close();
             menuinfor.ShowDialog();
+        }
+        private void BtnResize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void BtnSazeMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Normal)
+            {
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = System.Windows.WindowState.Normal;
+            }
+        }
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

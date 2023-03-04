@@ -14,7 +14,8 @@
        
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="EdditUsers" Height="500" Width="800" AllowsTransparency="True" WindowStartupLocation="CenterScreen"  WindowStyle="None">
-    <Grid>
+    <Grid>       
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="46"/>
             <RowDefinition/>
@@ -26,6 +27,23 @@
             <ColumnDefinition />
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Left" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
 
         <Grid HorizontalAlignment="Center" Grid.Row="1"  Grid.RowSpan="2" >
             <StackPanel Orientation="Vertical">

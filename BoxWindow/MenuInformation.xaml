@@ -21,8 +21,8 @@
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="522" />
-            <ColumnDefinition/>
+            <ColumnDefinition Width="21*" />
+            <ColumnDefinition Width="44*" />
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
@@ -43,7 +43,7 @@
             </Border>
         </Grid>
 
-        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1"  VerticalAlignment="Top" Margin="0,13,0,0"  HorizontalAlignment="Left" >
+        <Grid  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1"  VerticalAlignment="Top" Margin="0,13,0,0"  HorizontalAlignment="Left"  >
             <StackPanel Orientation="Vertical"  VerticalAlignment="Bottom">
                 <Menu  VerticalAlignment="Top" FontFamily="Times New Roman" FontSize="14">
                     <MenuItem Name="ListWind"  Header="Окна"  HorizontalAlignment="Left"  >
@@ -53,16 +53,16 @@
                     <MenuItem Name="MenuData" Header="Данные">
                         <MenuItem x:Name="AddTec" Header="Добавить устройство" Click="AddTec_Click" ></MenuItem>
                         <MenuItem Header="Изменить даныне устроства" Name="EdiitTec" Click="EdiitTec_Click" />
-                        <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>                        
-                    </MenuItem>                
+                        <MenuItem x:Name="ReportMessgae" Header="Отправить заявку" Click="ReportMessgae_Click" ></MenuItem>
+                    </MenuItem>
                     <MenuItem Header="Отчет" >
-                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" > 
-                            
+                        <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" >
+
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Компоненты">                        
-                            <MenuItem x:Name="AddComponet" Header="Добавить компонет(ы)" Click="AddComponet_Click" />
-                            <MenuItem x:Name="DellComponet" Header="Удалить компонет(ы)" Click="DellComponet_Click"  />
+                    <MenuItem Header="Компоненты">
+                        <MenuItem x:Name="AddComponet" Header="Добавить компонет(ы)" Click="AddComponet_Click" />
+                        <MenuItem x:Name="DellComponet" Header="Удалить компонет(ы)" Click="DellComponet_Click"  />
                     </MenuItem>
                     <MenuItem Header="Помощь">
                         <MenuItem Header="Список оборудования" ></MenuItem>
@@ -72,7 +72,7 @@
         </Grid>
 
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
-            <DockPanel  LastChildFill="True">               
+            <DockPanel  LastChildFill="True">
                 <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2" TextChanged="TxtSearch_TextChanged" />
 
                 <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
@@ -109,135 +109,159 @@
                     <TextBlock>Тип памяти RAM4</TextBlock>
                     <TextBlock>Производитель RAM4</TextBlock>
                 </ComboBox>
-            </DockPanel>            
+            </DockPanel>
         </StackPanel>
-        
+
         <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="3" Margin="5,0,5,0">
             <TabControl Name="TabConrlMenuPer" SelectionChanged="TabConrlMenuPer_SelectionChanged">
                 <TabItem x:Name="TabitemPCTech" Header="Компьютерная техника" ContextMenuOpening="TabitemPCTech_ContextMenuOpening">
                     <Grid>
-                        <ScrollViewer >
+                        <ScrollViewer x:Name="ScrollPC" PreviewMouseWheel="ScrollPC_PreviewMouseWheel" VerticalScrollBarVisibility="Hidden">
                             <DataGrid  IsReadOnly="True" ColumnWidth="*" ScrollViewer.CanContentScroll="True"   x:Name="InforPcTex"  CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" MouseDoubleClick="InforPcTex_MouseDoubleClick" Background="White" HorizontalAlignment="Center"  >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
-                                <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
-                                <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
-                                <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= отсутствует}"/>
-                                <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
-                                <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
-                            </DataGrid.Columns>
-                            <DataGrid.RowDetailsTemplate>
-                                <DataTemplate >
-                                    <StackPanel Orientation="Vertical"  Background="White">
-                                        <TextBlock   FontSize="25" Text=" Процессор: " FontWeight="Bold" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=NameProcces}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= SpeedProcces}" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= MakerProcc}" />
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Организация" FontSize="20"  Binding="{Binding NameOrg}"/>
+                                    <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
+                                    <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
+                                    <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
+                                    <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
+                                    <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= отсутствует}"/>
+                                    <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
+                                    <DataGridTextColumn Header="Работа" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate >
+                                        <StackPanel Orientation="Vertical"  Background="White">
+                                            <TextBlock   FontSize="25" Text=" Процессор: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=NameProcces}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= SpeedProcces}" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= MakerProcc}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Материнская плата: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelMatePlat}" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=MakerMaterPlat}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Видеокарта: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelVideos}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=VVideoMemory}" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=MakerVideoCard}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Диск: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelDisk}" />
+                                                <TextBlock   FontSize="25" Text=" Размер: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=SazeDisk}" />
+                                                <TextBlock   FontSize="25" Text=" Тип: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=TypeDisk}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Звукаовая карта: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelSoundCard}" />
+                                                <TextBlock   FontSize="25" Text=" Тип: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelSoundCard}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Блок питания: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelPowerBlocks}" />
+                                                <TextBlock   FontSize="25" Text=" Мощность " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=EnergyPowerBlock}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Оперативная память: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" I " />
+                                                <TextBlock   FontSize="25" Text="   Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Model1}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= V1 }" />
+                                                <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory1}" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Maker1}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" II " />
+                                                <TextBlock   FontSize="25" Name="Name2" Text="  Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Model2}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= V2 }" />
+                                                <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory2}" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Maker2}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" III " />
+                                                <TextBlock   FontSize="25" Name="NameRam3" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Model3}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= V3 }" />
+                                                <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory3 }" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Maker3}" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" IV " />
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Model4}" />
+                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= V4 }" />
+                                                <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory4 }" />
+                                                <TextBlock   FontSize="25" Text=" Производитель: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path= Maker4}" />
+                                            </StackPanel>
+                                            <TextBlock   FontSize="25"   Text=" Корупус: " FontWeight="Bold" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Название: " />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelCorpus}" />
+                                            </StackPanel>
                                         </StackPanel>
-                                        <TextBlock   FontSize="25"   Text=" Материнская плата: " FontWeight="Bold" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=ModelMatePlat}" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=MakerMaterPlat}" />
-                                        </StackPanel>
-                                        <TextBlock   FontSize="25"   Text=" Видеокарта: " FontWeight="Bold" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=ModelVideos}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=VVideoMemory}" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=MakerVideoCard}" />
-                                        </StackPanel>
-                                        <TextBlock   FontSize="25"   Text=" Оперативная память: " FontWeight="Bold" />
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" I " />
-                                            <TextBlock   FontSize="25" Text="   Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Model1}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= V1 }" />
-                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory1}" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker1}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" II " />
-                                            <TextBlock   FontSize="25" Name="Name2" Text="  Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Model2}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= V2 }" />
-                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory2}" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker2}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" III " />
-                                            <TextBlock   FontSize="25" Name="NameRam3" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Model3}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= V3 }" />
-                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory3 }" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker3}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" IV " />
-                                            <TextBlock   FontSize="25" Text=" Название: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Model4}" />
-                                            <TextBlock   FontSize="25" Text=" Скорость: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= V4 }" />
-                                            <TextBlock   FontSize="25" Text=" Тип папяти: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory4 }" />
-                                            <TextBlock   FontSize="25" Text=" Производитель: " />
-                                            <TextBlock   FontSize="25" Text="{Binding Path= Maker4}" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
-                                        </StackPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
 
-                        </DataGrid>
+                            </DataGrid>
                         </ScrollViewer>
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="TabItemPerTech" Header="Перефирийные устройства" >
                     <Grid>
-                        <ScrollViewer>
-                        <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Организация" FontSize="20" Width="150"  Binding="{Binding NameOrg}"/>
-                                <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
-                                <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
-                                <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
-                                <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= Отсутствует}"/>
-                                <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
-                                <DataGridTextColumn Header="Работаспособность" FontSize="20"  Binding="{Binding NameWorks}"/>
-                            </DataGrid.Columns>
-                            <DataGrid.RowDetailsTemplate>
-                                <DataTemplate >
-                                    <StackPanel Orientation="Vertical"  Background="White">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
-                                            <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
+                        <ScrollViewer x:Name="ScrollPerTech" PreviewMouseWheel="ScrollPC_PreviewMouseWheel" VerticalScrollBarVisibility="Hidden">
+                            <DataGrid Grid.Row= "1" Grid.Column="1"  IsReadOnly="True" ColumnWidth="*" x:Name="InforPerTech" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="InforPerTech_MouseDoubleClick" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Организация" FontSize="20" Width="150"  Binding="{Binding NameOrg}"/>
+                                    <DataGridTextColumn Header="Номер" FontSize="20" Width="110"  Binding="{Binding Number}"/>
+                                    <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
+                                    <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
+                                    <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
+                                    <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue= отсутствует}"/>
+                                    <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
+                                    <DataGridTextColumn Header="Работаспособность" FontSize="20"  Binding="{Binding NameWorks}"/>
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate >
+                                        <StackPanel Orientation="Vertical"  Background="White">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock   FontSize="25" Text=" Коментарий: "  FontWeight="Bold" />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=Comments}" />
+                                            </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
-                        </DataGrid>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+                            </DataGrid>
                         </ScrollViewer>
                     </Grid>
                 </TabItem>
@@ -251,7 +275,7 @@
                                 <DataGridTextColumn Header="Кабинет" FontSize="20" Width="100"  Binding="{Binding Kabunet}"/>
                                 <DataGridTextColumn Header="Имя" FontSize="20" Width="110"  Binding="{Binding NameYstr}"/>
                                 <DataGridTextColumn Header="Начало работы" FontSize="20"  Width="150" Binding="{Binding StartWork}"/>
-                                <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue = Отсутствует}"/>
+                                <DataGridTextColumn Header="Окончание работы" FontSize="20"  Width="150" Binding="{Binding EndWork,TargetNullValue = отсутствует}"/>
                                 <DataGridTextColumn Header="Статус" FontSize="20"  Binding="{Binding NameStatus}"/>
                                 <DataGridTextColumn Header="Работаспособность" FontSize="20"  Binding="{Binding NameWorks}"/>
                             </DataGrid.Columns>
@@ -288,6 +312,6 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-        </Grid>        
+        </Grid>
     </Grid>
 </Window>

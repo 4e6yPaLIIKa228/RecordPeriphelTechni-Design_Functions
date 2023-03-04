@@ -25,23 +25,35 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="140" />
             <ColumnDefinition/>
-            <ColumnDefinition Width="115" />
+            <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+            <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="3" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
+            <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
+            </Border>
+        </StackPanel>
+        <Grid Grid.Column="0"  Grid.Row="0"  Grid.RowSpan="4" HorizontalAlignment="Left" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
+        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="4" HorizontalAlignment="Right" Width="2"  >
+            <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
+            </Border>
+        </Grid>
 
         <Grid x:Name="Login_In" Visibility="Hidden" Grid.RowSpan="2" >
             <TextBlock HorizontalAlignment="Left" Height="21.334" Margin="4,0,0,0" TextWrapping="Wrap" Text="ITBankBigFarm" VerticalAlignment="Top" Width="132.667" FontWeight="Bold" FontSize="16" Foreground="#FF2222C5"/>
             <TextBlock HorizontalAlignment="Left" Height="21.334" Margin="0,68.333,0,0" TextWrapping="Wrap" Text="Войдите в свою учетную запись" VerticalAlignment="Top" Width="354.25" FontWeight="Bold" FontSize="16" Foreground="#FF02020C" TextAlignment="Center"/>
             <TextBlock HorizontalAlignment="Left" Height="40" Margin="19.333,103.334,0,0" TextWrapping="Wrap" Text="Войдите в свою учетную запись, чтобы продолжить свою работу" VerticalAlignment="Top" Width="320.917" Foreground="#FF02020C" TextAlignment="Center"/>
-
-
             <TextBlock HorizontalAlignment="Left" Height="19.999" Margin="183.333,312.001,0,0" TextWrapping="Wrap" Text="Забыл пароль?" VerticalAlignment="Top" Width="170"  Background="{x:Null}" TextAlignment="Right" Foreground="#FF151580" />
-
-
-
         </Grid>
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <TextBlock HorizontalAlignment="Left" Margin="4,0,0,0" TextWrapping="Wrap" Text="ITBankBigFarm" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#FF2222C5"/>
+            <TextBlock HorizontalAlignment="Left" Margin="4,0,0,0" TextWrapping="Wrap" Text="Талант - Учета" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="#FF2222C5"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Left"  VerticalAlignment="Center" Height="70" Margin="65,0,0,0" Width="320">
@@ -69,6 +81,26 @@
             <StackPanel Orientation="Vertical">
                 <Button x:Name="BtnAvtoriz" Content="Аворизоваться" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="250"   BorderBrush="White"  FontWeight="Bold" Click="BtnAvtoriz_Click"/>
                 <Button x:Name="BtnAvtorizvisitor" Content="Гость" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="250"   BorderBrush="White"  FontWeight="Bold" Margin="0,5,0,5" Click="BtnAvtorizvisitor_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontSize="20" Text="-" ></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnSazeMax"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnSazeMax_Click">
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=ArrowExpandAll}"  />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnClose"  VerticalAlignment="Top" HorizontalAlignment="Left" Background="Black" Width="46" Cursor="Hand" Margin="1" Click="BtnClose_Click" >
+                    <StackPanel Orientation="Horizontal" >
+                        <ContentControl  Content="{materialDesign:PackIcon Kind=CloseOutline}"  />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>

@@ -25,7 +25,7 @@ namespace RecordPeriphelTechniс.Windows
     public partial class EditTech : Window
     {
         int TypeEdit, ProverkaPC = 0,  /*ProverkaOsnova=0,*/ ProverkaRams = 0;
-        string IDMenuPerPC=null, IDComponets=null, ProccesID=null, MaterPlatID=null, VideCardID=null, IDRAM=null,IDMenuPerTech = null, NameTypeTech = null, TextRamInfo2 = "",OldNumber=null,  TextRamInfo3 = "", TextRamInfo4 = "";
+        string IDMenuPerPC=null, IDComponets=null, ProccesID=null, MaterPlatID=null, VideCardID=null, IDRAM=null, IDDisk = null, IDSoundCard = null, IDBlockPower = null, IDCorpus = null, IDMenuPerTech = null, NameTypeTech = null, OldNumber=null, TextRamInfo2 = "",  TextRamInfo3 = "", TextRamInfo4 = "";
 
         public EditTech(DataRowView drv, int Type,string NameType)
         {
@@ -56,12 +56,31 @@ namespace RecordPeriphelTechniс.Windows
                 MaterPlatID = drv["MaterPlatID"].ToString();
                 VideCardID = drv["VideoCardID"].ToString();
                 IDRAM = drv["IDRAM"].ToString();
+                IDDisk = drv["DiskID"].ToString();
+                IDSoundCard = drv["SoundCardsID"].ToString();
+                IDBlockPower = drv["PowerBlocksID"].ToString();
+                IDCorpus = drv["CorpusID"].ToString();
                 IDMenuPerTech = drv["IDMenuPer"].ToString();
+
                 TextProccModel.Text = drv["NameProcces"].ToString();
                 TextSpeed.Text = drv["SpeedProcces"].ToString();
                 CombProccMaker.Text = drv["MakerProcc"].ToString();
+
                 TextMatePlatModel.Text = drv["ModelMatePlat"].ToString();
                 CombMatePlatMaker.Text = drv["MakerMaterPlat"].ToString();
+
+                TextDiskModel.Text = drv["ModelDisk"].ToString();
+                TextSizeDisk.Text = drv["SizeDisk"].ToString();
+                CombDiskType.Text = drv["TypeDisk"].ToString();
+
+                TextSoundCardModel.Text = drv["ModelSoundCard"].ToString();
+                CombSoundCardVud.Text = drv["TypeSoundCard"].ToString();
+
+                TextPowerBlockName.Text = drv["ModelPowerBlocks"].ToString();
+                TextPowerBlockEnergy.Text = drv["EnergyPowerBlock"].ToString();  
+                
+                TextCorpusModel.Text = drv["ModelCorpus"].ToString();
+
 
                 TextRAMModel1.Text = drv["Model1"].ToString();
                 TextVmemory1.Text = drv["V1"].ToString();
@@ -123,6 +142,14 @@ namespace RecordPeriphelTechniс.Windows
             SimpleComand.CheckTextBox(TextVideoModel);
             SimpleComand.CheckTextBox(TextVideoMemory);
             SimpleComand.CheckComboBox(CombVidieoMaker);
+            SimpleComand.CheckTextBox(TextDiskModel);
+            SimpleComand.CheckTextBox(TextSizeDisk);
+            SimpleComand.CheckComboBox(CombDiskType);
+            SimpleComand.CheckTextBox(TextSoundCardModel);
+            SimpleComand.CheckComboBox(CombSoundCardVud);
+            SimpleComand.CheckTextBox(TextPowerBlockEnergy);
+            SimpleComand.CheckTextBox(TextPowerBlockName);
+            SimpleComand.CheckTextBox(TextCorpusModel);
         }
 
         public void CombBoxDowmload()  //Данные для комбобоксов 
@@ -140,53 +167,55 @@ namespace RecordPeriphelTechniс.Windows
                     string query6 = $@"SELECT * FROM MakersProcc"; // 
                     string query7 = $@"SELECT * FROM MakersMaterPlat"; // 
                     string query8 = $@"SELECT * FROM MakersVideoCard"; // 
+                    string query9 = $@"SELECT * FROM DiskType"; // 
+                    string query10 = $@"SELECT * FROM SoundCardsType"; // 
 
 
                     //----------------------------------------------
                     SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                     SQLiteCommand cmd2 = new SQLiteCommand(query2, connection);
-
                     SQLiteCommand cmd3 = new SQLiteCommand(query1_3, connection);
-
                     SQLiteCommand cmd4 = new SQLiteCommand(query4, connection);
                     SQLiteCommand cmd5 = new SQLiteCommand(query5, connection);
                     SQLiteCommand cmd6 = new SQLiteCommand(query6, connection);
                     SQLiteCommand cmd7 = new SQLiteCommand(query7, connection);
                     SQLiteCommand cmd8 = new SQLiteCommand(query8, connection);
+                    SQLiteCommand cmd9 = new SQLiteCommand(query9, connection);
+                    SQLiteCommand cmd10 = new SQLiteCommand(query10, connection);
 
                     //----------------------------------------------
                     SQLiteDataAdapter SDA1 = new SQLiteDataAdapter(cmd1);
                     SQLiteDataAdapter SDA2 = new SQLiteDataAdapter(cmd2);
-
                     SQLiteDataAdapter SDA3 = new SQLiteDataAdapter(cmd3);
-
                     SQLiteDataAdapter SDA4 = new SQLiteDataAdapter(cmd4);
                     SQLiteDataAdapter SDA5 = new SQLiteDataAdapter(cmd5);
                     SQLiteDataAdapter SDA6 = new SQLiteDataAdapter(cmd6);
                     SQLiteDataAdapter SDA7 = new SQLiteDataAdapter(cmd7);
                     SQLiteDataAdapter SDA8 = new SQLiteDataAdapter(cmd8);
+                    SQLiteDataAdapter SDA9 = new SQLiteDataAdapter(cmd9);
+                    SQLiteDataAdapter SDA10 = new SQLiteDataAdapter(cmd10);
                     //----------------------------------------------
                     DataTable dt1 = new DataTable("TypeTechs");
                     DataTable dt2 = new DataTable("Organiz");
-
                     DataTable dt3 = new DataTable("TypeTechs");
-
                     DataTable dt4 = new DataTable("Status");
                     DataTable dt5 = new DataTable("Works");
                     DataTable dt6 = new DataTable("MakersProcc");
                     DataTable dt7 = new DataTable("MakersMaterPlat");
                     DataTable dt8 = new DataTable("MakersVideoCard");
+                    DataTable dt9 = new DataTable("DiskType");
+                    DataTable dt10 = new DataTable("SoundCardsType");
                     //----------------------------------------------
                     SDA1.Fill(dt1);
                     SDA2.Fill(dt2);
-
                     SDA3.Fill(dt3);
-
                     SDA4.Fill(dt4);
                     SDA5.Fill(dt5);
                     SDA6.Fill(dt6);
                     SDA7.Fill(dt7);
                     SDA8.Fill(dt8);
+                    SDA9.Fill(dt9);
+                    SDA10.Fill(dt10);
                     //----------------------------------------------
                     if (TypeEdit != 1)
                     {
@@ -199,15 +228,11 @@ namespace RecordPeriphelTechniс.Windows
                     CombTypeTech.ItemsSource = dt1.DefaultView;
                     CombTypeTech.DisplayMemberPath = "NameType";
                     CombTypeTech.SelectedValuePath = "ID";
-                    }
-                   
+                    }                   
                     //----------------------------------------------
                     CombIDOrgamniz.ItemsSource = dt2.DefaultView;
                     CombIDOrgamniz.DisplayMemberPath = "NameOrg";
-                    CombIDOrgamniz.SelectedValuePath = "ID";
-                    //----------------------------------------------
-
-
+                    CombIDOrgamniz.SelectedValuePath = "ID"; 
                     //----------------------------------------------
                     CombIDStatus.ItemsSource = dt4.DefaultView;
                     CombIDStatus.DisplayMemberPath = "NameStatus";
@@ -228,6 +253,14 @@ namespace RecordPeriphelTechniс.Windows
                     CombVidieoMaker.ItemsSource = dt8.DefaultView;
                     CombVidieoMaker.DisplayMemberPath = "Name";
                     CombVidieoMaker.SelectedValuePath = "ID";
+                    //----------------------------------------------
+                    CombDiskType.ItemsSource = dt9.DefaultView;
+                    CombDiskType.DisplayMemberPath = "TypeName";
+                    CombDiskType.SelectedValuePath = "ID";
+                    //----------------------------------------------
+                    CombSoundCardVud.ItemsSource = dt10.DefaultView;
+                    CombSoundCardVud.DisplayMemberPath = "TypeName";
+                    CombSoundCardVud.SelectedValuePath = "ID";
                 }
                 catch (Exception ex)
                 {
@@ -269,7 +302,7 @@ namespace RecordPeriphelTechniс.Windows
             TextVideoMemory.IsEnabled = false;
             CombVidieoMaker.IsEnabled = false;
 
-            CicBlock.Visibility = Visibility.Hidden;
+            CicBlock.Visibility = Visibility.Collapsed;
         }
 
         private void BtnEdit_Click(object sender, RoutedEventArgs e)
@@ -407,9 +440,12 @@ namespace RecordPeriphelTechniс.Windows
                 {
                     connection.Open();
                     ProverkaPC = 0;
-                    if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) ||
-                        String.IsNullOrEmpty(CombMatePlatMaker.Text) || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
-                        String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || String.IsNullOrEmpty(CombVidieoMaker.Text))
+                    if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text)
+                       || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
+                       String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) ||
+                       String.IsNullOrEmpty(CombVidieoMaker.Text) || String.IsNullOrEmpty(TextDiskModel.Text) || String.IsNullOrEmpty(TextSizeDisk.Text) || String.IsNullOrEmpty(CombDiskType.Text)
+                       || String.IsNullOrEmpty(TextSoundCardModel.Text) || String.IsNullOrEmpty(CombSoundCardVud.Text) || String.IsNullOrEmpty(TextPowerBlockName.Text) || String.IsNullOrEmpty(TextPowerBlockEnergy.Text)
+                       || String.IsNullOrEmpty(TextCorpusModel.Text))
                     {
                         MessageBox.Show("Заполните все поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         CheckerTextComponets();
@@ -421,6 +457,8 @@ namespace RecordPeriphelTechniс.Windows
                         bool resultTitl = int.TryParse(CombProccMaker.SelectedValue.ToString(), out id4);
                         bool resultBrand = int.TryParse(CombMatePlatMaker.SelectedValue.ToString(), out id5);
                         bool resultModel = int.TryParse(CombVidieoMaker.SelectedValue.ToString(), out id6);
+                        bool resultDisk = int.TryParse(CombDiskType.SelectedValue.ToString(), out int id7);
+                        bool resultSounCard = int.TryParse(CombSoundCardVud.SelectedValue.ToString(), out int id8);
                         string query = $@"UPDATE Procces SET Model='{TextProccModel.Text.ToLower()}', Speed='{TextSpeed.Text.ToLower()}',IDMaker='{id4}' WHERE ID='{ProccesID}';";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
@@ -428,6 +466,18 @@ namespace RecordPeriphelTechniс.Windows
                         cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
                         query = $@"UPDATE VideoCards SET Model='{TextVideoModel.Text.ToLower()}', VVideoMemory='{TextVideoMemory.Text.ToLower()}', IDMaker='{id6}' WHERE ID='{VideCardID}';";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"UPDATE Disks SET Model='{TextDiskModel.Text.ToLower()}', Size='{TextSizeDisk.Text.ToLower()}', IDTypeDisk='{id7}' WHERE ID='{IDDisk}';";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"UPDATE SoundCards SET Model='{TextSoundCardModel.Text.ToLower()}', IDTypeCards='{id8}' WHERE ID='{IDSoundCard}';";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"UPDATE PowerBlocks SET Model='{TextPowerBlockName.Text.ToLower()}', Energy='{TextPowerBlockEnergy.Text.ToLower()}' WHERE ID='{IDBlockPower}';";
+                        cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        query = $@"UPDATE Corpus SET Model='{TextCorpusModel.Text.ToLower()}' WHERE ID='{IDCorpus}';";
                         cmd = new SQLiteCommand(query, connection);
                         cmd.ExecuteNonQuery();
                         query = $@"UPDATE RAMs SET Model1='{TextRAMModel1.Text.ToLower()}', Vmemory1='{TextVmemory1.Text.ToLower()}',TypeMemory1='{TextTypeMemory1.Text.ToLower()}',Maker1='{TextMaker1.Text.ToLower()}' WHERE ID='{IDRAM}'";
@@ -641,7 +691,7 @@ namespace RecordPeriphelTechniс.Windows
 
                         if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
                         {
-                            MessageBox.Show("заполнено все2");
+                           // MessageBox.Show("заполнено все2");
                             string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text.ToLower()}', Vmemory2='{TextVmemory2.Text.ToLower()}',TypeMemory2='{TextTypeMemory2.Text.ToLower()}',Maker2='{TextMaker2.Text.ToLower()}' WHERE ID='{IDRAM}'";
                             SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                             cmd1.ExecuteNonQuery();
@@ -649,7 +699,7 @@ namespace RecordPeriphelTechniс.Windows
                         }
                         else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
                         {
-                            MessageBox.Show("Все пусто");
+                            //MessageBox.Show("Все пусто");
                             string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRAM}'";
                             SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                             cmd1.ExecuteNonQuery();

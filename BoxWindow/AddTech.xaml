@@ -111,7 +111,7 @@
                 </TabItem>
                 <TabItem Name="CuctemBlock" Header="Системный блок" MouseLeftButtonUp="CuctemBlock_MouseLeftButtonUp" >
                     <TabControl TabStripPlacement="Left">
-                        <TabItem Header="Процессор"  >
+                        <TabItem Header="Процессор" x:Name="TabProcces"   >
                             <StackPanel Orientation="Vertical" Width="auto" HorizontalAlignment="Left"  >
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -152,6 +152,46 @@
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
                                     <ComboBox Width="350" FontSize="20" x:Name="CombVidieoMaker" Margin="123,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Производители" />
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>                        
+                        <TabItem x:Name="TabItemDisk" Header="Диск">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextDiskModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Размер"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSizeDisk" Margin="199.1,0,0,0"  materialDesign:HintAssist.Hint="Размер"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Тип"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <ComboBox Width="350" FontSize="20" x:Name="CombDiskType" Margin="235.3,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Тип" />
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem x:Name="TabItemSoundCard" Header="Звуковая карта">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSoundCardModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>                                
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Вид"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <ComboBox Width="350" FontSize="20" x:Name="CombSoundCardVud" Margin="233.2,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Виды" />
+                                </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem x:Name="TabItemPoweBlock" Header="Блок питания">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockEnergy"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Мощность"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockName"  Margin="170,0,0,0"  materialDesign:HintAssist.Hint="Мощность"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -241,6 +281,14 @@
                                         </Expander>
                                     </StackPanel>
                                 </StackPanel>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem x:Name="TabItemCorpus" Header="Корпус">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                    <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextCorpusModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>                               
                             </StackPanel>
                         </TabItem>
                     </TabControl>
