@@ -92,7 +92,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        if (MessageBox.Show("Вы уверены что хотите изменить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены,что хотите изменить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             connection.Open();
                             int ProverkaLogin = 0;
@@ -115,7 +115,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                                             IDStatus='{idStatus}' ,IDAllowance='{idAllow}'  WHERE ID='{IDUser}';";
                                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                                         cmd.ExecuteNonQuery();
-                                        MessageBox.Show("Данные обновленны!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                        MessageBox.Show("Данные обновлены!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                                     }
                                     else if (PassBoxNew1.Password != "" && PassBoxNew2.Password != "" && PassBoxNew1.Password == PassBoxNew2.Password)
                                     {                                       
@@ -166,7 +166,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         }
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            this.Close();
         }
 
         private void EdditUser_Click(object sender, RoutedEventArgs e)

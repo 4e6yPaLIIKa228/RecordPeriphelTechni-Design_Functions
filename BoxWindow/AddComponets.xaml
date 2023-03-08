@@ -43,6 +43,13 @@
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
         </Grid>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"  Orientation="Horizontal">
+            <Image Margin="5" HorizontalAlignment="Left" Source="\BoxWindow\kstimage.png" Height="40" Width="80"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Добавление компонента" FontSize="16" />
+        </StackPanel>
+        
         <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
                 <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
@@ -63,7 +70,7 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Height="174" Margin="125,0,0,0" Width="350"  >
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="125,0,0,0"  >
             <TextBlock Text="Выберите критерий:" HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="Times New Roman" FontSize="14"/>
             <ComboBox x:Name="CombKruterui" Width="350" FontFamily="Times New Roman" FontSize="14" Height="50" Margin="0,0,0,10" VerticalAlignment="Center" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed" SelectionChanged="CombKruterui_SelectionChanged">
                 <TextBlock>Организация</TextBlock>
@@ -80,6 +87,9 @@
                 <Button x:Name="BtnBack"  Height="40" Width="120"  Content= "Назад"  FontFamily="Times New Roman" FontSize="14" Margin="0,0,25,0" Click="BtnBack_Click"/>
                 <Button x:Name="BtnClear" Height="40" Width="120"  Content="Очистить"  FontFamily="Times New Roman" FontSize="14" Margin="0,0,25,0" Click="BtnClear_Click"/>
                 <Button x:Name="BtnAddcomponet"  Height="40" Width="120" Content="Добавить"   FontFamily="Times New Roman" FontSize="14" Margin="0,0,25,0" Click="BtnAddcomponet_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2" >
+                <TextBlock Text="Version 0.1 "/>
             </StackPanel>
         </Grid>
     </Grid>

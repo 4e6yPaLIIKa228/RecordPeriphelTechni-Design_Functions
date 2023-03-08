@@ -64,14 +64,14 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" >
-            <TextBlock Text="Выберите критерий:" VerticalAlignment="Center" Margin="0,0,0,10" FontFamily="Times New Roman" FontSize="14"/>
+            <TextBlock Text="Выберите критерий:" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10" FontFamily="Times New Roman" FontSize="14"/>
             <ComboBox x:Name="CombKruterui" Width="350" FontFamily="Times New Roman" FontSize="14" Height="50" Margin="0,0,0,10" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed" SelectionChanged="CombKruterui_SelectionChanged">
                 <TextBlock>Организация</TextBlock>
                 <TextBlock>Производитель процессора</TextBlock>
                 <TextBlock>Производитель материнской платы</TextBlock>
                 <TextBlock>Производитель видеокарты</TextBlock>
             </ComboBox>
-            <TextBlock Text="Выберите название:" FontFamily="Times New Roman" FontSize="14" Margin="0,0,0,10"/>
+            <TextBlock Text="Выберите название:" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="14" Margin="0,0,0,10"/>
             <ComboBox  x:Name="CombNazvanue" Width="350" FontFamily="Times New Roman" FontSize="14" Height="50" Margin="0,0,0,10" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Название" SelectionChanged="CombKruterui_SelectionChanged" />
         </StackPanel>
 
@@ -81,6 +81,16 @@
                 <Button x:Name="BtnClear" Height="40" Width="120"  Content="Очистить"  FontFamily="Times New Roman" FontSize="14" Margin="0,0,25,0" Click="BtnClear_Click"/>
                 <Button x:Name="BtnDellcomponet"  Height="40" Width="120" Content="Удалить"   FontFamily="Times New Roman" FontSize="14" Margin="0,0,25,0" Click="BtnDellcomponet_Click"/>
             </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2" >
+                <TextBlock Text="Version 0.1 "/>
+            </StackPanel>
         </Grid>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"  Orientation="Horizontal">
+            <Image Margin="5" HorizontalAlignment="Left" Source="\BoxWindow\kstimage.png" Height="40" Width="80"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Удаление компонента" FontSize="16" />
+        </StackPanel>
     </Grid>
 </Window>

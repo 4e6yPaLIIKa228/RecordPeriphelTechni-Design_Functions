@@ -31,6 +31,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             InitializeComponent();
             CombBoxDowmload();
+            CuctemBlock.Visibility = Visibility.Collapsed;
         }
         public void CombBoxDowmload()  //Данные для комбобоксов 
         {
@@ -200,7 +201,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        if (MessageBox.Show("Вы уверены что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
                             bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
@@ -258,7 +259,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 }
                 else
                 {
-                    if (MessageBox.Show("Вы уверены что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Вы уверены,что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
                         bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
                         bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
@@ -569,9 +570,12 @@ namespace RecordPeriphelTechniс.BoxWindow
             {
                 TextName.Text = "пк";
                 TextName.IsReadOnly = true;
+                CuctemBlock.Visibility = Visibility.Visible;
             }
             else
             {
+                CuctemBlock.Visibility = Visibility.Collapsed;
+                CuctemBlock.Visibility = Visibility.Collapsed;
                 TextName.Text = string.Empty;
                 TextName.IsReadOnly = false;
             }
@@ -598,6 +602,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             }           
             else
             {
+               
                 TabProcces.IsSelected = true;
                 TabProcces.IsEnabled = false;
                 TextProccModel.IsEnabled = false;
@@ -727,7 +732,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         public void ClearData()
         {
-            if (MessageBox.Show("Вы уверены что хотите очистить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Вы уверены, что хотите очистить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
                 CombTypeTech.Text = null;
                 CombIDOrgamniz.Text = null;

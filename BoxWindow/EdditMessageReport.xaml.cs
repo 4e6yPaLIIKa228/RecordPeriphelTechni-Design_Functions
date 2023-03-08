@@ -116,12 +116,12 @@ namespace RecordPeriphelTechniс.BoxWindow
                     String combtext = CombStatus.Text;
                     if (combtext == "Принята" || combtext == "принята")
                     {
-                        if (MessageBox.Show("Вы уверены что хотите принять эту заявку?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что хотите принять эту заявку?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             connection.Open();
                             string query = $@"SELECT count() from RepairDevice 
                                        JOIN StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
-                                       WHERE StatusApplications.NameStatus = 'Выполнина' or StatusApplications.NameStatus = 'Принята' and  RepairDevice.ID = '{IDRepairDevice}';";
+                                       WHERE StatusApplications.NameStatus = 'выполнина' or StatusApplications.NameStatus = 'принята' and  RepairDevice.ID = '{IDRepairDevice}';";
                             SQLiteCommand cmd = new SQLiteCommand(query, connection);
                             int CheckDevice = Convert.ToInt32(cmd.ExecuteScalar());
                             if (CheckDevice == 0)
@@ -131,7 +131,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                                 cmd = new SQLiteCommand(query, connection);
                                 cmd.ExecuteNonQuery();
                                 MessageBox.Show("Зявка принята!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                                this.Close();
                             }
                             else
                             {
@@ -140,24 +139,23 @@ namespace RecordPeriphelTechniс.BoxWindow
 
                         }
                     }
-                    else if (combtext == "Выполнина" || combtext == "выполнина")
+                    else if (combtext == "Выполнена" || combtext == "выполнена")
                     {
-                        if (MessageBox.Show("Вы уверены что заявка выполнена?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что заявка выполнена?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             connection.Open();
                             bool resultCon = int.TryParse(CombStatus.SelectedValue.ToString(), out int id3);
-                            string query = $@"UPDATE RepairDevice SET IDStatus='{id3}' WHERE ID='{IDRepairDevice}' and  IDMaster = '{Saver.IDUser}';";
+                            string query = $@"UPDATE RepairDevice SET IDStatus='{id3}' WHERE ID = '{IDRepairDevice}' and IDMaster = '{Saver.IDUser}';";
                             SQLiteCommand cmd = new SQLiteCommand(query, connection);
                             cmd.ExecuteNonQuery();
                             query = $@"SELECT count() from RepairDevice 
                                        JOIN StatusApplications on RepairDevice.IDStatus = StatusApplications.ID
-                                       WHERE StatusApplications.NameStatus = 'Выполнина' and RepairDevice.ID = '{IDRepairDevice}';";
+                                       WHERE StatusApplications.NameStatus = 'выполнена' and RepairDevice.ID = '{IDRepairDevice}';";
                             cmd = new SQLiteCommand(query, connection);
                             int  CheckDevice = Convert.ToInt32(cmd.ExecuteScalar());
                             if (CheckDevice == 1)
                             {
-                                MessageBox.Show("Зявка выполнена!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                                this.Close();
+                                MessageBox.Show("Зявка выполнена!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);                              
                             }
                             else
                             {

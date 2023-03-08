@@ -108,34 +108,37 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        CheckerLogin();
-                        if (CheckeLogin == 0)
+                        if (MessageBox.Show("Вы уверены, что хотите добавить пользователя?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
-                            connection.Open();
-                            var Login = TextBoxLogin.Text.ToLower();
-                            var Pass = SimpleComand.GetHash(PassBox.Password);
-                            //var Pass = SimpleComand.GetHash(txtpassreg.Password);
-                            var DateNow = DateTime.Now.ToString("dd/MM/yyyy");
-                            bool resultType = int.TryParse(CombAllowance.SelectedValue.ToString(), out int IDCombAllowance);
-                            string query = $@"INSERT INTO Users ('Login','Password','Surname',Name,MiddleName,IDStatus,IDAllowance,DataRegist) VALUES ('{Login}',@Password,'{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{1}','{IDCombAllowance}','{DateNow}')";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            cmd.Parameters.AddWithValue("@Password", Pass);
-                            cmd.ExecuteScalar();
-                            query = $@"SELECT ID FROM Users WHERE Login='{Login}';";
-                            cmd = new SQLiteCommand(query, connection);
-                            int IDProverka = Convert.ToInt32(cmd.ExecuteScalar());
-                            AddProverka();
-                            query = $@"UPDATE Users SET IDProverka = '{IDProverka}' WHERE Login= '{Login}'";
-                            cmd = new SQLiteCommand(query, connection);
-                            cmd.ExecuteScalar();
-                            connection.Close();
-                            MessageBox.Show("Пользователь добавлен ", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);                            
-                        }
-                        else
-                        {
-                            MessageBox.Show("Такой логин занят ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                          
-                            connection.Close();
+                            CheckerLogin();
+                            if (CheckeLogin == 0)
+                            {
+                                connection.Open();
+                                var Login = TextBoxLogin.Text.ToLower();
+                                var Pass = SimpleComand.GetHash(PassBox.Password);
+                                //var Pass = SimpleComand.GetHash(txtpassreg.Password);
+                                var DateNow = DateTime.Now.ToString("dd/MM/yyyy");
+                                bool resultType = int.TryParse(CombAllowance.SelectedValue.ToString(), out int IDCombAllowance);
+                                string query = $@"INSERT INTO Users ('Login','Password','Surname',Name,MiddleName,IDStatus,IDAllowance,DataRegist) VALUES ('{Login}',@Password,'{TextFamili.Text}','{TextName.Text}','{TextOthectbo.Text}','{1}','{IDCombAllowance}','{DateNow}')";
+                                SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                                cmd.Parameters.AddWithValue("@Password", Pass);
+                                cmd.ExecuteScalar();
+                                query = $@"SELECT ID FROM Users WHERE Login='{Login}';";
+                                cmd = new SQLiteCommand(query, connection);
+                                int IDProverka = Convert.ToInt32(cmd.ExecuteScalar());
+                                AddProverka();
+                                query = $@"UPDATE Users SET IDProverka = '{IDProverka}' WHERE Login= '{Login}'";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.ExecuteScalar();
+                                connection.Close();
+                                MessageBox.Show("Пользователь добавлен ", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Такой логин занят ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                                connection.Close();
+                            }
                         }
                     }
                 }

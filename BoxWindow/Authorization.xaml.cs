@@ -152,16 +152,18 @@ namespace RecordPeriphelTechniс.BoxWindow
                     int UsersUnBlock = Convert.ToInt32(cmd.ExecuteScalar());
                     if (proverkaInvalidPass == 1)
                     {
-                        query = $@"SELECT IDAllowance FROM Users WHERE Login= '{LoginLower}'";
+                        query = $@"SELECT IDAllowance,IDProverka FROM Users WHERE Login= '{LoginLower}'";
                         Saver.LoginUser = LoginLower;
                         SQLiteDataReader dr = null;
                         SQLiteCommand cmd1 = new SQLiteCommand(query, connection);
                         int IDProverka = 0;
+                        int IDAllowance = 0;
                         dr = cmd1.ExecuteReader();
                         while (dr.Read())
                         {
                             //Saver.IDUser = dr["ID"].ToString();
-                            IDProverka = Convert.ToInt32(dr["IDAllowance"].ToString());
+                            IDProverka = Convert.ToInt32(dr["IDProverka"].ToString());
+                            IDAllowance = Convert.ToInt32(dr["IDAllowance"].ToString());
                             //  Saver.IDAcc = countID;
                         }
                         query = $@"SELECT AttemptNumber,TimeEnd,TimeBegin FROM Proverka WHERE ID = '{IDProverka}';";
@@ -188,7 +190,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                             int kolint = Convert.ToInt32(AttemptNumber);
                             kolint++;
                             //string timeban = "0:02";
-                            TimeSpan s1 = TimeSpan.Parse("0:02");
+                            TimeSpan s1 = TimeSpan.Parse("0:01");
                             TimeSpan s3 = s1 + s2;
                             string times3 = s3.ToString("hh':'mm");
                             query = $@"UPDATE Proverka SET AttemptNumber='{kolint}',TimeBegin='{dateOpen}',TimeEnd ='{times3}' WHERE ID ='{IDProverka}';";
@@ -236,7 +238,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         {
                             // Saver.IDUser = dr["ID"].ToString();
                             IDAllowance = Convert.ToInt32(dr["IDAllowance"].ToString());
-                            IDProverka = Convert.ToInt32(dr["IDAllowance"].ToString());
+                            IDProverka = Convert.ToInt32(dr["IDProverka"].ToString());
                             //  Saver.IDAcc = countID;
                         }
                         query = $@"SELECT AttemptNumber,TimeEnd,TimeBegin FROM Proverka WHERE ID = '{IDProverka}';";
@@ -245,16 +247,17 @@ namespace RecordPeriphelTechniс.BoxWindow
                         TimeSpan s2 = TimeSpan.Parse(dateOpen);
                         dr = null;
                         string AttemptNumber = "";
-                        string dateban = "00:00";
+                       // string dateban = "00:00";
                         string dateBegin = "00:00";
+                        string dateban = DateTime.Now.ToString("t");
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
                         {
                             AttemptNumber = dr["AttemptNumber"].ToString();
                             dateban = dr["TimeEnd"].ToString();
                             dateBegin = dr["TimeBegin"].ToString();
-
                         }
+
                         if (Convert.ToInt32(AttemptNumber) == 3 && (TimeSpan.Parse(dateOpen) > TimeSpan.Parse(dateban)))
                         {
                             query = $@"UPDATE Proverka SET AttemptNumber = '{0}',TimeBegin = '00:00',TimeEnd = '00:00' WHERE ID ='{IDProverka}';";
@@ -263,7 +266,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                             query = $@"UPDATE Users SET IDStatus='{1}' WHERE Login='{LoginLower}';";
                             cmd = new SQLiteCommand(query, connection);
                             cmd.ExecuteReader();
-                            query = $@"SELECT ID FROM Users,Users.IDAllowance,AllowanceUsers.Allowance
+                            query = $@"SELECT Users.ID ,Users.IDAllowance, AllowanceUsers.Allowance FROM Users
                                         join AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID 
                                         WHERE Login= '{LoginLower}'";
                             Saver.LoginUser = LoginLower;
@@ -314,7 +317,6 @@ namespace RecordPeriphelTechniс.BoxWindow
                         else
                         {
                             MessageBox.Show("Ваша учетная запись временно заблокированна,попробуйте позже", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-
                         }
 
 

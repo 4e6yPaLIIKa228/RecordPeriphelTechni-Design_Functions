@@ -26,7 +26,11 @@ namespace RecordPeriphelTechniс.BoxWindow
     {
         public MasterPanel()
         {
-            InitializeComponent();
+            InitializeComponent();            
+            if (Saver.IDAllowanceString == "Мастер" || Saver.IDAllowanceString == "мастер")
+            {
+                Master();
+            }
             LoadDB_Application();
         }
 
@@ -283,6 +287,11 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void ListApplications_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Eddit_InforPcTex();
+        }
+
+        public void Master()
+        {
+            ListUsers.Visibility = Visibility.Collapsed;
         }
     } 
 }

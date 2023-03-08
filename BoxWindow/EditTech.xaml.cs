@@ -328,7 +328,7 @@ namespace RecordPeriphelTechniс.Windows
                 }
                 else
                 {
-                    if (MessageBox.Show("Вы уверены что хотите изменить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Вы уверены, что хотите изменить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
                         bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int idOrg);
                         bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int idStatus);

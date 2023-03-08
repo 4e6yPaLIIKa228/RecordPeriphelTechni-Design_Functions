@@ -44,6 +44,12 @@
             <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"  Orientation="Horizontal">
+            <Image Margin="5" HorizontalAlignment="Left" Source="\BoxWindow\kstimage.png" Height="40" Width="80"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Добавление устройства" FontSize="16" />
+        </StackPanel>
 
         <Grid HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,10,0" >
             <TabControl>
@@ -98,7 +104,7 @@
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
-                        <TabItem  Header="Коментрий">
+                        <TabItem  Header="Коментарий">
                             <StackPanel Orientation="Vertical" >
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Horizontal"  VerticalAlignment="Center">
@@ -302,6 +308,9 @@
                 <Button x:Name="BtnBack"  Height="40" Width="120"  Content= "Назад" Margin="0,0,25,0" Click="BtnBack_Click"/>
                 <Button x:Name="BtnClear" Height="40" Width="120"  Content="Очистить" Margin="0,0,25,0" Click="BtnClear_Click"/>
                 <Button x:Name="BtnSave"  Height="40" Width="120" Content="Добавить"  Margin="0,0,25,0" Click="BtnSave_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2"  >
+                <TextBlock Text="Version 0.1 "/>
             </StackPanel>
         </Grid>
 

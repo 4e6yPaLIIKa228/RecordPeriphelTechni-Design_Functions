@@ -74,13 +74,13 @@ namespace RecordPeriphelTechniс.Windows
             //VisitorCheck = s;
             InitializeComponent();
             
-            if (Saver.IDAllowanceString == "Гость")
+            if (Saver.IDAllowanceString == "Гость" || Saver.IDAllowanceString == "гость")
             {
                 Visitor();
-            }else if (Saver.IDAllowanceString == "Пользователь")
+            }else if (Saver.IDAllowanceString == "Пользователь" || Saver.IDAllowanceString == "пользователь")
             {
                 Users();
-            }else if (Saver.IDAllowanceString == "Мастер")
+            }else if (Saver.IDAllowanceString == "Мастер" || Saver.IDAllowanceString == "мастер")
             {
                 Master();
             }

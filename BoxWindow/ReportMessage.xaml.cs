@@ -84,7 +84,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else // поиск устройства
                     {
-                        if (MessageBox.Show("Вы уверены что хотите отравить заявку на ремонт?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что хотите отравить заявку на ремонт?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             connection.Open();
                             string NumberLower = TextNumberTech.Text.ToLower();

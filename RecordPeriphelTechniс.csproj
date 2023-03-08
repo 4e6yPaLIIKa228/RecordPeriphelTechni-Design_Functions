@@ -114,9 +114,6 @@
     <Compile Include="BoxWindow\ReportMessage.xaml.cs">
       <DependentUpon>ReportMessage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BoxWindow\SettingSearch.xaml.cs">
-      <DependentUpon>SettingSearch.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Connection\DBConnection.cs" />
     <Compile Include="BoxWindow\EditTech.xaml.cs">
       <DependentUpon>EditTech.xaml</DependentUpon>
@@ -179,10 +176,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BoxWindow\SettingSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -207,7 +200,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="BoxWindow\kstimage.png" />
+    <Resource Include="BoxWindow\kstimage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="YechetPerTech.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

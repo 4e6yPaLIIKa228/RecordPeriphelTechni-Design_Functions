@@ -86,7 +86,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        if (MessageBox.Show("Вы уверены что хотите добавить этот компонет?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что хотите добавить этот компонет?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             String combtext = CombKruterui.Text;
                             if (combtext == "Организация")
@@ -99,7 +99,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"INSERT INTO Organiz('NameOrg') values ('{TextComponet.Text.ToUpper()}')";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Компонет добавлен", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    TextComponet.Text = string.Empty;
                                 }
                                 else
                                 {
@@ -116,11 +118,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"INSERT INTO MakersProcc('Name') values ('{TextComponet.Text.ToUpper()}')";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Компонет добавлен", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    TextComponet.Text = string.Empty;
                                 }
                                 else
                                 {
                                     MessageBox.Show("Такой компонет уже внесет в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+
                                 }
                             }
                             else if (combtext == "Производитель материнской платы")
@@ -133,7 +138,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"INSERT INTO MakersMaterPlat('Name') values ('{TextComponet.Text.ToUpper()}')";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Компонет добавлен", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    TextComponet.Text = string.Empty;
                                 }
                                 else
                                 {
@@ -150,7 +157,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"INSERT INTO MakersVideoCard('Name') values ('{TextComponet.Text.ToUpper()}')";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Компонет добавлен в базу", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    MessageBox.Show("Компонет добавлен", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    TextComponet.Text = string.Empty;
                                 }
                                 else
                                 {
@@ -168,8 +177,11 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         public void ClearData()
         {
-            CombKruterui.Text = string.Empty;
-            TextComponet.Text = string.Empty;
+            if (MessageBox.Show("Вы уверены, что хотитеочистить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CombKruterui.Text = string.Empty;
+                TextComponet.Text = string.Empty;
+            }
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)

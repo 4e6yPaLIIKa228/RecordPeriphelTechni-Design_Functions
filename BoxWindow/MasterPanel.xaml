@@ -21,17 +21,18 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="454" />
-            <ColumnDefinition/>
+            <ColumnDefinition Width="28*" />
+            <ColumnDefinition Width="44*" />
+            <ColumnDefinition Width="180" />
             <ColumnDefinition Width="150" />
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
+        <StackPanel Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="0"  Orientation="Vertical">
             <Border Background="Black" Width="Auto" Height="Auto"   BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
-        <StackPanel Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
+        <StackPanel Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="2" Orientation="Vertical" VerticalAlignment="Bottom" Height="2">
             <Border Background="Black" Width="Auto" Height="Auto"  BorderBrush="Black" BorderThickness="1,1,1,1">
             </Border>
         </StackPanel>
@@ -40,12 +41,12 @@
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
         </Grid>
-        <Grid Grid.Column="2"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
+        <Grid Grid.Column="3"  Grid.Row="0"  Grid.RowSpan="3" HorizontalAlignment="Right" Width="2"  >
             <Border  Width="Auto" Height="Auto"  BorderBrush="Black"  BorderThickness="1,1,1,1" >
             </Border>
         </Grid>
 
-        <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
+        <Grid Grid.Row="0"  Grid.Column="3" Margin="0,7,0,0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
                 <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Click="BtnResize_Click">
                     <StackPanel Orientation="Horizontal" >
@@ -77,8 +78,7 @@
                     <MenuItem Header="Отчет" >
                         <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" ></MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Помощь">
-                        <MenuItem Header="Список оборудования" ></MenuItem>
+                    <MenuItem Header="Помощь">                       
                     </MenuItem>
                 </Menu>
             </StackPanel>
@@ -89,9 +89,8 @@
         </Grid>
 
         <StackPanel Grid.Row= "0" Grid.Column="1" Orientation="Horizontal" >
-            <DockPanel  LastChildFill="True"> 
+            <DockPanel  LastChildFill="True">
                 <TextBox x:Name="TxtSearch" Style="{StaticResource MaterialDesignOutlinedTextBox}" FontFamily="Times New Roman" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Bottom"   Width="290" Height="52"  materialDesign:HintAssist.Hint="Поиск" Margin="5,0,0,2" TextChanged="TxtSearch_TextChanged" />
-
                 <ComboBox x:Name="CombSearchInfo" Width="290" FontFamily="Times New Roman" FontSize="14" Height="52" Margin="10,0,0,2" VerticalAlignment="Bottom" MaxDropDownHeight="100"  Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Критерий"  DropDownClosed="CombSearchInfo_DropDownClosed">
                     <TextBlock>ID</TextBlock>
                     <TextBlock>Тип устройства</TextBlock>
@@ -101,20 +100,13 @@
                     <TextBlock>Дата обращения</TextBlock>
                     <TextBlock>Коментарий</TextBlock>
                 </ComboBox>
+                <Image Margin="5" Source="\BoxWindow\kstimage.png" Height="40" Width="80"/>
             </DockPanel>
         </StackPanel>
-
-        <Grid  Grid.Column="2" Grid.Row="0">
-            <StackPanel Orientation="Vertical" >
-
-            </StackPanel>
-        </Grid>
-
-        <Grid  Grid.Column="0" Grid.Row="1" >
-
-        </Grid>
-
-        <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="5,0,5,0" >
+        <StackPanel Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical" >
+            <TextBlock Text="Панель мастера" FontSize="16"  Margin="5,0,0,0"/>
+        </StackPanel> 
+        <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Margin="5,0,5,0" >
           <ScrollViewer >
             <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="DataGridApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="ListApplications_MouseDoubleClick" >
                 <DataGrid.Columns>
@@ -138,7 +130,9 @@
             </DataGrid>
          </ScrollViewer >
         </Grid>
-
+        <StackPanel Grid.Row="3" Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2" >
+            <TextBlock Text="Version 0.1 "/>
+        </StackPanel>
 
     </Grid>
 </Window>

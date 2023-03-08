@@ -66,7 +66,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 try
                 {
                     String combtext = CombKruterui.Text;                   
-                    if (combtext == "Организация")
+                    if (combtext == "Организация" || combtext == "организация")
                     {
                         string query = $@"SELECT * FROM Organiz";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
@@ -77,7 +77,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         CombNazvanue.DisplayMemberPath = "NameOrg";
                         CombNazvanue.SelectedValuePath = "ID";
                     }
-                    else if (combtext == "Производитель процессора")
+                    else if (combtext == "Производитель процессора" || combtext == "производитель процессора")
                     {
                         string query = $@"SELECT * FROM MakersProcc";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
@@ -88,7 +88,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         CombNazvanue.DisplayMemberPath = "Name";
                         CombNazvanue.SelectedValuePath = "ID";
                     }
-                    else if (combtext == "Производитель материнской платы")
+                    else if (combtext == "Производитель материнской платы" || combtext == "производитель материнской платы")
                     {
                         string query = $@"SELECT * FROM MakersMaterPlat";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
@@ -99,7 +99,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                         CombNazvanue.DisplayMemberPath = "Name";
                         CombNazvanue.SelectedValuePath = "ID";
                     }
-                    else if (combtext == "Производитель видеокарты")
+                    else if (combtext == "Производитель видеокарты" || combtext == "Производитель видеокарты")
                     {
                         string query = $@"SELECT * FROM MakersVideoCard";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
@@ -134,7 +134,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        if (MessageBox.Show("Вы уверены что хотите удалить этот компонет?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Вы уверены, что хотите удалить этот Компонент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                         {
                             String combtext = CombKruterui.Text;
                             if (combtext == "Организация")
@@ -148,12 +148,13 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"Delete from Organiz WHERE ID = '{IDOrg}'";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Название удалено из базы", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    ClearData();
+                                    MessageBox.Show("Компонент удален", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    CombNazvanue.Text = string.Empty;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Название используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Компонент используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else if (combtext == "Производитель процессора")
@@ -167,12 +168,13 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"Delete from MakersProcc WHERE ID = '{IDMaker}'";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Название удалено из базы", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    ClearData();
+                                    MessageBox.Show("Компонент удален", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    CombNazvanue.Text = string.Empty;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Название используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Компонент используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else if (combtext == "Производитель материнской платы")
@@ -186,12 +188,13 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"Delete from MakersMaterPlat WHERE ID = '{IDMaker}'";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Название удалено из базы", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    ClearData();
+                                    MessageBox.Show("Компонет удален", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    CombNazvanue.Text = string.Empty;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Название используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Компонент используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
                             }
                             else if (combtext == "Производитель видеокарты")
@@ -205,12 +208,13 @@ namespace RecordPeriphelTechniс.BoxWindow
                                     query = $@"Delete from MakersVideoCard WHERE ID = '{IDMaker}'";
                                     cmd = new SQLiteCommand(query, connection);
                                     cmd.ExecuteScalar();
-                                    MessageBox.Show("Название удалено из базы", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    ClearData();
+                                    MessageBox.Show("Компонент удален", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                    CombKruterui.Text = string.Empty;
+                                    CombNazvanue.Text = string.Empty;
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Название используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    MessageBox.Show("Компонент используется в данных", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
 
                             }
@@ -228,7 +232,7 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             String combtext = CombKruterui.Text;
            // MessageBox.Show(combtext);
-         //   LoadComboBox();
+           LoadComboBox();
         }
 
         public void CheckerText()
@@ -239,8 +243,11 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         public void ClearData()
         {
-            CombKruterui.Text = string.Empty;
-            CombNazvanue.Text = string.Empty;
+            if (MessageBox.Show("Вы уверены, что хотитеочистить данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CombKruterui.Text = string.Empty;
+                CombNazvanue.Text = string.Empty;
+            }
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)

@@ -68,8 +68,11 @@
                 <Button Name="InHome" Height="40" Width="120" Margin="25,0,25,0"  Content="Назад"/>
                 <Button Name="DellUser" Height="40" Width="120" Margin="0,0,25,0" Content="Удалить"/>
                 <Button x:Name="EdditUser" Height="40" Width="120" Margin="0,0,25,0" Content="Изменить" Click="EdditUser_Click"/>
-            </StackPanel>
+            </StackPanel>            
         </Grid>
+        <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2" >
+            <TextBlock Text="Version 0.1 "/>
+        </StackPanel>
         <Grid Grid.Row="0"  Grid.Column="2" Margin="0,7,0,0">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
                 <Button x:Name="BtnResize"  VerticalAlignment="Top" Background="Black" Margin="1" Width="46" Click="BtnResize_Click">
@@ -89,6 +92,11 @@
                 </Button>
             </StackPanel>
         </Grid>
-
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left"  Orientation="Horizontal">
+            <Image Margin="5" HorizontalAlignment="Left" Source="\BoxWindow\kstimage.png" Height="40" Width="80"/>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <Label Content="Изменение данных пользователя" FontSize="16" />
+        </StackPanel>
     </Grid>
 </Window>
