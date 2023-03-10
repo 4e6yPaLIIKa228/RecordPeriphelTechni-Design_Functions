@@ -152,8 +152,9 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock   FontSize="25" Text=" Название: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=ModelVideos}" />
-                                                <TextBlock   FontSize="25" Text=" Скорость: " />
+                                                <TextBlock   FontSize="25" Text=" Обхем памяти: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=VVideoMemory}" />
+                                                <TextBlock   FontSize="25" Text=" ГБ " />
                                                 <TextBlock   FontSize="25" Text=" Производитель: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=MakerVideoCard}" />
                                             </StackPanel>
@@ -162,7 +163,8 @@
                                                 <TextBlock   FontSize="25" Text=" Название: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=ModelDisk}" />
                                                 <TextBlock   FontSize="25" Text=" Размер: " />
-                                                <TextBlock   FontSize="25" Text="{Binding Path=SazeDisk}" />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=SizeDisk}" />
+                                                <TextBlock   FontSize="25" Text=" ГБ " />
                                                 <TextBlock   FontSize="25" Text=" Тип: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=TypeDisk}" />
                                             </StackPanel>
@@ -171,7 +173,7 @@
                                                 <TextBlock   FontSize="25" Text=" Название: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=ModelSoundCard}" />
                                                 <TextBlock   FontSize="25" Text=" Тип: " />
-                                                <TextBlock   FontSize="25" Text="{Binding Path=ModelSoundCard}" />
+                                                <TextBlock   FontSize="25" Text="{Binding Path=TypeSoundCard}" />
                                             </StackPanel>
                                             <TextBlock   FontSize="25"   Text=" Блок питания: " FontWeight="Bold" />
                                             <StackPanel Orientation="Horizontal">
@@ -179,6 +181,7 @@
                                                 <TextBlock   FontSize="25" Text="{Binding Path=ModelPowerBlocks}" />
                                                 <TextBlock   FontSize="25" Text=" Мощность " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path=EnergyPowerBlock}" />
+                                                <TextBlock   FontSize="25" Text=" Вт " />
                                             </StackPanel>
                                             <TextBlock   FontSize="25"   Text=" Оперативная память: " FontWeight="Bold" />
                                             <StackPanel Orientation="Horizontal">
