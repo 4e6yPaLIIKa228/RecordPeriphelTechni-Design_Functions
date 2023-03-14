@@ -78,6 +78,10 @@
                                     <TextBlock   FontSize="20" Text=" Номер " VerticalAlignment="Center"   Margin="0,0,0,0"/>
                                     <TextBox x:Name="TextNumber" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="188.5,0,0,0" materialDesign:HintAssist.Hint="Номер"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
+                                    <TextBlock  x:Name="TxtKoll"  FontSize="20" Text=" Колл. клона " Visibility="Collapsed" VerticalAlignment="Center"   Margin="0,0,0,0"/>
+                                    <TextBox x:Name="TextNumberClone" VerticalAlignment="Top" Visibility="Collapsed"    Width="350"  FontSize="20" Margin="137.5,0,0,0" materialDesign:HintAssist.Hint="Колличество"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                </StackPanel>
                             </StackPanel>
                         </TabItem>
                         <TabItem Header="Даты работы ">
@@ -308,6 +312,7 @@
                 <Button x:Name="BtnBack"  Height="40" Width="120"  Content= "Назад" Margin="0,0,25,0" Click="BtnBack_Click"/>
                 <Button x:Name="BtnClear" Height="40" Width="120"  Content="Очистить" Margin="0,0,25,0" Click="BtnClear_Click"/>
                 <Button x:Name="BtnSave"  Height="40" Width="120" Content="Добавить"  Margin="0,0,25,0" Click="BtnSave_Click"/>
+                <Button x:Name="BtnCloun"  Height="40" Width="120" Visibility="Collapsed" Content="Клонировать"  Margin="0,0,25,0" Click="BtnCloun_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,5,5" Height="14" Grid.RowSpan="2"  >
                 <TextBlock Text="Version 0.1 "/>

@@ -117,51 +117,49 @@ namespace RecordPeriphelTechniс.Windows
                 {
                     connection.Open();
                     string query = $@"SELECT MenuPerTech.ID as IDMenuPer, MenuPerTech.Name as NameYstr, TypeTechs.NameType,MenuPerTech.Kabunet ,Organiz.NameOrg, MenuPerTech.Number,
-MenuPerTech.IDComponets as IDComponets, MenuPerTech.StartWork, MenuPerTech.EndWork,
-MenuPerTech.Comments, Status.NameStatus, Works.NameWorks,
-Procces.ID as ProccesID, Procces.Model as NameProcces ,Procces.Speed as SpeedProcces, MakersProcc.Name as MakerProcc,
-MaterPlatas.ID as MaterPlatID, MaterPlatas.Model as ModelMatePlat, MakersMaterPlat.Name as MakerMaterPlat,
-VideoCards.ID as VideoCardID, VideoCards.Model as ModelVideos, VideoCards.VVideoMemory , MakersVideoCard.Name as MakerVideoCard,
-Disks.ID as DiskID, Disks.Model as ModelDisk, Disks.Size as SizeDisk, DiskType.TypeName as TypeDisk,
-SoundCards.ID as SoundCardsID, SoundCards.Model as ModelSoundCard, SoundCardsType.TypeName as TypeSoundCard,
-PowerBlocks.ID as PowerBlocksID, PowerBlocks.Model as ModelPowerBlocks, PowerBlocks.Energy as EnergyPowerBlock,
-Corpus.ID as CorpusID, Corpus.Model as ModelCorpus,
-RAMs.ID as IDRAM,
-RAMs.Model1 as Model1, RAMs.Vmemory1 as V1, RAMs.TypeMemory1 as TypeMemory1 , RAMs.Maker1 as Maker1, 
-RAMs.Model2 as Model2, RAMs.Vmemory2 as V2, RAMs.TypeMemory2 as TypeMemory2 , RAMs.Maker2 as Maker2,
-RAMs.Model3 as Model3, RAMs.Vmemory3 as V3, RAMs.TypeMemory3 as TypeMemory3 , RAMs.Maker3 as Maker3,
-RAMs.Model4 as Model4, RAMs.Vmemory4 as V4, RAMs.TypeMemory4 as TypeMemory4 , RAMs.Maker4 as Maker4    
+                    MenuPerTech.IDComponets as IDComponets, MenuPerTech.StartWork, MenuPerTech.EndWork,
+                    MenuPerTech.Comments, Status.NameStatus, Works.NameWorks,
+                    Procces.ID as ProccesID, Procces.Model as NameProcces ,Procces.Speed as SpeedProcces, MakersProcc.Name as MakerProcc,
+                    MaterPlatas.ID as MaterPlatID, MaterPlatas.Model as ModelMatePlat, MakersMaterPlat.Name as MakerMaterPlat,
+                    VideoCards.ID as VideoCardID, VideoCards.Model as ModelVideos, VideoCards.VVideoMemory , MakersVideoCard.Name as MakerVideoCard,
+                    Disks.ID as DiskID, Disks.Model as ModelDisk, Disks.Size as SizeDisk, DiskType.TypeName as TypeDisk,
+                    SoundCards.ID as SoundCardsID, SoundCards.Model as ModelSoundCard, SoundCardsType.TypeName as TypeSoundCard,
+                    PowerBlocks.ID as PowerBlocksID, PowerBlocks.Model as ModelPowerBlocks, PowerBlocks.Energy as EnergyPowerBlock,
+                    Corpus.ID as CorpusID, Corpus.Model as ModelCorpus,
+                    RAMs.ID as IDRAM,
+                    RAMs.Model1 as Model1, RAMs.Vmemory1 as V1, RAMs.TypeMemory1 as TypeMemory1 , RAMs.Maker1 as Maker1, 
+                    RAMs.Model2 as Model2, RAMs.Vmemory2 as V2, RAMs.TypeMemory2 as TypeMemory2 , RAMs.Maker2 as Maker2,
+                    RAMs.Model3 as Model3, RAMs.Vmemory3 as V3, RAMs.TypeMemory3 as TypeMemory3 , RAMs.Maker3 as Maker3,
+                    RAMs.Model4 as Model4, RAMs.Vmemory4 as V4, RAMs.TypeMemory4 as TypeMemory4 , RAMs.Maker4 as Maker4 
+                    FROM MenuPerTech
+                    LEFT JOIN TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
+                    LEFT JOIN Organiz on MenuPerTech.IDOrganiz = Organiz.ID
+                    LEFT JOIN Components on MenuPerTech.IDComponets = Components.ID
+                    LEFT JOIN Status on MenuPerTech.IDStatus = Status.ID
+                    LEFT JOIN Works on MenuPerTech.IDWorks = Works.ID
 
-FROM MenuPerTech
-LEFT JOIN TypeTechs on MenuPerTech.IDTypeTech = TypeTechs.ID
-LEFT JOIN Organiz on MenuPerTech.IDOrganiz = Organiz.ID
-LEFT JOIN Components on MenuPerTech.IDComponets = Components.ID
-LEFT JOIN Status on MenuPerTech.IDStatus = Status.ID
-LEFT JOIN Works on MenuPerTech.IDWorks = Works.ID
+                    LEFT JOIN Procces on Components.IDProcces = Procces.ID
+                    LEFT JOIN MakersProcc ON Procces.IDMaker = MakersProcc.ID
 
-LEFT JOIN Procces on Components.IDProcces = Procces.ID
-LEFT JOIN MakersProcc ON Procces.IDMaker = MakersProcc.ID
+                    LEFT JOIN MaterPlatas on Components.IDMaterPlata = MaterPlatas.ID
+                    LEFT JOIN MakersMaterPlat on MaterPlatas.IDMaker = MakersMaterPlat.ID
 
-LEFT JOIN MaterPlatas on Components.IDMaterPlata = MaterPlatas.ID
-LEFT JOIN MakersMaterPlat on MaterPlatas.IDMaker = MakersMaterPlat.ID
+                    LEFT JOIN VideoCards on Components.IDVideo = VideoCards.ID
+                    LEFT JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
 
-LEFT JOIN VideoCards on Components.IDVideo = VideoCards.ID
-LEFT JOIN MakersVideoCard on VideoCards.IDMaker = MakersVideoCard.ID
+                    LEFT JOIN Disks on Components.IDDisk = Disks.ID
+                    LEFT JOIN DiskType on Disks.IDTypeDisk = DiskType.ID
 
-LEFT JOIN Disks on Components.IDDisk = Disks.ID
-LEFT JOIN DiskType on Disks.IDTypeDisk = DiskType.ID
+                    LEFT JOIN SoundCards on Components.IDSoundCard = SoundCards.ID
+                    LEFT JOIN SoundCardsType on SoundCards.IDTypeCards = SoundCardsType.ID
 
-LEFT JOIN SoundCards on Components.IDSoundCard = SoundCards.ID
-LEFT JOIN SoundCardsType on SoundCards.IDTypeCards = SoundCardsType.ID
+                    LEFT JOIN PowerBlocks on Components.IDPowerBlock = PowerBlocks.ID
 
-LEFT JOIN PowerBlocks on Components.IDPowerBlock = PowerBlocks.ID
+                    LEFT JOIN Corpus on Components.IDCorpus = Corpus.ID
 
-LEFT JOIN Corpus on Components.IDCorpus = Corpus.ID
+                    LEFT JOIN RAMs on Components.ID = RAMs.ID
 
-LEFT JOIN RAMs on Components.ID = RAMs.ID
-
-WHERE  MenuPerTech.IDTypeTech = '1'
-                          ";
+                    WHERE  MenuPerTech.IDTypeTech = '1'";
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     DataTable DT = new DataTable("MenuPerTech");
                     SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);

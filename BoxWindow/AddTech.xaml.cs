@@ -25,8 +25,12 @@ namespace RecordPeriphelTechniс.BoxWindow
     /// </summary>
     public partial class AddTech : Window
     {
-        int IDMenuPerTech = 0, IDTypeTech = 0, ProverkaNumber = 0, ProverkaPcCompont=0, ProverkaRams = 0, IDComponets = 0, IDProcces=0, IDMaterPlat=0, IDVideoCard=0,IDRams=0, IDDisk=0,IDSoundCard=0,IDBlockPower=0,IDCorpus=0;
+        int IDMenuPerTech = 0, IDTypeTech = 0, ProverkaNumber = 0, ProverkaPcCompont = 0, ProverkaRams = 0,
+            IDComponets = 0, IDProcces = 0, IDMaterPlat = 0, IDVideoCard = 0,
+            IDRams = 0, IDDisk = 0, IDSoundCard = 0, IDBlockPower = 0, IDCorpus = 0,
+            IDClone = 0, TextNumberInt = 0;
         string TextRamInfo2 = "", TextRamInfo3 = "", TextRamInfo4 = "";
+
         public AddTech()
         {
             InitializeComponent();
@@ -139,15 +143,17 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             String textcomb = CombTypeTech.Text;
-            if (textcomb == "компьютерная техника" || textcomb == "Компьютерная техника")
-            {               
-                AddOsnovaPC();               
-            }
-            else
+            if (MessageBox.Show("Вы уверены,что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                AddOsnovaPerTech();
+                if (textcomb == "компьютерная техника" || textcomb == "Компьютерная техника")
+                {
+                    AddOsnovaPC();
+                }
+                else
+                {
+                    AddOsnovaPerTech();
+                }
             }
-           
         }
         public void CheckerTextOsnova() // подцветка при пустоте
         {
@@ -159,11 +165,11 @@ namespace RecordPeriphelTechniс.BoxWindow
             SimpleComand.CheckComboBox(CombIDStatus);
             SimpleComand.CheckTextBox(TextName);
             SimpleComand.CheckComboBox(CombIDWorks);
-            SimpleComand.CheckDatePicker(TextDataStart);  
+            SimpleComand.CheckDatePicker(TextDataStart);
         }
         public void CheckerTextComponets()
         {
-           
+
             SimpleComand.CheckTextBox(TextProccModel);
             SimpleComand.CheckTextBox(TextSpeed);
             SimpleComand.CheckComboBox(CombProccMaker);
@@ -193,7 +199,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
                 {
                     connection.Open();
-                    if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) || String.IsNullOrEmpty(TextDataStart.Text) 
+                    if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) || String.IsNullOrEmpty(TextDataStart.Text)
                         || String.IsNullOrEmpty(CombIDWorks.Text))
                     {
                         MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -201,41 +207,53 @@ namespace RecordPeriphelTechniс.BoxWindow
                     }
                     else
                     {
-                        if (MessageBox.Show("Вы уверены, что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                        bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                        bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                        bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                        bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
+                        int TxtNumberString = Convert.ToInt32(TextNumber.Text);
+                        if (IDClone == 0)
                         {
-                            bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
-                            bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
-                            bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
-                            bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
-                            string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text.ToLower()}'";
-                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                            ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
-                            if (ProverkaNumber != 1)
-                            {
+                            TxtNumberString = Convert.ToInt32(TextNumber.Text);
+                        }
+                        else
+                        {
+                            TxtNumberString = TextNumberInt;
+                        }
 
-                                query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TextNumber.Text.ToLower()}',@IDComponets,'{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
-                                cmd = new SQLiteCommand(query, connection);
-                                if (String.IsNullOrEmpty(TextDataEnd.Text))
-                                {
-                                    cmd.Parameters.AddWithValue("@EndWork", null);
-                                }
-                                else
-                                {
-                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                                }
-                                cmd.Parameters.AddWithValue("@IDComponets", null);
-                                cmd.ExecuteNonQuery();
-                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TextNumber.Text.ToLower()}' and Name = '{TextName.Text.ToLower()}' and StartWork = '{TextDataStart.Text.ToLower()}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
-                                cmd = new SQLiteCommand(query, connection);
-                                IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                                MessageBox.Show("Устройство добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TxtNumberString}'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                        if (ProverkaNumber != 1)
+                        {
+
+                            query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                            values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TxtNumberString}',@IDComponets,'{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
+                            cmd = new SQLiteCommand(query, connection);
+                            if (String.IsNullOrEmpty(TextDataEnd.Text))
+                            {
+                                cmd.Parameters.AddWithValue("@EndWork", null);
                             }
                             else
                             {
-                                MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
                             }
+                            cmd.Parameters.AddWithValue("@IDComponets", null);
+                            cmd.ExecuteNonQuery();
+                            query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TxtNumberString}' and Name = '{TextName.Text.ToLower()}' and StartWork = '{TextDataStart.Text.ToLower()}' and EndWork = '{TextDataEnd.Text}' and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
+                            cmd = new SQLiteCommand(query, connection);
+                            IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                            MessageBox.Show("Устройство добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                            BtnCloun.Visibility = Visibility.Visible;
+                            TxtKoll.Visibility = Visibility.Visible;
+                            TextNumberClone.Visibility = Visibility.Visible;
+
                         }
+                        else
+                        {
+                            MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+
                     }
                 }
             }
@@ -250,7 +268,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
             {
                 connection.Open();
-                if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) || 
+                if (String.IsNullOrEmpty(CombIDOrgamniz.Text) || String.IsNullOrEmpty(TextIDKabuneta.Text) || String.IsNullOrEmpty(TextNumber.Text) || String.IsNullOrEmpty(CombIDStatus.Text) || String.IsNullOrEmpty(TextName.Text) ||
                     String.IsNullOrEmpty(CombIDWorks.Text) || String.IsNullOrEmpty(TextDataStart.Text))
                 {
                     CheckerTextOsnova();
@@ -259,57 +277,64 @@ namespace RecordPeriphelTechniс.BoxWindow
                 }
                 else
                 {
-                    if (MessageBox.Show("Вы уверены,что хотите добавить новое устройство?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
+                    bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
+                    bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
+                    bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
+                    int TxtNumberString = Convert.ToInt32(TextNumber.Text);
+                    if (IDClone == 0)
                     {
-                        bool resultType = int.TryParse(CombTypeTech.SelectedValue.ToString(), out IDTypeTech);
-                        bool resultClass = int.TryParse(CombIDOrgamniz.SelectedValue.ToString(), out int id);
-                        bool resultKab = int.TryParse(CombIDStatus.SelectedValue.ToString(), out int id2);
-                        bool resultCon = int.TryParse(CombIDWorks.SelectedValue.ToString(), out int id3);
-                        string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TextNumber.Text.ToLower()}'";
-                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
-                        ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
-                        if (ProverkaNumber != 1)
+                        TxtNumberString = Convert.ToInt32(TextNumber.Text);
+                    }
+                    else
+                    {
+                        TxtNumberString = TextNumberInt;
+                    }
+                    string query = $@"SELECT count (Number) FROM MenuPerTech WHERE Number = '{TxtNumberString}'";
+                    SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                    ProverkaNumber = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (ProverkaNumber != 1)
+                    {
+                        CheckRams();
+                        if (ProverkaRams == 0)
                         {
-                            CheckRams();
-                            if (ProverkaRams == 0)
+                            AddPcCompet();
+                            if (ProverkaPcCompont == 1)
                             {
-                                AddPcCompet();
-                                if (ProverkaPcCompont == 1)
+                                query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
+                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TxtNumberString}','{null}','{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
+                                cmd = new SQLiteCommand(query, connection);
+                                if (String.IsNullOrEmpty(TextDataEnd.Text))
                                 {
-                                    query = $@"INSERT INTO MenuPerTech('IDTypeTech','IDOrganiz','Kabunet','Number','IDComponets','Name','StartWork','EndWork','IDStatus','IDWorks','Comments')
-                                values ('{IDTypeTech}','{id}','{TextIDKabuneta.Text.ToLower()}','{TextNumber.Text.ToLower()}','{null}','{TextName.Text.ToLower()}','{TextDataStart.Text.ToLower()}',@EndWork,'{id2}','{id3}','{TextComments.Text.ToLower()}')";
-                                    cmd = new SQLiteCommand(query, connection);
-                                    if (String.IsNullOrEmpty(TextDataEnd.Text))
-                                    {
-                                        cmd.Parameters.AddWithValue("@EndWork", null);
-                                    }
-                                    else
-                                    {
-                                        cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
-                                    }
-                                    cmd.ExecuteNonQuery();
-                                    query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TextNumber.Text.ToLower()}' and Name = '{TextName.Text.ToLower()}'  and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
-                                    cmd = new SQLiteCommand(query, connection);
-                                    IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
-                                    AddRams();
-                                    AddComponets();
-                                    UpdateMenuPer();
+                                    cmd.Parameters.AddWithValue("@EndWork", null);
                                 }
+                                else
+                                {
+                                    cmd.Parameters.AddWithValue("@EndWork", TextDataEnd.Text);
+                                }
+                                cmd.ExecuteNonQuery();
+                                query = $@"SELECT ID FROM MenuPerTech WHERE IDTypeTech = '{IDTypeTech}' and IDOrganiz = '{id}' and Kabunet = '{TextIDKabuneta.Text.ToLower()}' and  Number = '{TxtNumberString}' and Name = '{TextName.Text.ToLower()}'  and  IDStatus = '{id2}' and  IDWorks ='{id3}' and Comments = '{TextComments.Text.ToLower()}' ";
+                                cmd = new SQLiteCommand(query, connection);
+                                IDMenuPerTech = Convert.ToInt32(cmd.ExecuteScalar());
+                                AddRams();
+                                AddComponets();
+                                UpdateMenuPer();
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
                     }
+                    else
+                    {
+                        MessageBox.Show("Измените номер техники", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
                 }
             }
         }
         public void AddPcCompet()
         {
-            if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text) 
+            if (String.IsNullOrEmpty(TextProccModel.Text) || String.IsNullOrEmpty(TextSpeed.Text) || String.IsNullOrEmpty(CombProccMaker.Text) || String.IsNullOrEmpty(TextMatePlatModel.Text) || String.IsNullOrEmpty(CombMatePlatMaker.Text)
                        || String.IsNullOrEmpty(TextRAMModel1.Text) || String.IsNullOrEmpty(TextVmemory1.Text) || String.IsNullOrEmpty(TextTypeMemory1.Text) ||
-                       String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) || 
+                       String.IsNullOrEmpty(TextMaker1.Text) || String.IsNullOrEmpty(TextVideoModel.Text) || String.IsNullOrEmpty(TextVideoMemory.Text) ||
                        String.IsNullOrEmpty(CombVidieoMaker.Text) || String.IsNullOrEmpty(TextDiskModel.Text) || String.IsNullOrEmpty(TextSizeDisk.Text) || String.IsNullOrEmpty(CombDiskType.Text)
                        || String.IsNullOrEmpty(TextSoundCardModel.Text) || String.IsNullOrEmpty(CombSoundCardVud.Text) || String.IsNullOrEmpty(TextPowerBlockName.Text) || String.IsNullOrEmpty(TextPowerBlockEnergy.Text)
                        || String.IsNullOrEmpty(TextCorpusModel.Text))
@@ -471,8 +496,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                         cmd.ExecuteNonQuery();
                         query = $@"SELECT count (ID) FROM  SoundCards  WHERE Model = '{TextSoundCardModel.Text.ToLower()}' and IDTypeCards = '{id8}'";
                         cmd = new SQLiteCommand(query, connection);
-                        int CheckIDSoundCards = Convert.ToInt32(cmd.ExecuteScalar()); 
-                        int IDSoundCardsCheck = 0; 
+                        int CheckIDSoundCards = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDSoundCardsCheck = 0;
                         if (CheckIDSoundCards != 0)
                         {
                             while (CheckIDSoundCards >= 1)
@@ -498,8 +523,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                         cmd.ExecuteNonQuery();
                         query = $@"SELECT count (ID) FROM  PowerBlocks  WHERE Model = '{TextPowerBlockName.Text.ToLower()}' and Energy = '{TextPowerBlockEnergy.Text.ToLower()}'";
                         cmd = new SQLiteCommand(query, connection);
-                        int CheckIDBlockPower = Convert.ToInt32(cmd.ExecuteScalar()); 
-                        int IDBlockPowerCheck = 0; 
+                        int CheckIDBlockPower = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDBlockPowerCheck = 0;
                         if (CheckIDBlockPower != 0)
                         {
                             while (CheckIDBlockPower >= 1)
@@ -525,8 +550,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                         cmd.ExecuteNonQuery();
                         query = $@"SELECT count (ID) FROM  Corpus  WHERE Model = '{TextCorpusModel.Text.ToLower()}'";
                         cmd = new SQLiteCommand(query, connection);
-                        int CheckIDCorpus = Convert.ToInt32(cmd.ExecuteScalar()); 
-                        int IDCorpusCheck = 0; 
+                        int CheckIDCorpus = Convert.ToInt32(cmd.ExecuteScalar());
+                        int IDCorpusCheck = 0;
                         if (CheckIDCorpus != 0)
                         {
                             while (CheckIDCorpus >= 1)
@@ -558,7 +583,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     MessageBox.Show(ex.Message);
                 }
             }
-        }       
+        }
 
         private void CombTypeTech_DropDownClosed(object sender, EventArgs e)
         {
@@ -586,7 +611,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             String a = CombTypeTech.Text;
             if (a == "Компьютерная техника" || a == "компьютерная техника")
             {
-                
+
                 TabProcces.IsEnabled = true;
                 TextProccModel.IsEnabled = true;
                 TextSpeed.IsEnabled = true;
@@ -599,10 +624,10 @@ namespace RecordPeriphelTechniс.BoxWindow
                 TabItemPoweBlock.IsEnabled = true;
                 TabItemCorpus.IsEnabled = true;
 
-            }           
+            }
             else
             {
-               
+
                 TabProcces.IsSelected = true;
                 TabProcces.IsEnabled = false;
                 TextProccModel.IsEnabled = false;
@@ -617,14 +642,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                 TabItemCorpus.IsEnabled = false;
 
             }
-            
+
         }
 
         public void CheckRams()
         {
             ProverkaRams = 0;
             TextRamInfo2 = "Заполните во втором слоте : ";
-            TextRamInfo3 = "Заполните в третьем слоте: " ;
+            TextRamInfo3 = "Заполните в третьем слоте: ";
             TextRamInfo4 = "Заполните в четвертом слоте: ";
             if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
             {
@@ -633,8 +658,8 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
             else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
             {
-                MessageBox.Show("Все пусто");
-                string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRams}'";               
+                //MessageBox.Show("Все пусто");
+                string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRams}'";
                 TextRamInfo2 = "";
             }
             else
@@ -658,14 +683,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                 ProverkaRams = 1;
             }
             if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
-            {                           
+            {
                 TextRamInfo3 = "";
             }
-            
+
             else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
             {
                 //  MessageBox.Show("Все пусто");
-                string query1 = $@"UPDATE RAMs SET  Model3='нет', Vmemory3='нет',TypeMemory3='нет',Maker3='нет' WHERE ID='{IDRams}'";               
+                string query1 = $@"UPDATE RAMs SET  Model3='нет', Vmemory3='нет',TypeMemory3='нет',Maker3='нет' WHERE ID='{IDRams}'";
                 TextRamInfo3 = "";
             }
             else
@@ -690,9 +715,9 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
             if (TextRAMModel4.Text != "" && TextVmemory4.Text != "" && TextTypeMemory4.Text != "" && TextMaker4.Text != "")
             {
-               // MessageBox.Show("заполнено все4");               
+                // MessageBox.Show("заполнено все4");               
                 TextRamInfo4 = "";
-            }            
+            }
             else if (TextRAMModel4.Text == "" && (TextVmemory4.Text == "" && TextTypeMemory4.Text == "" && TextMaker4.Text == ""))
             {
                 //  MessageBox.Show("Все пусто");               
@@ -722,7 +747,7 @@ namespace RecordPeriphelTechniс.BoxWindow
             {
                 MessageBox.Show(TextRamInfo2 + '\n' + TextRamInfo3 + '\n' + TextRamInfo4);
             }
-            
+
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -760,31 +785,32 @@ namespace RecordPeriphelTechniс.BoxWindow
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
+
             ClearData();
         }
 
         public void AddRams()
         {
-            try 
+            try
             {
                 using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
-                {                    
-                    connection.Open();                    
+                {
+                    connection.Open();
                     if (TextRAMModel2.Text != "" && TextVmemory2.Text != "" && TextTypeMemory2.Text != "" && TextMaker2.Text != "")
                     {
-                       // MessageBox.Show("заполнено все2");
+                        // MessageBox.Show("заполнено все2");
                         string query1 = $@"UPDATE RAMs SET Model2='{TextRAMModel2.Text.ToLower()}', Vmemory2='{TextVmemory2.Text.ToLower()}',TypeMemory2='{TextTypeMemory2.Text.ToLower()}',Maker2='{TextMaker2.Text.ToLower()}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                    }                    
+                    }
                     else if (TextRAMModel2.Text == "" && (TextVmemory2.Text == "" && TextTypeMemory2.Text == "" && TextMaker2.Text == ""))
                     {
-                       // MessageBox.Show("Все пусто");
+                        // MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model2='нет', Vmemory2='нет',TypeMemory2='нет',Maker2='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
 
-                    }                   
+                    }
                     if (TextRAMModel3.Text != "" && TextVmemory3.Text != "" && TextTypeMemory3.Text != "" && TextMaker3.Text != "")
                     {
                         //MessageBox.Show("заполнено все3");
@@ -792,38 +818,39 @@ namespace RecordPeriphelTechniс.BoxWindow
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
 
-                    }                    
+                    }
                     else if (TextRAMModel3.Text == "" && (TextVmemory3.Text == "" && TextTypeMemory3.Text == "" && TextMaker3.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model3='нет', Vmemory3='нет',TypeMemory3='нет',Maker3='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                 
-                    }                   
+
+                    }
                     if (TextRAMModel4.Text != "" && TextVmemory4.Text != "" && TextTypeMemory4.Text != "" && TextMaker4.Text != "")
                     {
                         //MessageBox.Show("заполнено все4");
                         string query1 = $@"UPDATE RAMs SET Model4='{TextRAMModel4.Text.ToLower()}', Vmemory4='{TextVmemory4.Text.ToLower()}',TypeMemory4='{TextTypeMemory4.Text.ToLower()}',Maker4='{TextMaker4.Text}' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
                         cmd1.ExecuteNonQuery();
-                      
+
                     }
                     else if (TextRAMModel4.Text == "" && (TextVmemory4.Text == "" && TextTypeMemory4.Text == "" && TextMaker4.Text == ""))
                     {
                         //  MessageBox.Show("Все пусто");
                         string query1 = $@"UPDATE RAMs SET  Model4='нет', Vmemory4='нет',TypeMemory4='нет',Maker4='нет' WHERE ID='{IDRams}'";
                         SQLiteCommand cmd1 = new SQLiteCommand(query1, connection);
-                        cmd1.ExecuteNonQuery();                       
-                    }                   
+                        cmd1.ExecuteNonQuery();
+                    }
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        
+
         public void AddComponets()
         {
             try
@@ -838,13 +865,14 @@ namespace RecordPeriphelTechniс.BoxWindow
                     cmd = new SQLiteCommand(query, connection);
                     IDComponets = Convert.ToInt32(cmd.ExecuteScalar());
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-       
+
         public void UpdateMenuPer()
         {
             try
@@ -856,6 +884,9 @@ namespace RecordPeriphelTechniс.BoxWindow
                     SQLiteCommand cmd = new SQLiteCommand(query, connection);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Устройство добавлено", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    BtnCloun.Visibility = Visibility.Visible;
+                    TxtKoll.Visibility = Visibility.Visible;
+                    TextNumberClone.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
@@ -863,6 +894,48 @@ namespace RecordPeriphelTechniс.BoxWindow
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void ClonePc()
+        {
+            String textcomb = CombTypeTech.Text;
+
+            if (String.IsNullOrEmpty(TextNumberClone.Text))
+            {
+                MessageBox.Show("Заполните обязательные поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                CheckerTextOsnova();
+            }
+            else
+            {
+                string NumberClone = TextNumberClone.Text;
+                int NumberCloneint = Convert.ToInt32(NumberClone);
+                IDClone = 1;
+                for (int i = 1; NumberCloneint >= i; i++)
+                {
+                    TextNumberInt = Convert.ToInt32(TextNumber.Text);
+                    TextNumberInt = TextNumberInt + i;
+
+                    if (textcomb == "компьютерная техника" || textcomb == "Компьютерная техника")
+                    {
+                        AddOsnovaPC();
+
+                    }
+                    else
+                    {
+                        AddOsnovaPerTech();
+                    }
+                }
+                IDClone = 0;
+            }
+        }
+
+        private void BtnCloun_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите клонировать технику?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ClonePc();
+            }
+        }
+
         private void Expander1_Expanded(object sender, RoutedEventArgs e)
         {
             Expander2.IsExpanded = false;
