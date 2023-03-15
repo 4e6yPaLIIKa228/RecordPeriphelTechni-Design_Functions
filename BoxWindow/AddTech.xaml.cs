@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -643,7 +644,7 @@ namespace RecordPeriphelTechniс.BoxWindow
 
             }
 
-        }
+        } 
 
         public void CheckRams()
         {
@@ -993,5 +994,16 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9,$]");
+            e.Handled = regex.IsMatch(e.Text); 
+        }
+        private void TextValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-ZА-яА-я ,]+");
+            e.Handled = regex.IsMatch(e.Text);
+
+        }
     }
 }
