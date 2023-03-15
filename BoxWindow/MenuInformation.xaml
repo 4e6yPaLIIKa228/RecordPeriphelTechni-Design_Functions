@@ -191,6 +191,7 @@
                                                 <TextBlock   FontSize="25" Text=" Скорость: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= V1 }" />
                                                 <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text=" DDR " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory1}" />
                                                 <TextBlock   FontSize="25" Text=" Производитель: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= Maker1}" />
@@ -202,6 +203,7 @@
                                                 <TextBlock   FontSize="25" Text=" Скорость: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= V2 }" />
                                                 <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text=" DDR " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory2}" />
                                                 <TextBlock   FontSize="25" Text=" Производитель: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= Maker2}" />
@@ -213,6 +215,7 @@
                                                 <TextBlock   FontSize="25" Text=" Скорость: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= V3 }" />
                                                 <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text=" DDR " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory3 }" />
                                                 <TextBlock   FontSize="25" Text=" Производитель: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= Maker3}" />
@@ -224,6 +227,7 @@
                                                 <TextBlock   FontSize="25" Text=" Скорость: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= V4 }" />
                                                 <TextBlock   FontSize="25" Text=" Тип папяти: " />
+                                                <TextBlock   FontSize="25" Text=" DDR " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= TypeMemory4 }" />
                                                 <TextBlock   FontSize="25" Text=" Производитель: " />
                                                 <TextBlock   FontSize="25" Text="{Binding Path= Maker4}" />

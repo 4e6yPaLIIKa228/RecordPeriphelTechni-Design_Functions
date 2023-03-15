@@ -72,15 +72,15 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text=" Имя" VerticalAlignment="Center"   Margin="0,0,0,0" HorizontalAlignment="Right" />
-                                    <TextBox x:Name="TextName"  VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="215.7,0,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox"/>
+                                    <TextBox x:Name="TextName"  VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="215.7,0,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" PreviewKeyDown="TextValidationTextBox"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text=" Номер " VerticalAlignment="Center"   Margin="0,0,0,0"/>
-                                    <TextBox x:Name="TextNumber" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="188.5,0,0,0" materialDesign:HintAssist.Hint="Номер"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox x:Name="TextNumber" VerticalAlignment="Top"   Width="350"  FontSize="20" Margin="188.5,0,0,0" materialDesign:HintAssist.Hint="Номер"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"  PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock  x:Name="TxtKoll"  FontSize="20" Text=" Колл. клона " Visibility="Collapsed" VerticalAlignment="Center"   Margin="0,0,0,0"/>
-                                    <TextBox x:Name="TextNumberClone" VerticalAlignment="Top" Visibility="Collapsed"    Width="350"  FontSize="20" Margin="137.5,0,0,0" materialDesign:HintAssist.Hint="Колличество"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox x:Name="TextNumberClone" VerticalAlignment="Top" Visibility="Collapsed"    Width="350"  FontSize="20" Margin="137.5,0,0,0" materialDesign:HintAssist.Hint="Колличество"  MaxLength="22" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewKeyDown="TextValidationTextBox" PreviewTextInput="NumberValidationTextBox"/>
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -125,11 +125,11 @@
                             <StackPanel Orientation="Vertical" Width="auto" HorizontalAlignment="Left"  >
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextProccModel" Margin="196,0,0,0" materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextProccModel" Margin="196,0,0,0" materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"  />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Тактовая частота"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextSpeed" Margin="105,0,0,0"  materialDesign:HintAssist.Hint="Тактовая частота(ГГц)"  MaxLength="3"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox"/>
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSpeed" Margin="105,0,0,0"  materialDesign:HintAssist.Hint="Тактовая частота(ГГц)"  MaxLength="3"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBoxZapud" PreviewKeyDown="TextValidationTextBox"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal"  Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -141,7 +141,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextMatePlatModel" Margin="196,0,0,0"   materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextMatePlatModel" Margin="196,0,0,0"   materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -153,11 +153,11 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextVideoModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextVideoModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"  />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Объем видеопамяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextVideoMemory" Margin="75.2,0,0,0"  materialDesign:HintAssist.Hint="Объем видеопамяти(МБ)"  MaxLength="6"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox"  />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextVideoMemory" Margin="75.2,0,0,0"  materialDesign:HintAssist.Hint="Объем видеопамяти(МБ)"  MaxLength="6"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox"  PreviewKeyDown="TextValidationTextBox" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -169,11 +169,11 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextDiskModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextDiskModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Размер"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextSizeDisk" Margin="199.1,0,0,0"  materialDesign:HintAssist.Hint="Размер(ГБ)"  MaxLength="5"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSizeDisk" Margin="199.1,0,0,0"  materialDesign:HintAssist.Hint="Размер(ГБ)"  MaxLength="5"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Тип"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -185,7 +185,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextSoundCardModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSoundCardModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
                                 </StackPanel>                                
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Вид"  Margin="5,0,0,0" VerticalAlignment="Center" />
@@ -197,11 +197,11 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockEnergy"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockEnergy"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Мощность"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockName"  Margin="170,0,0,0"  materialDesign:HintAssist.Hint="Мощность(Вт)"  MaxLength="4"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockName"  Margin="170,0,0,0"  materialDesign:HintAssist.Hint="Мощность(Вт)"  MaxLength="4"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -213,19 +213,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel1" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel1" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory1" materialDesign:HintAssist.Hint="Мощность(Вт)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory1" materialDesign:HintAssist.Hint="Объем памяти(ГБ)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory1" materialDesign:HintAssist.Hint="DDR" MaxLength="4" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory1" materialDesign:HintAssist.Hint="DDR" MaxLength="1" Margin="179.8,0,0,0" PreviewKeyDown="TextValidationTextBox" PreviewTextInput="NumberValidationTextBox"  />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker1"  materialDesign:HintAssist.Hint="Производитель" MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker1"  materialDesign:HintAssist.Hint="Производитель" MaxLength="25" Margin="141.9,0,0,0" PreviewTextInput="TextValidationTextBox"  />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -233,19 +233,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel2" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel2" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"    />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory2"  materialDesign:HintAssist.Hint="Мощность(Вт)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory2"  materialDesign:HintAssist.Hint="Объем памяти(ГБ)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory2" materialDesign:HintAssist.Hint="DDR" MaxLength="4" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory2" materialDesign:HintAssist.Hint="DDR" MaxLength="1" Margin="179.8,0,0,0" PreviewKeyDown="TextValidationTextBox" PreviewTextInput="NumberValidationTextBox" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker2" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker2" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" PreviewTextInput="TextValidationTextBox" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -253,19 +253,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel3" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel3" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory3" materialDesign:HintAssist.Hint="Мощность(Вт)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory3" materialDesign:HintAssist.Hint="Объем памяти(ГБ)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory3" materialDesign:HintAssist.Hint="DDR" MaxLength="4" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory3" materialDesign:HintAssist.Hint="DDR" MaxLength="1" Margin="179.8,0,0,0" PreviewKeyDown="TextValidationTextBox" PreviewTextInput="NumberValidationTextBox"  />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker3" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker3" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" PreviewTextInput="TextValidationTextBox" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -273,19 +273,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel4" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel4" materialDesign:HintAssist.Hint="Модель"  MaxLength="25" Margin="214.8,0,0,0"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory4" materialDesign:HintAssist.Hint="Мощность(Вт)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory4" materialDesign:HintAssist.Hint="Объем памяти(ГБ)" MaxLength="3" Margin="151.1,0,0,0" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory4" materialDesign:HintAssist.Hint="DDR" MaxLength="4" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory4" materialDesign:HintAssist.Hint="DDR" MaxLength="1" Margin="179.8,0,0,0" PreviewTextInput="NumberValidationTextBox" PreviewKeyDown="TextValidationTextBox"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker4" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker4" materialDesign:HintAssist.Hint="Производитель"  MaxLength="25" Margin="141.9,0,0,0" PreviewTextInput="TextValidationTextBox"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -297,7 +297,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextCorpusModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextCorpusModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap"  />
                                 </StackPanel>                               
                             </StackPanel>
                         </TabItem>
