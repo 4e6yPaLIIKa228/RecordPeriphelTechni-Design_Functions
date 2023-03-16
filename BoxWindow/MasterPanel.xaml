@@ -72,13 +72,14 @@
                     <MenuItem x:Name="ListWind" Header="Окна">
                         <MenuItem Name="ListTechn" Header="Список устройств" Click="ListTechn_Click" />
                         <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
+                        <MenuItem Name="ExitAcc" Header="Выйти из аккаунта" Click="ExitAcc_Click"  />
                     </MenuItem>                   
                     <MenuItem x:Name="ItemInfoTech" Header="Информация" Click="ItemInfoTech_Click" >                       
                     </MenuItem>
                     <MenuItem Header="Отчет" >
                         <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" ></MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Помощь">                       
+                    <MenuItem Header="Помощь" Visibility="Collapsed">                       
                     </MenuItem>
                 </Menu>
             </StackPanel>

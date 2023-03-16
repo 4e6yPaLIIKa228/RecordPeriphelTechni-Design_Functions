@@ -99,7 +99,9 @@ namespace RecordPeriphelTechniс.Windows
 
         public void Users()
         {
-            ListWind.Visibility = Visibility.Collapsed;
+           // ListWind.Visibility = Visibility.Collapsed;
+            ListService.Visibility = Visibility.Collapsed;
+            ListUsers.Visibility = Visibility.Collapsed;
         }
 
         public void Master()
@@ -1175,6 +1177,18 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
 
-        }       
+        }
+
+        private void ExitAcc_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Saver.IDUser = null;
+                Saver.LoginUser = null;
+                Authorization admpnl = new Authorization();
+                this.Close();
+                admpnl.ShowDialog();
+            }
+        }
     }
 }

@@ -50,6 +50,7 @@
                     <MenuItem Name="ListWind"  Header="Окна"  HorizontalAlignment="Left"  >
                         <MenuItem Name="ListService" Header="Список заявок" Click="ListService_Click"  />
                         <MenuItem Name="ListUsers" Header="Список пользователей" Click="ListUsers_Click" />
+                        <MenuItem Name="ExitAcc" Header="Выйти из аккаунта" Click="ExitAcc_Click"  />
                     </MenuItem>
                     <MenuItem Name="MenuData" Header="Данные">
                         <MenuItem x:Name="AddTec" Header="Добавить устройство" Click="AddTec_Click" ></MenuItem>
@@ -65,7 +66,7 @@
                         <MenuItem x:Name="AddComponet" Header="Добавить компонент" Click="AddComponet_Click" />
                         <MenuItem x:Name="DellComponet" Header="Удалить компонент" Click="DellComponet_Click"  />
                     </MenuItem>
-                    <MenuItem Header="Помощь">                       
+                    <MenuItem Header="Помощь" Visibility="Collapsed">                       
                     </MenuItem>
                 </Menu>
             </StackPanel>
@@ -325,7 +326,7 @@
             <TextBlock Text="Version 0.1 "/>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="2"  VerticalAlignment="Center" Orientation="Vertical" >
-            <TextBlock Text="Список оборудования" FontSize="16"  Margin="5,0,0,0"/>
+            <TextBlock Text="Список устройств" FontSize="16"  Margin="5,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -293,5 +293,16 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             ListUsers.Visibility = Visibility.Collapsed;
         }
+        private void ExitAcc_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Saver.IDUser = null;
+                Saver.LoginUser = null;
+                Authorization admpnl = new Authorization();
+                this.Close();
+                admpnl.ShowDialog();
+            }
+        }
     } 
 }

@@ -51,6 +51,7 @@
                     <MenuItem Name="ListWind"  Header="Окна"  HorizontalAlignment="Left" >
                         <MenuItem Name="ListTechnic" Header="Список устройтсв" Click="ListTechnic_Click"  />
                         <MenuItem Name="ListService" Header="Список заявок" Click="ListService_Click"  />
+                        <MenuItem Name="ExitAcc" Header="Выйти из аккаунта" Click="ExitAcc_Click"  />
                     </MenuItem>
                     <MenuItem Name="MenuData" Header="Данные">
                         <MenuItem Header="Добавить пользователя" Name="AddUsers" Click="AddUsers_Click"/>
@@ -60,7 +61,7 @@
                         <MenuItem Name="ExsportExcel" Header="Экспорт в Excel" Click="ExsportExcel_Click" >
                         </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Помощь">
+                    <MenuItem Header="Помощь" Visibility="Collapsed">
                     </MenuItem>
                 </Menu>
             </StackPanel>
