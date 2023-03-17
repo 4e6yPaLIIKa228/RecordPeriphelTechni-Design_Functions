@@ -57,16 +57,16 @@
             <StackPanel Orientation="Vertical">
                 <PasswordBox Width="350"  FontSize="20" Name="PassBoxNew1" HorizontalAlignment="Right" Margin="0,15,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Новый Пароль"  />
                 <PasswordBox Width="350"  FontSize="20" Name="PassBoxNew2" HorizontalAlignment="Right" Margin="0,15,0,0"  Style="{StaticResource MaterialDesignOutlinedPasswordBox}" materialDesign:HintAssist.Hint="Новый Пароль"  />
-                <TextBox Name="TextFamili"  VerticalAlignment="Top"  HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
-                <TextBox x:Name="TextName"  VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
-                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                <TextBox Name="TextFamili"  VerticalAlignment="Top"  HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" />
+                <TextBox x:Name="TextName"  VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" />
+                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"  >
             <StackPanel Orientation="Horizontal">
-                <Button Name="InHome" Height="40" Width="120" Margin="25,0,25,0"  Content="Назад"/>
-                <Button Name="DellUser" Height="40" Width="120" Margin="0,0,25,0" Content="Удалить"/>
+                <Button Name="InHome" Height="40" Width="120" Margin="25,0,25,0"  Content="Назад" Click="InHome_Click"/>
+                <Button Name="DellUser" Height="40" Width="120" Margin="0,0,25,0" Content="Удалить" Visibility="Collapsed"/>
                 <Button x:Name="EdditUser" Height="40" Width="120" Margin="0,0,25,0" Content="Изменить" Click="EdditUser_Click"/>
             </StackPanel>            
         </Grid>

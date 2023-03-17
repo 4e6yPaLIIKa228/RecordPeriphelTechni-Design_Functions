@@ -54,9 +54,9 @@
         </Grid>
         <Grid HorizontalAlignment="Left" Grid.Row="1"  Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="14,0,0,0"  >
             <StackPanel Orientation="Vertical">
-                <TextBox Name="TextFamili"  VerticalAlignment="Top"  HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextFamili_TextChanged" />
-                <TextBox x:Name="TextName"  VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextName_TextChanged" />
-                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                <TextBox Name="TextFamili"  VerticalAlignment="Top"  HorizontalAlignment="Right"  Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Фамилия"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextFamili_TextChanged" PreviewTextInput="TextValidationTextBox" />
+                <TextBox x:Name="TextName"  VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Имя"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" TextChanged="TextName_TextChanged" PreviewTextInput="TextValidationTextBox" />
+                <TextBox x:Name="TextOthectbo" VerticalAlignment="Top" HorizontalAlignment="Right"   Width="350"  FontSize="20" Margin="0,15,0,0" materialDesign:HintAssist.Hint="Отчество"  MaxLength="25" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" PreviewTextInput="TextValidationTextBox" />
             </StackPanel>
         </Grid>
 
