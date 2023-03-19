@@ -67,48 +67,72 @@ namespace RecordPeriphelTechniс.BoxWindow
                             int UsersFound = Convert.ToInt32(cmd.ExecuteScalar());
                             if (UsersFound == 1)
                             {
-                                query = $@"SELECT Users.ID,Users.IDAllowance, AllowanceUsers.Allowance FROM Users
+                                query = $@"SELECT  COUNT(1) FROM Users WHERE Login='{LoginLower}' AND Password = @Password and IDStatus = 4";
+                                cmd = new SQLiteCommand(query, connection);
+                                cmd.Parameters.AddWithValue("@Password", Pass);
+                                int UsersFoundBan = Convert.ToInt32(cmd.ExecuteScalar());
+                                if (UsersFoundBan == 0)
+                                {
+                                    query = $@"SELECT  COUNT(1) FROM Users WHERE Login='{LoginLower}' AND Password = @Password and IDStatus = 2";
+                                    cmd = new SQLiteCommand(query, connection);
+                                    cmd.Parameters.AddWithValue("@Password", Pass);
+                                    int UsersFoundBanTime = Convert.ToInt32(cmd.ExecuteScalar());
+                                    if (UsersFoundBanTime == 0)
+                                    {
+
+                                        query = $@"SELECT Users.ID,Users.IDAllowance, AllowanceUsers.Allowance FROM Users
                                         join AllowanceUsers on Users.IDAllowance = AllowanceUsers.ID 
                                         WHERE Login= '{LoginLower}'";
-                                Saver.LoginUser = LoginLower;
-                                SQLiteDataReader dr = null;
-                                SQLiteCommand cmd1 = new SQLiteCommand(query, connection);
-                                string IDAllowanceString = null;
-                                dr = cmd1.ExecuteReader();
-                                while (dr.Read())
-                                {
-                                    Saver.IDUser = dr["ID"].ToString();
-                                    IDAllowanceString = dr["Allowance"].ToString();
-                                    //  Saver.IDAcc = countID;
+                                        Saver.LoginUser = LoginLower;
+                                        SQLiteDataReader dr = null;
+                                        SQLiteCommand cmd1 = new SQLiteCommand(query, connection);
+                                        string IDAllowanceString = null;
+                                        dr = cmd1.ExecuteReader();
+                                        while (dr.Read())
+                                        {
+                                            Saver.IDUser = dr["ID"].ToString();
+                                            IDAllowanceString = dr["Allowance"].ToString();
+                                            //  Saver.IDAcc = countID;
+                                        }
+
+                                        if (IDAllowanceString == "Администратор" || IDAllowanceString == "администратор")
+                                        {
+                                            MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            Saver.IDAllowanceString = IDAllowanceString;
+                                            AdminPanel admpnl = new AdminPanel();
+                                            this.Close();
+                                            admpnl.ShowDialog();
+                                            connection.Close();
+                                        }
+                                        else if (IDAllowanceString == "Пользователь" || IDAllowanceString == "пользователь")
+                                        {
+                                            Saver.Visitor = 0;
+                                            MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            Saver.IDAllowanceString = IDAllowanceString;
+                                            MenuInformation menuinfor = new MenuInformation();
+                                            this.Close();
+                                            menuinfor.ShowDialog();
+                                            connection.Close();
+                                        }
+                                        else if (IDAllowanceString == "Мастер" || IDAllowanceString == "мастер")
+                                        {
+                                            Saver.Visitor = 0;
+                                            MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                                            Saver.IDAllowanceString = IDAllowanceString;
+                                            MasterPanel master = new MasterPanel();
+                                            this.Close();
+                                            master.ShowDialog();
+                                            connection.Close();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Ваш аккаунт неактивен, обратитесь к администратору системы", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    }
                                 }
-                                if (IDAllowanceString == "Администратор" || IDAllowanceString == "администратор")
+                                else
                                 {
-                                    MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    Saver.IDAllowanceString = IDAllowanceString;
-                                    AdminPanel admpnl = new AdminPanel();                                   
-                                    this.Close();
-                                    admpnl.ShowDialog();
-                                    connection.Close();
-                                }
-                                else if (IDAllowanceString == "Пользователь" || IDAllowanceString == "пользователь")
-                                {
-                                    Saver.Visitor = 0;
-                                    MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    Saver.IDAllowanceString = IDAllowanceString;
-                                    MenuInformation menuinfor = new MenuInformation();                                    
-                                    this.Close();
-                                    menuinfor.ShowDialog();
-                                    connection.Close();
-                                }
-                                else if (IDAllowanceString == "Мастер" || IDAllowanceString == "мастер")
-                                {
-                                    Saver.Visitor = 0;
-                                    MessageBox.Show("Добро пожаловать!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
-                                    Saver.IDAllowanceString = IDAllowanceString;
-                                    MasterPanel master = new MasterPanel();                                    
-                                    this.Close();
-                                    master.ShowDialog();
-                                    connection.Close();
+                                    MessageBox.Show("Ваш аккаунт заблокирован", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                                 }
 
                                 connection.Close();

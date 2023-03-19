@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -150,8 +151,7 @@ namespace RecordPeriphelTechniс.Windows
             SimpleComand.CheckTextBox(TextPowerBlockEnergy);
             SimpleComand.CheckTextBox(TextPowerBlockName);
             SimpleComand.CheckTextBox(TextCorpusModel);
-        }
-
+        }  
         public void CombBoxDowmload()  //Данные для комбобоксов 
         {
             using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
@@ -826,6 +826,34 @@ namespace RecordPeriphelTechniс.Windows
             catch
             {
 
+            }
+        }
+        public void DellTech()
+        {
+
+        }
+
+        private void BtnDell_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите списать эту технику?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                    {
+                        connection.Open();
+                        var DateNow = DateTime.Now.ToString("dd/MM/yyyy");
+                        string query = $@"UPDATE MenuPerTech SET IDStatus='{2}',IDWorks='{4}', EndWork = '{DateNow}'  WHERE ID='{IDMenuPerTech}'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Устройство списано", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                        this.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 

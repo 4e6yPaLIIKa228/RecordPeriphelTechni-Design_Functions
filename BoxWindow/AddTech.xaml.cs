@@ -913,7 +913,8 @@ namespace RecordPeriphelTechniс.BoxWindow
                 for (int i = 1; NumberCloneint >= i; i++)
                 {
                     TextNumberInt = Convert.ToInt32(TextNumber.Text);
-                    TextNumberInt = TextNumberInt + i;
+                    TextNumberInt = TextNumberInt + 1;
+                    TextNumber.Text = Convert.ToString(TextNumberInt);
 
                     if (textcomb == "компьютерная техника" || textcomb == "Компьютерная техника")
                     {

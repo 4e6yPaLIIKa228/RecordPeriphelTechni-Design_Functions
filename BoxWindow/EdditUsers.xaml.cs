@@ -169,6 +169,17 @@ namespace RecordPeriphelTechniс.BoxWindow
         {
             this.Close();
         }
+        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                this.DragMove();
+            }
+            catch
+            {
+
+            }
+        }
 
         private void EdditUser_Click(object sender, RoutedEventArgs e)
         {
@@ -178,6 +189,41 @@ namespace RecordPeriphelTechniс.BoxWindow
         private void InHome_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        public void DellUsers()
+        {
+            if (MessageBox.Show("Вы уверены,что хотите удлаить аккаунт данные?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    using (SQLiteConnection connection = new SQLiteConnection(DBConnection.myConn))
+                    {
+                        if (IDUser != Saver.IDUser)
+                        {
+                            connection.Open();
+                            string query = $@"UPDATE Users SET  IDStatus='{4}'  WHERE ID='{IDUser}';";
+                            SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Данные обновленны, аккаунт удален", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Вы не можете удалить свой аккаунт", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void DellUser_Click(object sender, RoutedEventArgs e)
+        {
+            DellUsers();
         }
 
         private void TextValidationTextBox(object sender, TextCompositionEventArgs e)
