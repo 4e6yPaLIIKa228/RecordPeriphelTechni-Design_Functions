@@ -1176,7 +1176,6 @@ WHERE  MenuPerTech.IDTypeTech = '3'
             ScrollViewer scv = (ScrollViewer)sender;
             scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
             e.Handled = true;
-
         }
 
         private void ExitAcc_Click(object sender, RoutedEventArgs e)

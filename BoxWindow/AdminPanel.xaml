@@ -117,7 +117,7 @@
         </Grid>
 
         <Grid   Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="4" Margin="5,5,5,0"  >
-            <ScrollViewer >
+            <ScrollViewer x:Name="ScrollAdminPanel" PreviewMouseWheel="ScrollAdminPanel_PreviewMouseWheel" VerticalScrollBarVisibility="Hidden">
                 <DataGrid  IsReadOnly="True"   ColumnWidth="*"  x:Name="DataGridUsers" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseLeftButtonDown="DataGridUsers_MouseLeftButtonDown" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />

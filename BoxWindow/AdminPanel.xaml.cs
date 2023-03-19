@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -248,6 +249,17 @@ namespace RecordPeriphelTechniс.BoxWindow
                         DataGridUsers.ItemsSource = DT.DefaultView;
                         cmd.ExecuteNonQuery();
                     }
+                    if (combtext == "Доступ")
+                    {
+                        DataGridUsers.ItemsSource = null;
+                        string query = $@"{DBSearch}  WHERE AllowanceUsers.Allowance like '%{TxtSearch.Text.ToLower()}%' or AllowanceUsers.Allowance like '%{TxtSearch.Text.ToUpper()}%' or AllowanceUsers.Allowance like '%{TxtSearch.Text}%'";
+                        SQLiteCommand cmd = new SQLiteCommand(query, connection);
+                        DataTable DT = new DataTable("Users");
+                        SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
+                        SDA.Fill(DT);
+                        DataGridUsers.ItemsSource = DT.DefaultView;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)
@@ -347,5 +359,19 @@ namespace RecordPeriphelTechniс.BoxWindow
             }
         }
 
+        private void ScrollAdminPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+        private void ScrollPCLineUp(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)ScrollAdminPanel).LineUp();
+        }
+        private void ScrollPCLineDown(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)ScrollAdminPanel).LineDown();
+        }       
     }
 }

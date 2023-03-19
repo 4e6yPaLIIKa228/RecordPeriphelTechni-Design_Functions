@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -226,7 +227,7 @@ namespace RecordPeriphelTechniс.BoxWindow
                     if (combtext == "Мастер")
                     {
                         DataGridApplications.ItemsSource = null;
-                        string query = $@"{DBSearch}  ??????";
+                        string query = $@"{DBSearch}  where  Users.Surname like '%{TxtSearch.Text}%' ";
                         SQLiteCommand cmd = new SQLiteCommand(query, connection);
                         DataTable DT = new DataTable("RepairDevice");
                         SQLiteDataAdapter SDA = new SQLiteDataAdapter(cmd);
@@ -303,6 +304,22 @@ namespace RecordPeriphelTechniс.BoxWindow
                 this.Close();
                 admpnl.ShowDialog();
             }
+        }
+     
+        private void ScrollPCLineUp(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)ScrollMasterPanel).LineUp();
+        }
+        private void ScrollPCLineDown(object sender, RoutedEventArgs e)
+        {
+            ((IScrollInfo)ScrollMasterPanel).LineDown();
+        }
+
+        private void ScrollMasterPanel_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
         }
     } 
 }

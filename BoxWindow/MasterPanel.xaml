@@ -97,7 +97,7 @@
                     <TextBlock>Тип устройства</TextBlock>
                     <TextBlock>Номер</TextBlock>
                     <TextBlock>Статус</TextBlock>
-                    <TextBlock>Мастер</TextBlock>
+                    <!--<TextBlock>Мастер</TextBlock>-->
                     <TextBlock>Дата обращения</TextBlock>
                     <TextBlock>Коментарий</TextBlock>
                 </ComboBox>
@@ -108,7 +108,7 @@
             <TextBlock Text="Панель мастера" FontSize="16"  Margin="5,0,0,0"/>
         </StackPanel> 
         <Grid  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="4" Margin="5,0,5,0" >
-          <ScrollViewer >
+            <ScrollViewer x:Name="ScrollMasterPanel" PreviewMouseWheel="ScrollMasterPanel_PreviewMouseWheel" VerticalScrollBarVisibility="Hidden" >
             <DataGrid  IsReadOnly="True" ColumnWidth="*" HorizontalAlignment="Center"  x:Name="DataGridApplications" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0"  Background="White" MouseDoubleClick="ListApplications_MouseDoubleClick" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID"  FontSize="20" Width="60" Binding="{Binding ID}"  />
