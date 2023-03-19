@@ -187,15 +187,15 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextDiskModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextDiskModel" IsReadOnly="True"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Размер"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextSizeDisk" Margin="199.1,0,0,0"  materialDesign:HintAssist.Hint="Размер"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" x:Name="TextSizeDisk" IsReadOnly="True" Margin="199.1,0,0,0"  materialDesign:HintAssist.Hint="Размер"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Тип"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <ComboBox Width="350" FontSize="20" x:Name="CombDiskType" Margin="235.3,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Тип" />
+                                    <ComboBox Width="350" IsHitTestVisible="False" FontSize="20" x:Name="CombDiskType" IsReadOnly="True" Margin="235.3,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Тип" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -203,11 +203,11 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextSoundCardModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" IsReadOnly="True" x:Name="TextSoundCardModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Вид"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <ComboBox Width="350" FontSize="20" x:Name="CombSoundCardVud" Margin="233.2,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Виды" />
+                                    <ComboBox Width="350" IsHitTestVisible="False" FontSize="20" x:Name="CombSoundCardVud" Margin="233.2,0,0,0" Style="{StaticResource MaterialDesignOutlinedComboBox}" materialDesign:HintAssist.Hint="Виды" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -215,11 +215,11 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockEnergy"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" IsReadOnly="True" x:Name="TextPowerBlockEnergy"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Мощность"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextPowerBlockName"  Margin="170,0,0,0"  materialDesign:HintAssist.Hint="Мощность"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" FontSize="20" IsReadOnly="True" x:Name="TextPowerBlockName"  Margin="170,0,0,0"  materialDesign:HintAssist.Hint="Мощность"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
@@ -231,19 +231,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel1"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextRAMModel1"  MaxLength="25" Margin="214.8,0,0,0"   />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory1" MaxLength="25" Margin="151.1,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextVmemory1" MaxLength="25" Margin="151.1,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory1" MaxLength="25" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextTypeMemory1" MaxLength="25" Margin="179.8,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker1"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextMaker1"  MaxLength="25" Margin="141.9,0,0,0" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -251,19 +251,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel2"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextRAMModel2"  MaxLength="25" Margin="214.8,0,0,0"   />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory2" MaxLength="25" Margin="151.1,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextVmemory2" MaxLength="25" Margin="151.1,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory2" MaxLength="25" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextTypeMemory2" MaxLength="25" Margin="179.8,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker2"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" IsReadOnly="True" FontSize="20" x:Name="TextMaker2"  MaxLength="25" Margin="141.9,0,0,0" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -271,19 +271,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel3"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextRAMModel3"  MaxLength="25" Margin="214.8,0,0,0"   />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory3" MaxLength="25" Margin="151.1,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextVmemory3" MaxLength="25" Margin="151.1,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory3" MaxLength="25" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextTypeMemory3" MaxLength="25" Margin="179.8,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker3"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextMaker3"  MaxLength="25" Margin="141.9,0,0,0" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -291,19 +291,19 @@
                                             <StackPanel Margin="24,0,24,16" Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                                 <StackPanel Orientation ="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextRAMModel4"  MaxLength="25" Margin="214.8,0,0,0"   />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextRAMModel4"  MaxLength="25" Margin="214.8,0,0,0"   />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Объем памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextVmemory4" MaxLength="25" Margin="151.1,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextVmemory4" MaxLength="25" Margin="151.1,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal"  Margin="0,10,0,0">
                                                     <TextBlock   FontSize="20" Text="Тип памяти"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextTypeMemory4" MaxLength="25" Margin="179.8,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextTypeMemory4" MaxLength="25" Margin="179.8,0,0,0" />
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                                                     <TextBlock   FontSize="20" Text="Производитель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                                    <TextBox Width="300" FontSize="20" x:Name="TextMaker4"  MaxLength="25" Margin="141.9,0,0,0" />
+                                                    <TextBox Width="300" FontSize="20" IsReadOnly="True" x:Name="TextMaker4"  MaxLength="25" Margin="141.9,0,0,0" />
                                                 </StackPanel>
                                             </StackPanel>
                                         </Expander>
@@ -315,7 +315,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                                     <TextBlock   FontSize="20" Text="Модель"  Margin="5,0,0,0" VerticalAlignment="Center" />
-                                    <TextBox Width="350" FontSize="20" x:Name="TextCorpusModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
+                                    <TextBox Width="350" IsReadOnly="True" FontSize="20" x:Name="TextCorpusModel"  Margin="196,0,0,0"  materialDesign:HintAssist.Hint="Модель"  MaxLength="22"  Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" />
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
